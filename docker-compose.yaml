@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  api:
+    container_name: nest_api
+    build: .
+    ports:
+      - '3000:3000'
+  database:
+    image: postgres:13
+    container_name: nest_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234567
+      POSTGRES_DB: smart-health
+    ports:
+      - '5432:5432'
