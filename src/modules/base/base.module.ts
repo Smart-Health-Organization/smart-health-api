@@ -1,5 +1,5 @@
 import { Module } from "@nestjs/common";
-import { Tokens } from "src/utils/tokens";
+import { Tokens } from "@utils/tokens";
 import { BaseController } from "./base.controller";
 import { BaseService } from "./base.service";
 

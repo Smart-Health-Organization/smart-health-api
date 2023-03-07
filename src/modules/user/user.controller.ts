@@ -1,9 +1,9 @@
 import { Body, Controller, Delete, Get, HttpCode, Inject, Param, Patch, Post } from '@nestjs/common';
 import { Args } from '@nestjs/graphql';
+import { Tokens } from '@utils/tokens';
 import { CreateUserDto } from 'src/types/dtos/create-user.dto';
 import { UpdateUserDto } from 'src/types/dtos/update-user.dto';
 import { User } from 'src/types/entities/user.entity';
-import { Tokens } from 'src/utils/tokens';
 import { Operations } from './user.operations';
 
 

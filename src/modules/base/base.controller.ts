@@ -1,5 +1,5 @@
 import { Controller, Get, Inject } from '@nestjs/common';
-import { Tokens } from 'src/utils/tokens';
+import { Tokens } from '@utils/tokens';
 import { Operations } from './base.operations';
 
 
