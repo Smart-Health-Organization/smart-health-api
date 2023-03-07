@@ -1,4 +1,8 @@
-import { Body, Controller, Get, HttpCode, Inject, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Inject, Param, Patch, Post } from '@nestjs/common';
+import { Args } from '@nestjs/graphql';
+import { CreateUserDto } from 'src/types/dtos/create-user.dto';
+import { UpdateUserDto } from 'src/types/dtos/update-user.dto';
+import { User } from 'src/types/entities/user.entity';
 import { Tokens } from 'src/utils/tokens';
 import { Operations } from './user.operations';
 
@@ -16,10 +20,25 @@ export class UserController {
   }
 
   @Post()
+  async createUser(@Args('data') data: CreateUserDto): Promise<User> {
+    const user = await this.service.createUser(data);
+    return user;
+  }
+
+  @Patch('/:id')
+  async updateUser(@Args('data') data: UpdateUserDto,@Param('id') id: string): Promise<User> {
+    const user = await this.service.updateUser(id,data);
+    return user;
+  }
+
+  @Get('/:id')
+  getUserById(@Param('id') id: string) {
+    return this.service.getUserById(id);
+  }
+
+  @Delete('/:id')
   @HttpCode(204)
-  createtUser(
-    @Body()
-  ) {
-    return this.service.getUsers();
+  deleteUser(@Param('id') id: string) {
+    return this.service.deleteUser(id);
   }
 }

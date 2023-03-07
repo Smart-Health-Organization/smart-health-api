@@ -5,11 +5,25 @@
 type User {
   id: ID!
   name: String!
+  age: Float!
   email: String!
-  user: String!
+  login: String!
   password: String!
 }
 
 type Query {
   users: [User!]!
+  findUserById(id: String!): User!
+}
+
+type Mutation {
+  createUser(data: CreateUserDto!): User!
+}
+
+input CreateUserDto {
+  name: String!
+  age: Float!
+  email: String!
+  login: String!
+  password: String!
 }
