@@ -6,7 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
-const settings = require('../../ormconfig.json');
+const settings = require('../../ormconfig.js');
 @Module({
   imports: [
     ConfigModule.forRoot({
