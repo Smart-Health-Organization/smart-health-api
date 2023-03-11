@@ -8,16 +8,22 @@ type User {
   age: Float!
   email: String!
   login: String!
-  password: String!
+}
+
+type AuthType {
+  user: User!
+  token: String!
 }
 
 type Query {
   users: [User!]!
   findUserById(id: String!): User!
+  findUserByEmail(email: String!): User!
 }
 
 type Mutation {
   createUser(data: CreateUserDto!): User!
+  login(data: AuthInput!): AuthType!
 }
 
 input CreateUserDto {
@@ -25,5 +31,10 @@ input CreateUserDto {
   age: Float!
   email: String!
   login: String!
+  password: String!
+}
+
+input AuthInput {
+  email: String!
   password: String!
 }
