@@ -1,4 +1,5 @@
 export class Tokens {
-    public static readonly BASE_OPERATIONS = 'BASE_OPERATIONS_TOKEN';
-    public static readonly USER_OPERATIONS = 'PRODUCT_USER_TOKEN';
-  }
+  public static readonly AUTH_OPERATIONS = 'AUTH_TOKEN';
+  public static readonly BASE_OPERATIONS = 'BASE_OPERATIONS_TOKEN';
+  public static readonly USER_OPERATIONS = 'USER_TOKEN';
+}
