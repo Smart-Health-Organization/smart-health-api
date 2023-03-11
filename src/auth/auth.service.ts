@@ -16,6 +16,10 @@ export class AuthService {
   async validateUser(data: AuthInput): Promise<AuthType> {
     const user = await this.userService.getUserByEmail(data.email);
 
+    if (!user) {
+      throw new UnauthorizedException('Incorrect login or password');
+    }
+
     const validPassword = compareSync(data.password, user.password);
 
     if (!validPassword) {

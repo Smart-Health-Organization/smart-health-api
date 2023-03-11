@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   Delete,
   Get,
@@ -8,7 +9,6 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { Args } from '@nestjs/graphql';
 import { Tokens } from '@utils/tokens';
 import { CreateUserDto } from 'src/types/dtos/create-user.dto';
 import { UpdateUserDto } from 'src/types/dtos/update-user.dto';
@@ -27,14 +27,14 @@ export class UserController {
   }
 
   @Post()
-  async createUser(@Args('data') data: CreateUserDto): Promise<User> {
+  async createUser(@Body() data: CreateUserDto): Promise<User> {
     const user = await this.service.createUser(data);
     return user;
   }
 
   @Patch('/:id')
   async updateUser(
-    @Args('data') data: UpdateUserDto,
+    @Body() data: UpdateUserDto,
     @Param('id') id: string,
   ): Promise<User> {
     const user = await this.service.updateUser(id, data);

@@ -28,6 +28,10 @@ import { JwtStrategy } from './jwt.strategy';
       provide: Tokens.AUTH_OPERATIONS,
       useClass: AuthService,
     },
+    {
+      provide: Tokens.USER_OPERATIONS,
+      useClass: UserService,
+    },
     AuthService,
     AuthResolver,
     UserService,

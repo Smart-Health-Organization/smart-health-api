@@ -35,9 +35,6 @@ export class UserService implements Operations {
     const user = await this.userRepository.findOne({
       where: { email },
     });
-    if (!user) {
-      throw new NotFoundException('User not found');
-    }
     return user;
   }
 

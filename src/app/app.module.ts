@@ -31,7 +31,8 @@ export class AppModule {
       .apply(JwtMiddleware)
       .exclude(
         { path: '/login', method: RequestMethod.POST },
-        { path: '/graphql', method: RequestMethod.GET },
+        { path: '/signup', method: RequestMethod.POST },
+        { path: '/graphql', method: RequestMethod.ALL },
       )
       .forRoutes('*');
   }
