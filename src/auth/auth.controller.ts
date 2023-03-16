@@ -4,6 +4,7 @@ import { AuthService } from 'src/auth/auth.service';
 import { AuthInput } from 'src/auth/dto/auth.input';
 import { AuthType } from 'src/auth/dto/auth.type';
 import { CreateUserDto } from 'src/types/dtos/create-user.dto';
+import { UserResponseDto } from 'src/types/dtos/user.response.dto';
 import { User } from 'src/types/entities/user.entity';
 import { UserService } from './../modules/user/user.service';
 
@@ -21,7 +22,7 @@ export class AuthController {
   }
 
   @Post('signup')
-  async createUser(@Body() data: CreateUserDto): Promise<User> {
+  async createUser(@Body() data: CreateUserDto): Promise<UserResponseDto> {
     const user = await this.userService.createUser(data);
     return user;
   }

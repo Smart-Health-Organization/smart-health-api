@@ -12,6 +12,7 @@ import {
 import { Tokens } from '@utils/tokens';
 import { CreateUserDto } from 'src/types/dtos/create-user.dto';
 import { UpdateUserDto } from 'src/types/dtos/update-user.dto';
+import { UserResponseDto } from 'src/types/dtos/user.response.dto';
 import { User } from 'src/types/entities/user.entity';
 import { Operations } from './user.operations';
 
@@ -27,7 +28,7 @@ export class UserController {
   }
 
   @Post()
-  async createUser(@Body() data: CreateUserDto): Promise<User> {
+  async createUser(@Body() data: CreateUserDto): Promise<UserResponseDto> {
     const user = await this.service.createUser(data);
     return user;
   }
