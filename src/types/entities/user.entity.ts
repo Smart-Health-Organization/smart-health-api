@@ -1,5 +1,6 @@
 import { Field, HideField, ID, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Exame } from 'src/types/entities/exame.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { hashPasswordTransform } from './../../helpers/crypto';
 
 @ObjectType()
@@ -26,4 +27,7 @@ export class User {
   })
   @HideField()
   password: string;
+
+  @OneToMany(() => Exame, (exame) => exame.user)
+  exames: Exame[];
 }

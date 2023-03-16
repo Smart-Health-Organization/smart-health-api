@@ -1,8 +1,8 @@
-import { Field, HideField, InputType } from '@nestjs/graphql';
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { InputType } from '@nestjs/graphql';
 
 @InputType()
 export class UserResponseDto {
+  id: number;
 
   name: string;
 
@@ -11,5 +11,4 @@ export class UserResponseDto {
   email: string;
 
   login: string;
-
 }
