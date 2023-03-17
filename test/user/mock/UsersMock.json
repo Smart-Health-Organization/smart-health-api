@@ -1,0 +1,14 @@
+[{
+    "name" : "Thiago Sanches",
+    "email": "thi.sanches@hotmail.com",
+    "age": 22,
+    "login": "thisanches07",
+    "password": "thiagoLegal"
+    },
+    {
+        "name" : "Pedro Paulo",
+        "email": "pedro.paulo@hotmail.com",
+        "age": 22,
+        "login": "pedropaulo",
+        "password": "pedropauloLegal"
+        }]
