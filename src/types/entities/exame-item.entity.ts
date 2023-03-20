@@ -18,6 +18,6 @@ export class ExameItem {
   @Column()
   unidade: string;
 
-  @ManyToOne(() => Exame, (exame) => exame.exameItens)
+  @ManyToOne(() => Exame, (exame) => exame.itens)
   exame: Exame;
 }

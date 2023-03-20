@@ -1,4 +1,5 @@
 import { BaseModule } from '@modules/base/base.module';
+import { ExameModule } from '@modules/exame/exame.module';
 import { UserModule } from '@modules/user/user.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
@@ -23,6 +24,7 @@ const ormconfig = require('../../ormconfig.js');
     BaseModule,
     UserModule,
     AuthModule,
+    ExameModule,
   ],
 })
 export class AppModule {

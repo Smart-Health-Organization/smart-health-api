@@ -1,14 +1,18 @@
-import { Module } from "@nestjs/common";
-import { UserService } from "./user.service";
+import { ExameService } from '@modules/exame/exame.service';
+import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserController } from "./user.controller";
-import { UserResolver } from "./user.resolver";
-import { User } from "src/types/entities/user.entity";
-import { Tokens } from "@utils/tokens";
-
+import { Tokens } from '@utils/tokens';
+import { Exame } from 'src/types/entities/exame.entity';
+import { User } from 'src/types/entities/user.entity';
+import { UserController } from './user.controller';
+import { UserResolver } from './user.resolver';
+import { UserService } from './user.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User])],
+  imports: [
+    TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forFeature([Exame]),
+  ],
   controllers: [UserController],
   providers: [
     UserService,
@@ -17,11 +21,19 @@ import { Tokens } from "@utils/tokens";
       provide: Tokens.USER_OPERATIONS,
       useClass: UserService,
     },
+    {
+      provide: Tokens.EXAME_OPERATIONS,
+      useClass: ExameService,
+    },
   ],
   exports: [
     {
       provide: Tokens.USER_OPERATIONS,
       useClass: UserService,
+    },
+    {
+      provide: Tokens.EXAME_OPERATIONS,
+      useClass: ExameService,
     },
   ],
 })

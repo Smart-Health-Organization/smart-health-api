@@ -1,3 +1,5 @@
+import { ExameOperations } from '@modules/exame/exame.operations';
+import { Operations } from '@modules/user/user.operations';
 import {
   Body,
   Controller,
@@ -11,15 +13,17 @@ import {
 } from '@nestjs/common';
 import { Tokens } from '@utils/tokens';
 import { CreateUserDto } from 'src/types/dtos/create-user.dto';
+import { ExameResponseDto } from 'src/types/dtos/exame.response.dto';
 import { UpdateUserDto } from 'src/types/dtos/update-user.dto';
 import { UserResponseDto } from 'src/types/dtos/user.response.dto';
 import { User } from 'src/types/entities/user.entity';
-import { Operations } from './user.operations';
 
 @Controller('users')
 export class UserController {
   constructor(
     @Inject(Tokens.USER_OPERATIONS) private readonly service: Operations,
+    @Inject(Tokens.EXAME_OPERATIONS)
+    private readonly exameService: ExameOperations,
   ) {}
 
   @Get()
@@ -31,6 +35,20 @@ export class UserController {
   async createUser(@Body() data: CreateUserDto): Promise<UserResponseDto> {
     const user = await this.service.createUser(data);
     return user;
+  }
+
+  @Post(':id/exames')
+  async createExame(@Param('id') id: string): Promise<ExameResponseDto[]> {
+    const user = await this.getUserById(id);
+    const exame = await this.exameService.getExamesByUserId(id);
+    return exame;
+  }
+
+  @Get(':id/exames')
+  async findExamesByUser(@Param('id') id: string): Promise<ExameResponseDto> {
+    const user = await this.getUserById(id);
+    const exame = await this.exameService.getExamesByUserId(id);
+    return exame;
   }
 
   @Patch('/:id')

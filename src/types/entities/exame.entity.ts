@@ -21,7 +21,7 @@ export class Exame {
   data: string;
 
   @OneToMany(() => ExameItem, (exameItem) => exameItem.exame)
-  exameItens: ExameItem[];
+  itens: ExameItem[];
 
   @ManyToOne(() => User, (user) => user.exames)
   user: User;
