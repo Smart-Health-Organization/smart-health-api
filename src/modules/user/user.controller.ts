@@ -1,3 +1,4 @@
+import { ResetPassword } from '@modules/user/type/reset-password.type';
 import {
   Body,
   Controller,
@@ -9,13 +10,14 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { Tokens } from '@utils/tokens';
 import { CreateUserDto } from 'src/types/dtos/create-user.dto';
 import { UpdateUserDto } from 'src/types/dtos/update-user.dto';
 import { UserResponseDto } from 'src/types/dtos/user.response.dto';
-import { User } from 'src/types/entities/user.entity';
 import { Operations } from './user.operations';
 
+@ApiTags('User')
 @Controller('users')
 export class UserController {
   constructor(
@@ -23,33 +25,39 @@ export class UserController {
   ) {}
 
   @Get()
-  getUsers() {
-    return this.service.getUsers();
+  async getUsers(): Promise<UserResponseDto[]> {
+    return await this.service.getUsers();
   }
 
   @Post()
   async createUser(@Body() data: CreateUserDto): Promise<UserResponseDto> {
-    const user = await this.service.createUser(data);
-    return user;
+    return await this.service.createUser(data);
   }
 
   @Patch('/:id')
   async updateUser(
     @Body() data: UpdateUserDto,
     @Param('id') id: string,
-  ): Promise<User> {
-    const user = await this.service.updateUser(id, data);
-    return user;
+  ): Promise<UserResponseDto> {
+    return await this.service.updateUser(id, data);
+  }
+
+  @Patch('/:id/resetpassword')
+  async updateUserPassword(
+    @Body() data: ResetPassword,
+    @Param('id') id: string,
+  ): Promise<UserResponseDto> {
+    return await this.service.updateUserPassword(id, data);
   }
 
   @Get('/:id')
-  getUserById(@Param('id') id: string) {
-    return this.service.getUserById(id);
+  async getUserById(@Param('id') id: string): Promise<UserResponseDto> {
+    return await this.service.getUserById(id);
   }
 
   @Delete('/:id')
   @HttpCode(204)
-  deleteUser(@Param('id') id: string) {
-    return this.service.deleteUser(id);
+  async deleteUser(@Param('id') id: string): Promise<void> {
+    await this.service.deleteUser(id);
   }
 }

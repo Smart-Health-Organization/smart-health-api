@@ -35,5 +35,9 @@ export class AppModule {
         { path: '/graphql', method: RequestMethod.ALL },
       )
       .forRoutes('*');
+    //TODO -> remove this comment to limit user only to see this content in /users/:id
+    // consumer
+    //   .apply(UserMiddleware)
+    //   .forRoutes({ path: '/users/*', method: RequestMethod.ALL });
   }
 }
