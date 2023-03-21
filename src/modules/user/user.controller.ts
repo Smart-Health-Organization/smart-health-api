@@ -10,7 +10,7 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Tokens } from '@utils/tokens';
 import { CreateUserDto } from 'src/types/dtos/create-user.dto';
 import { UpdateUserDto } from 'src/types/dtos/update-user.dto';
@@ -25,16 +25,30 @@ export class UserController {
   ) {}
 
   @Get()
+  @ApiOkResponse({
+    description: 'List of users ',
+    type: [UserResponseDto],
+  })
   async getUsers(): Promise<UserResponseDto[]> {
     return await this.service.getUsers();
   }
 
   @Post()
+  @ApiBody({ type: CreateUserDto })
+  @ApiOkResponse({
+    description: 'User created',
+    type: UserResponseDto,
+  })
   async createUser(@Body() data: CreateUserDto): Promise<UserResponseDto> {
     return await this.service.createUser(data);
   }
 
   @Patch('/:id')
+  @ApiBody({ type: UpdateUserDto })
+  @ApiOkResponse({
+    description: 'User updated',
+    type: UserResponseDto,
+  })
   async updateUser(
     @Body() data: UpdateUserDto,
     @Param('id') id: string,
@@ -43,6 +57,11 @@ export class UserController {
   }
 
   @Patch('/:id/resetpassword')
+  @ApiBody({ type: ResetPassword })
+  @ApiOkResponse({
+    description: 'Password updated',
+    type: UserResponseDto,
+  })
   async updateUserPassword(
     @Body() data: ResetPassword,
     @Param('id') id: string,
@@ -51,6 +70,10 @@ export class UserController {
   }
 
   @Get('/:id')
+  @ApiOkResponse({
+    description: 'User Created',
+    type: UserResponseDto,
+  })
   async getUserById(@Param('id') id: string): Promise<UserResponseDto> {
     return await this.service.getUserById(id);
   }

@@ -1,5 +1,5 @@
 import { Body, Controller, Inject, Post } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Tokens } from '@utils/tokens';
 import { AuthService } from 'src/auth/auth.service';
 import { AuthInput } from 'src/auth/dto/auth.input';
@@ -17,12 +17,22 @@ export class AuthController {
   ) {}
 
   @Post('login')
+  @ApiBody({ type: AuthInput })
+  @ApiOkResponse({
+    description: 'User logged and token generated',
+    type: AuthType,
+  })
   async validateUser(@Body() data: AuthInput): Promise<AuthType> {
     const user = await this.authService.validateUser(data);
     return user;
   }
 
   @Post('signup')
+  @ApiBody({ type: CreateUserDto })
+  @ApiOkResponse({
+    description: 'User created',
+    type: UserResponseDto,
+  })
   async createUser(@Body() data: CreateUserDto): Promise<UserResponseDto> {
     const user = await this.userService.createUser(data);
     return user;
