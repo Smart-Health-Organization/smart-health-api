@@ -8,26 +8,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
 import { AuthModule } from 'src/auth/auth.module';
 import { JwtMiddleware } from 'src/auth/jwt.middleware';
-const ormconfig = require('../../ormconfig.js');
-const postgres = require('postgres');
-require('dotenv').config();
-const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
-const URL = `postgres://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}?options=project%3D${ENDPOINT_ID}`;
-const sql = postgres(URL, { ssl: 'require' });
-
-async function getPostgresVersion() {
-  const result = await sql`select version()`;
-  console.log(result);
-}
-
-getPostgresVersion();
+const devconfig = require('../../devconfig.js');
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: `.env.${process.env.NODE_ENV}`,
     }),
-    TypeOrmModule.forRoot(ormconfig),
+    TypeOrmModule.forRoot(devconfig),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
