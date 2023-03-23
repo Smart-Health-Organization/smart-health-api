@@ -26,6 +26,9 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+# First steps
+Clone the repository with ```git clone```
+
 # Installation
 
 ## Run docker containers
