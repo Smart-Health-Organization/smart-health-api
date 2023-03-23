@@ -26,14 +26,23 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
+# Installation
 
+## Run docker containers
+```bash
+$ docker-compose up -d
+```
+### Run docker containers
+You can access smart-health-api on localhost:3000. 
+To run it locally, you need to turn off smart-health-api container
+
+## Run npm install
 ```bash
 $ npm install
 ```
 
 ## Running the app
-
+### Observation: to run the app in localhost, smart-health-api should be off, because it will use the same port
 ```bash
 # development
 $ npm run start
@@ -57,6 +66,8 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
+
 
 # PROD environment
 https://smart-health-prod-xcaubn3uta-uc.a.run.app
