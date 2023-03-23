@@ -30,7 +30,7 @@
 Clone the repository with ```git clone```
 
 # Installation
-
+## DOCKER
 ## Run docker containers
 ```bash
 $ docker-compose up -d
@@ -39,6 +39,7 @@ $ docker-compose up -d
 You can access smart-health-api on localhost:3000. 
 To run it locally, you need to turn off smart-health-api container
 
+## LOCAL
 ## Run npm install
 ```bash
 $ npm install
