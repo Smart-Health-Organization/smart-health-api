@@ -8,14 +8,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
 import { AuthModule } from 'src/auth/auth.module';
 import { JwtMiddleware } from 'src/auth/jwt.middleware';
-const devconfig = require('../../devconfig.js');
+const prodconfig = require('../../prodconfig.js');
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: `.env.${process.env.NODE_ENV}`,
     }),
-    TypeOrmModule.forRoot(devconfig),
+    TypeOrmModule.forRoot(prodconfig),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
