@@ -3,7 +3,6 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as dotenv from 'dotenv';
 import { AppModule } from 'src/app/app.module';
-
 async function bootstrap() {
   dotenv.config();
   const app = await NestFactory.create(AppModule);
