@@ -36,8 +36,8 @@ Clone the repository with ```git clone```
 $ docker-compose up -d
 ```
 ### Run docker containers
-You can access smart-health-api on localhost:3000
-To run it locally, you need to turn off smart-health-api container
+You can access smart-health-api on [localhost:3000](http://localhost:3000).<br>
+<b>To run it locally, you need to turn off smart-health-api container</b>
 
 ## [![My Skills](https://skillicons.dev/icons?i=nodejs&theme=dark)](https://skillicons.dev) - LOCAL
 ## copy .env
