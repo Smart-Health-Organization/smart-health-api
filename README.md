@@ -61,8 +61,16 @@ $ npm run test:cov
 ## PROD environment
 https://smart-health-prod-xcaubn3uta-uc.a.run.app
 
+### swagger PROD environment
+https://smart-health-prod-xcaubn3uta-uc.a.run.app/api
+
 ## DEV environment
 https://smart-health-dev-xcaubn3uta-uc.a.run.app
+
+### swagger DEV environment
+https://smart-health-dev-xcaubn3uta-uc.a.run.app/api
+
+
 
 ## Support
 
