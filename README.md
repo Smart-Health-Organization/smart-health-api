@@ -30,16 +30,23 @@
 Clone the repository with ```git clone```
 
 # Installation
-## DOCKER
+## [![My Skills](https://skills.thijs.gg/icons?i=docker)](https://skills.thijs.gg) - DOCKER 
 ## Run docker containers
 ```bash
 $ docker-compose up -d
 ```
 ### Run docker containers
-You can access smart-health-api on localhost:3000. 
+You can access smart-health-api on localhost:3000
 To run it locally, you need to turn off smart-health-api container
 
-## LOCAL
+## [![My Skills](https://skillicons.dev/icons?i=nodejs&theme=dark)](https://skillicons.dev) - LOCAL
+## copy .env
+```bash
+$ cp .env-example .env
+```
+
+### verify postgreSQL instance on docker or local
+
 ## Run npm install
 ```bash
 $ npm install
@@ -70,6 +77,9 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
+## swagger localhost
+https://smart-health-prod-xcaubn3uta-uc.a.run.app/api
 
 
 
