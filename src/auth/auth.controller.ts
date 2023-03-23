@@ -1,13 +1,14 @@
 import { Body, Controller, Inject, Post } from '@nestjs/common';
+import { ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Tokens } from '@utils/tokens';
 import { AuthService } from 'src/auth/auth.service';
 import { AuthInput } from 'src/auth/dto/auth.input';
 import { AuthType } from 'src/auth/dto/auth.type';
 import { CreateUserDto } from 'src/types/dtos/create-user.dto';
 import { UserResponseDto } from 'src/types/dtos/user.response.dto';
-import { User } from 'src/types/entities/user.entity';
 import { UserService } from './../modules/user/user.service';
 
+@ApiTags('Authentication')
 @Controller('')
 export class AuthController {
   constructor(
@@ -16,12 +17,22 @@ export class AuthController {
   ) {}
 
   @Post('login')
+  @ApiBody({ type: AuthInput })
+  @ApiOkResponse({
+    description: 'User logged and token generated',
+    type: AuthType,
+  })
   async validateUser(@Body() data: AuthInput): Promise<AuthType> {
     const user = await this.authService.validateUser(data);
     return user;
   }
 
   @Post('signup')
+  @ApiBody({ type: CreateUserDto })
+  @ApiOkResponse({
+    description: 'User created',
+    type: UserResponseDto,
+  })
   async createUser(@Body() data: CreateUserDto): Promise<UserResponseDto> {
     const user = await this.userService.createUser(data);
     return user;

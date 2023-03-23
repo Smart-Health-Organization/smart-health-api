@@ -7,7 +7,6 @@ import { UserService } from 'src/modules/user/user.service';
 import { User } from 'src/types/entities/user.entity';
 import { AuthController } from './auth.controller';
 import { AuthResolver } from './auth.resolver';
-import { JwtStrategy } from './jwt.strategy';
 
 @Module({
   imports: [
@@ -35,7 +34,7 @@ import { JwtStrategy } from './jwt.strategy';
     AuthService,
     AuthResolver,
     UserService,
-    JwtStrategy,
+    // JwtStrategy,
   ],
   exports: [
     {

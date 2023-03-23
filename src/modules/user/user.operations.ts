@@ -1,3 +1,4 @@
+import { ResetPassword } from '@modules/user/type/reset-password.type';
 import { CreateUserDto } from 'src/types/dtos/create-user.dto';
 import { UpdateUserDto } from 'src/types/dtos/update-user.dto';
 import { UserResponseDto } from 'src/types/dtos/user.response.dto';
@@ -8,6 +9,7 @@ export interface Operations {
   createUser(data: CreateUserDto): Promise<UserResponseDto>;
   getUserById(id: string): Promise<User>;
   getUserByEmail(email: string): Promise<User>;
-  updateUser(id: string, data: UpdateUserDto): Promise<User>;
+  updateUser(id: string, data: UpdateUserDto): Promise<UserResponseDto>;
+  updateUserPassword(id: string, data: ResetPassword): Promise<UserResponseDto>;
   deleteUser(id: string): Promise<boolean>;
 }
