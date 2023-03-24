@@ -29,6 +29,10 @@
 # First steps
 Clone the repository with ```git clone```
 
+## Important observation
+<b>To run the app, you should change the branch to any of these branches: "prod" or "dev".</b>
+In some of these branches("prod" or "dev"), you can start the application with the steps bellow
+
 # Installation
 ## [![My Skills](https://skills.thijs.gg/icons?i=docker)](https://skills.thijs.gg) - DOCKER 
 ## Run docker containers
