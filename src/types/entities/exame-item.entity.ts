@@ -1,7 +1,14 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 import { Exame } from 'src/types/entities/exame.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { ResultadoExameItem } from './resultado-exame.entity';
 
 @ObjectType()
 @Entity()
@@ -33,4 +40,7 @@ export class ExameItem {
 
   @ManyToOne(() => Exame, (exame) => exame.itens)
   exame: Exame;
+
+  @OneToOne(() => ResultadoExameItem)
+  retultado: ResultadoExameItem;
 }
