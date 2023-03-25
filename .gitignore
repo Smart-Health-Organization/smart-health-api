@@ -8,6 +8,9 @@ ormconfig.json
 .env-dev
 schema.gql
 
+#graphql
+schema.gql
+
 # Logs
 logs
 *.log
