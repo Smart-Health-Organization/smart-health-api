@@ -2,6 +2,7 @@ import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UserService } from 'src/modules/user/user.service';
 import { CreateUserDto } from 'src/types/dtos/create-user.dto';
+import { UpdateUserDto } from 'src/types/dtos/update-user.dto';
 import { UserResponseDto } from 'src/types/dtos/user.response.dto';
 import { User } from 'src/types/entities/user.entity';
 import { GqlAuthGuard } from './../../auth/auth.guard';
@@ -30,19 +31,21 @@ export class UserResolver {
   }
 
   @Mutation(() => User)
-  async createUser(@Args('data') data: CreateUserDto): Promise<UserResponseDto> {
+  async createUser(
+    @Args('data') data: CreateUserDto,
+  ): Promise<UserResponseDto> {
     const user = await this.userService.createUser(data);
     return user;
   }
 
-  // @Mutation(() => User)
-  // async updateUser(
-  //   @Args('id') id: string,
-  //   @Args('data') data: UpdateUserDto,
-  // ): Promise<User> {
-  //   const user = await this.userService.updateUser(id, data);
-  //   return user;
-  // }
+  @Mutation(() => User)
+  async updateUser(
+    @Args('id') id: string,
+    @Args('data') data: UpdateUserDto,
+  ): Promise<UserResponseDto> {
+    const user = await this.userService.updateUser(id, data);
+    return user;
+  }
 
   // @Mutation(() => Boolean)
   // async deleteUser(@Args('id') id: string): Promise<boolean> {

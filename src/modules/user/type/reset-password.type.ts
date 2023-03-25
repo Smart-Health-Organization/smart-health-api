@@ -1,16 +1,18 @@
 import { InputType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString } from 'class-validator';
+
 @InputType()
-export class AuthInput {
+export class ResetPassword {
   @IsString()
   @ApiProperty({
-    example: 'thi.sanches@hotmail.com',
+    example: 'oldPassword',
   })
-  email: string;
+  oldPassword: string;
+
   @IsString()
   @ApiProperty({
-    example: 'password',
+    example: 'newPassword',
   })
-  password: string;
+  newPassword: string;
 }

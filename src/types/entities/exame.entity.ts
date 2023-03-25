@@ -1,6 +1,7 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { User } from './user.entity';
 
+import { ApiProperty } from '@nestjs/swagger';
 import { ExameItem } from 'src/types/entities/exame-item.entity';
 import {
   Column,
@@ -15,9 +16,15 @@ import {
 export class Exame {
   @PrimaryGeneratedColumn()
   @Field(() => ID)
+  @ApiProperty({
+    example: 1,
+  })
   id: number;
 
   @Column()
+  @ApiProperty({
+    example: '21/03/2001',
+  })
   data: string;
 
   @OneToMany(() => ExameItem, (exameItem) => exameItem.exame)

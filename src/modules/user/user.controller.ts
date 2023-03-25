@@ -1,5 +1,6 @@
 import { ExameOperations } from '@modules/exame/exame.operations';
 import { Operations } from '@modules/user/user.operations';
+import { ResetPassword } from '@modules/user/type/reset-password.type';
 import {
   Body,
   Controller,
@@ -11,6 +12,7 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
+import { ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Tokens } from '@utils/tokens';
 import { CreateUserDto } from 'src/types/dtos/create-user.dto';
 import { ExameResponseDto } from 'src/types/dtos/exame.response.dto';
@@ -18,6 +20,7 @@ import { UpdateUserDto } from 'src/types/dtos/update-user.dto';
 import { UserResponseDto } from 'src/types/dtos/user.response.dto';
 import { User } from 'src/types/entities/user.entity';
 
+@ApiTags('User')
 @Controller('users')
 export class UserController {
   constructor(
@@ -27,20 +30,28 @@ export class UserController {
   ) {}
 
   @Get()
-  getUsers() {
-    return this.service.getUsers();
+  @ApiOkResponse({
+    description: 'List of users ',
+    type: [UserResponseDto],
+  })
+  async getUsers(): Promise<UserResponseDto[]> {
+    return await this.service.getUsers();
   }
 
   @Post()
+  @ApiBody({ type: CreateUserDto })
+  @ApiOkResponse({
+    description: 'User created',
+    type: UserResponseDto,
+  })
   async createUser(@Body() data: CreateUserDto): Promise<UserResponseDto> {
-    const user = await this.service.createUser(data);
-    return user;
+    return await this.service.createUser(data);
   }
 
   @Post(':id/exames')
   async createExame(@Param('id') id: string): Promise<ExameResponseDto[]> {
     const user = await this.getUserById(id);
-    const exame = await this.exameService.getExamesByUserId(id);
+    const exame = await this.exameService.createExame(user);
     return exame;
   }
 
@@ -52,22 +63,43 @@ export class UserController {
   }
 
   @Patch('/:id')
+  @ApiBody({ type: UpdateUserDto })
+  @ApiOkResponse({
+    description: 'User updated',
+    type: UserResponseDto,
+  })
   async updateUser(
     @Body() data: UpdateUserDto,
     @Param('id') id: string,
-  ): Promise<User> {
-    const user = await this.service.updateUser(id, data);
-    return user;
+  ): Promise<UserResponseDto> {
+    return await this.service.updateUser(id, data);
+  }
+
+  @Patch('/:id/resetpassword')
+  @ApiBody({ type: ResetPassword })
+  @ApiOkResponse({
+    description: 'Password updated',
+    type: UserResponseDto,
+  })
+  async updateUserPassword(
+    @Body() data: ResetPassword,
+    @Param('id') id: string,
+  ): Promise<UserResponseDto> {
+    return await this.service.updateUserPassword(id, data);
   }
 
   @Get('/:id')
-  getUserById(@Param('id') id: string) {
-    return this.service.getUserById(id);
+  @ApiOkResponse({
+    description: 'User Created',
+    type: UserResponseDto,
+  })
+  async getUserById(@Param('id') id: string): Promise<User> {
+    return await this.service.getUserById(id);
   }
 
   @Delete('/:id')
   @HttpCode(204)
-  deleteUser(@Param('id') id: string) {
-    return this.service.deleteUser(id);
+  async deleteUser(@Param('id') id: string): Promise<void> {
+    await this.service.deleteUser(id);
   }
 }
