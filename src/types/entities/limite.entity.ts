@@ -14,12 +14,41 @@ export class Limite {
   })
   id: number;
 
-  @Column()
-  @ApiProperty({
-    example: '21/03/2001',
-  })
-  data: string;
-
   @ManyToOne(() => Metrica, (metrica) => metrica.limites)
   metrica: Metrica;
+
+  @Column()
+  @ApiProperty({
+    example: 'feminino',
+  })
+  sexo: string;
+
+  @Column()
+  @ApiProperty({
+    example: '2',
+  })
+  idadeInicio: number;
+  @Column()
+  @ApiProperty({
+    example: '19',
+  })
+  idadeFim: number;
+
+  @Column()
+  @ApiProperty({
+    example: '100',
+  })
+  alto: number;
+
+  @Column()
+  @ApiProperty({
+    example: '20',
+  })
+  baixo: number;
+
+  @Column()
+  @ApiProperty({
+    example: 'mg/dL',
+  })
+  unidade: string;
 }
