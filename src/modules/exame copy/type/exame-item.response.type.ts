@@ -1,12 +1,25 @@
-export class ExameItemResponseType{
+import { ApiProperty } from '@nestjs/swagger';
 
-    id: number
-    
-    metrica:string
+export class ExameItemResponseType {
+  @ApiProperty({
+    example: 1,
+  })
+  id: number;
 
-    medida:string
+  @ApiProperty({
+    example: 'colesterol',
+  })
+  metrica: string;
 
-    unidade:string
+  @ApiProperty({
+    example: 100,
+  })
+  medida: number;
+
+  @ApiProperty({
+    example: 'mg/L',
+  })
+  unidade: string;
 }
 
-export class ArrayOfExameItemResponseType extends Array<ExameItemResponseType>{}
+export class ArrayOfExameItemResponseType extends Array<ExameItemResponseType> {}

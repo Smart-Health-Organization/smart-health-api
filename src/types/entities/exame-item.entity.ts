@@ -30,7 +30,7 @@ export class ExameItem {
   @ApiProperty({
     example: 200,
   })
-  medida: string;
+  medida: number;
 
   @Column()
   @ApiProperty({

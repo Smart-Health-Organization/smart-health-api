@@ -1,7 +1,12 @@
 import { Field, InputType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsNotEmpty, IsNumber, IsString, ValidateNested } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
 
 @InputType()
 export class ExameItemInsertDto {
@@ -19,22 +24,23 @@ export class ExameItemInsertDto {
   @ApiProperty({
     example: '100',
   })
-  medida: string;
+  medida: number;
 
   @Field()
   @IsString()
   @IsNotEmpty({ message: 'unidade' })
   @ApiProperty({
-    example: 'thi.sanches@hotmail.com',
+    example: 'mg/L',
   })
   unidade: string;
-
-  
 }
 
-export class insertExameItems{
-  @Type(()=> ExameItemInsertDto)
+export class InsertExameItems {
+  @Type(() => ExameItemInsertDto)
   @ValidateNested()
   @IsNotEmpty()
-  itens: ExameItemInsertDto[]
+  @ApiProperty({
+    type: [ExameItemInsertDto],
+  })
+  itens: ExameItemInsertDto[];
 }
