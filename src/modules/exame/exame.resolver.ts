@@ -5,6 +5,7 @@ import { CreateExameDto } from 'src/types/dtos/create-exame.dto';
 import { ExameResponseDto } from 'src/types/dtos/exame.response.dto';
 import { Exame } from 'src/types/entities/exame.entity';
 import { GqlAuthGuard } from '../../auth/auth.guard';
+import { ExamesAndExameItemsResponseType } from './type/exame-and-exame-items.response.type';
 
 @Resolver('Exame')
 export class ExameResolver {
@@ -32,7 +33,7 @@ export class ExameResolver {
   }
 
   @Query(() => Exame)
-  async findExamesByUserId(@Args('user') userId: string): Promise<Exame[]> {
+  async findExamesByUserId(@Args('user') userId: string): Promise<ExamesAndExameItemsResponseType> {
     const exame = await this.exameService.getExamesByUserId(userId);
     return exame;
   }

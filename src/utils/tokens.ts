@@ -3,4 +3,5 @@ export class Tokens {
   public static readonly BASE_OPERATIONS = 'BASE_OPERATIONS_TOKEN';
   public static readonly USER_OPERATIONS = 'USER_TOKEN';
   public static readonly EXAME_OPERATIONS = 'EXAME_TOKEN';
+  public static readonly EXAME_ITEM_OPERATIONS = 'EXAME_ITEM_TOKEN';
 }

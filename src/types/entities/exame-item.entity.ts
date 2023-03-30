@@ -42,5 +42,5 @@ export class ExameItem {
   exame: Exame;
 
   @OneToOne(() => ResultadoExameItem)
-  retultado: ResultadoExameItem;
+  resultado: ResultadoExameItem;
 }

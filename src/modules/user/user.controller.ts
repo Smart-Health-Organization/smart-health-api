@@ -19,14 +19,18 @@ import { ExameResponseDto } from 'src/types/dtos/exame.response.dto';
 import { UpdateUserDto } from 'src/types/dtos/update-user.dto';
 import { UserResponseDto } from 'src/types/dtos/user.response.dto';
 import { User } from 'src/types/entities/user.entity';
+import { ExameItemOperations } from '@modules/exame copy/exame-item.operations';
+import { insertExameItems } from 'src/types/dtos/exame-item.insert.dto';
+import { ExamesAndExameItemsResponseType } from '@modules/exame/type/exame-and-exame-items.response.type';
 
 @ApiTags('User')
 @Controller('users')
 export class UserController {
   constructor(
     @Inject(Tokens.USER_OPERATIONS) private readonly service: Operations,
-    @Inject(Tokens.EXAME_OPERATIONS)
-    private readonly exameService: ExameOperations,
+    @Inject(Tokens.EXAME_OPERATIONS) private readonly exameService: ExameOperations,
+    @Inject(Tokens.EXAME_ITEM_OPERATIONS) private readonly exameItemservice: ExameItemOperations,
+
   ) {}
 
   @Get()
@@ -49,17 +53,22 @@ export class UserController {
   }
 
   @Post(':id/exames')
-  async createExame(@Param('id') id: string): Promise<ExameResponseDto[]> {
+  async createExame
+  (
+    @Param('id') id: string, 
+    @Body() data: insertExameItems,
+  ): Promise<ExameResponseDto[]> {
     const user = await this.getUserById(id);
     const exame = await this.exameService.createExame(user);
+    await this.exameItemservice.createExameItems(exame,data.itens);
     return exame;
   }
 
   @Get(':id/exames')
-  async findExamesByUser(@Param('id') id: string): Promise<ExameResponseDto> {
+  async findExamesByUser(@Param('id') id: string): Promise<ExamesAndExameItemsResponseType> {
     const user = await this.getUserById(id);
-    const exame = await this.exameService.getExamesByUserId(id);
-    return exame;
+    const exames = await this.exameService.getExamesByUserId(id);
+    return exames;
   }
 
   @Patch('/:id')

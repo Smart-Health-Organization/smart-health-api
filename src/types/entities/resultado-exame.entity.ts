@@ -13,6 +13,6 @@ export class ResultadoExameItem {
   })
   id: number;
 
-  @OneToOne(() => ExameItem, (exameItem) => exameItem.retultado)
+  @OneToOne(() => ExameItem, (exameItem) => exameItem.resultado)
   exameItem: ExameItem;
 }

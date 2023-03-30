@@ -15,7 +15,7 @@ import { AuthResolver } from './auth.resolver';
       useFactory: () => ({
         secret: process.env.JWT_SECRET,
         signOptions: {
-          expiresIn: '1d',
+          expiresIn: '1000d',
         },
       }),
     }),

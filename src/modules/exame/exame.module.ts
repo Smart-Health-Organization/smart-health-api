@@ -1,3 +1,4 @@
+import { ExameItemModule } from '@modules/exame copy/exame-item.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Tokens } from '@utils/tokens';
@@ -7,7 +8,8 @@ import { ExameResolver } from './exame.resolver';
 import { ExameService } from './exame.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Exame])],
+  imports: [ExameItemModule ,TypeOrmModule.forFeature([Exame])
+],
   controllers: [ExameController],
   providers: [
     ExameService,
@@ -16,12 +18,14 @@ import { ExameService } from './exame.service';
       provide: Tokens.EXAME_OPERATIONS,
       useClass: ExameService,
     },
+   
   ],
   exports: [
     {
       provide: Tokens.EXAME_OPERATIONS,
       useClass: ExameService,
     },
+    
   ],
 })
 export class ExameModule {}

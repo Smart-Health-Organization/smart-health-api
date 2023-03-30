@@ -7,7 +7,7 @@ export class ExameResponseDto {
 
   data: string;
 
-  itens: string;
+  itens?: string;
 
   user: IdAndNameResponseType;
 }
