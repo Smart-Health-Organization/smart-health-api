@@ -26,7 +26,7 @@ export class ExameItem {
   })
   metrica: string;
 
-  @Column()
+  @Column('float')
   @ApiProperty({
     example: 200,
   })
