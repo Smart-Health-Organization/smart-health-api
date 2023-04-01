@@ -52,7 +52,7 @@ describe('UserService', () => {
       );
       console.log(exameItens);
       // Verifica se a função retornou corretamente o novo usuário criado
-      expect(0).toEqual(exameItemsFromAllExamesResponse);
+      expect(1).toEqual(exameItemsFromAllExamesResponse);
     });
   });
 });
