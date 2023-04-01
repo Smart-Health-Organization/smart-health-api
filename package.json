@@ -21,12 +21,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm": "npm run build && npx typeorm -d dist/db/data-source",
     "migration:generate": "npm run typeorm -- migration:generate",
-    "migration:run": "npm run typeorm -- migration:run"
-  },
-  "husky":{
-    "hooks":{
-      "pre-push": "yarn test"
-    }
+    "migration:run": "npm run typeorm -- migration:run",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@nestjs/apollo": "^10.1.7",
