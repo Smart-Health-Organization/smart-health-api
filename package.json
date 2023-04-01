@@ -23,6 +23,11 @@
     "migration:generate": "npm run typeorm -- migration:generate",
     "migration:run": "npm run typeorm -- migration:run"
   },
+  "husky":{
+    "hooks":{
+      "pre-push": "yarn test"
+    }
+  },
   "dependencies": {
     "@nestjs/apollo": "^10.1.7",
     "@nestjs/common": "^9.0.0",
@@ -42,6 +47,7 @@
     "dotenv": "^16.0.3",
     "graphql": "^16.6.0",
     "graphql-tools": "^8.3.17",
+    "husky": "^8.0.3",
     "nodemailer": "^6.9.1",
     "nodemailer-sendgrid-transport": "^0.2.0",
     "passport": "^0.6.0",
