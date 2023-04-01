@@ -1,9 +1,10 @@
-import { ExameItemOperations } from '@modules/exame copy/exame-item.operations';
+import { ExameItemOperations } from '@modules/exame-item/exame-item.operations';
 import { ExameOperations } from '@modules/exame/exame.operations';
 import {
   ExameAndExameItemsResponseType,
   ExamesAndExameItemsResponseType,
 } from '@modules/exame/type/exame-and-exame-items.response.type';
+import { ExameItemsMapResponseType } from '@modules/exame/type/exame-items-map.response.type';
 import { ResetPassword } from '@modules/user/type/reset-password.type';
 import { Operations } from '@modules/user/user.operations';
 import {
@@ -82,6 +83,18 @@ export class UserController {
   ): Promise<ExamesAndExameItemsResponseType> {
     const exames = await this.exameService.getExamesByUserId(id);
     return exames;
+  }
+
+  @Get(':id/exame-items')
+  @ApiOkResponse({
+    description: 'Items from all exams returned',
+    type: ExameItemsMapResponseType,
+  })
+  async findExameItems(@Param('id') id: string): Promise<any> {
+    const exameItems = await this.exameService.getExameItemsFromAllExamsByUser(
+      id,
+    );
+    return exameItems;
   }
 
   @Patch('/:id')

@@ -36,21 +36,20 @@ export class UserService implements Operations {
     if (!userSaved) {
       throw new InternalServerErrorException('User was not created');
     }
-    const msg = {
-      to: user.email,
-      from: 'thi.sanches@hotmail.com',
-      subject: 'SEJA BEM VINDO!!!',
-      text: 'Seja bem vindo a Smart Health',
-      html: '<strong>estamos muito feliz em recebê-lo</strong>',
-    };
-    sgMail
-      .send(msg)
-      .then(() => {
-        console.log('Email sent');
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    // const msg = {
+    //   to: user.email,
+    //   from: 'thi.sanches@hotmail.com',
+    //   subject: 'SEJA BEM VINDO!!!',
+    //   text: 'Seja bem vindo a Smart Health',
+    //   html: '<strong>estamos muito feliz em recebê-lo</strong>',
+    // };
+    // sgMail.send(msg);
+    // .then(() => {
+    //   console.log('Email sent');
+    // })
+    // .catch((error) => {
+    //   console.error(error);
+    // });
     const userDto = UserAssembler.assembleCreateUserToDto(userSaved);
     return userDto;
   }

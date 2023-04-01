@@ -1,4 +1,4 @@
-import { ExameItemOperations } from '@modules/exame copy/exame-item.operations';
+import { ExameItemOperations } from '@modules/exame-item/exame-item.operations';
 import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
 import { Tokens } from '@utils/tokens';
 import { InsertExameItems } from 'src/types/dtos/exame-item.insert.dto';

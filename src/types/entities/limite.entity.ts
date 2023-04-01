@@ -1,7 +1,7 @@
+import { Metrica } from '@app/types/entities/metrica.entity';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 
 import { ApiProperty } from '@nestjs/swagger';
-import { Metrica } from 'src/types/entities/metrica.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @ObjectType()
