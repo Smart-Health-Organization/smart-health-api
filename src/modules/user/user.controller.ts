@@ -87,7 +87,7 @@ export class UserController {
 
   @Get(':id/exame-items')
   @ApiOkResponse({
-    description: 'Exames returned',
+    description: 'Items from all exams returned',
     type: ExameItemsMapResponseType,
   })
   async findExameItems(@Param('id') id: string): Promise<any> {
