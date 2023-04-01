@@ -11,6 +11,7 @@ import { ExameResponseDto } from '@app/types/dtos/exame.response.dto';
 import { ExameItem } from '@app/types/entities/exame-item.entity';
 import { User } from '@app/types/entities/user.entity';
 import { Tokens } from '@app/utils/tokens';
+import { ExameItemsMapResponseType } from '@modules/exame/type/exame-items-map.response.type';
 import { Repository } from 'typeorm';
 import { Exame } from '../../types/entities/exame.entity';
 import { ExameAssembler } from './assembler/exameAssembler';
@@ -73,7 +74,9 @@ export class ExameService implements ExameOperations {
     return ExameAssembler.assembleExameAndExameItemsToDto(exameItensMap);
   }
 
-  async getExameItemsFromAllExamsByUser(userId: string): Promise<any> {
+  async getExameItemsFromAllExamsByUser(
+    userId: string,
+  ): Promise<ExameItemsMapResponseType> {
     const exames = await this.getExamesByUserId(userId);
     const examesPorData = exames.sort((a, b) => {
       const dataA = new Date(a.data);
@@ -105,7 +108,7 @@ export class ExameService implements ExameOperations {
       });
     });
 
-    return Object.fromEntries([...itensMap]);
+    return { data: Object.fromEntries([...itensMap]) };
   }
   // async updateExame(id: string, data: UpdateExameDto): Promise<any> {
   //   const exame = await this.getExameById(id);

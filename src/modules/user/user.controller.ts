@@ -4,6 +4,7 @@ import {
   ExameAndExameItemsResponseType,
   ExamesAndExameItemsResponseType,
 } from '@modules/exame/type/exame-and-exame-items.response.type';
+import { ExameItemsMapResponseType } from '@modules/exame/type/exame-items-map.response.type';
 import { ResetPassword } from '@modules/user/type/reset-password.type';
 import { Operations } from '@modules/user/user.operations';
 import {
@@ -87,7 +88,7 @@ export class UserController {
   @Get(':id/exame-items')
   @ApiOkResponse({
     description: 'Exames returned',
-    type: [ExameAndExameItemsResponseType],
+    type: ExameItemsMapResponseType,
   })
   async findExameItems(@Param('id') id: string): Promise<any> {
     const exameItems = await this.exameService.getExameItemsFromAllExamsByUser(
