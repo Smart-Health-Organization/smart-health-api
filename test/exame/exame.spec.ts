@@ -50,7 +50,6 @@ describe('UserService', () => {
       const exameItens = await exameService.getExameItemsFromAllExamsByUser(
         '1',
       );
-      console.log(exameItens);
       // Verifica se a função retornou corretamente o novo usuário criado
       expect(exameItens).toEqual(exameItemsFromAllExamesResponse);
     });
