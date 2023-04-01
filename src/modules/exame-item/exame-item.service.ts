@@ -1,7 +1,7 @@
+import { ExameItem } from '@app/types/entities/exame-item.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ExameItemInsertDto } from 'src/types/dtos/exame-item.insert.dto';
-import { ExameItem } from 'src/types/entities/exame-item.entity';
 import { Repository } from 'typeorm';
 import { Exame } from '../../types/entities/exame.entity';
 import { ExameItemOperations } from './exame-item.operations';

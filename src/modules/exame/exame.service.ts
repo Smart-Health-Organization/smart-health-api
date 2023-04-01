@@ -1,4 +1,4 @@
-import { ExameItemOperations } from '@modules/exame copy/exame-item.operations';
+import { ExameItemOperations } from '@modules/exame-item/exame-item.operations';
 import {
   Inject,
   Injectable,
@@ -6,10 +6,11 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Tokens } from '@utils/tokens';
-import { ExameResponseDto } from 'src/types/dtos/exame.response.dto';
-import { ExameItem } from 'src/types/entities/exame-item.entity';
-import { User } from 'src/types/entities/user.entity';
+
+import { ExameResponseDto } from '@app/types/dtos/exame.response.dto';
+import { ExameItem } from '@app/types/entities/exame-item.entity';
+import { User } from '@app/types/entities/user.entity';
+import { Tokens } from '@app/utils/tokens';
 import { Repository } from 'typeorm';
 import { Exame } from '../../types/entities/exame.entity';
 import { ExameAssembler } from './assembler/exameAssembler';
@@ -21,8 +22,8 @@ export class ExameService implements ExameOperations {
   constructor(
     @InjectRepository(Exame)
     private exameRepository: Repository<Exame>,
-    @Inject(Tokens.EXAME_ITEM_OPERATIONS) private readonly exameItemservice: ExameItemOperations,
-
+    @Inject(Tokens.EXAME_ITEM_OPERATIONS)
+    private readonly exameItemservice: ExameItemOperations,
   ) {}
   async createExame(user: User): Promise<ExameResponseDto> {
     const exame = this.exameRepository.create({
@@ -53,22 +54,59 @@ export class ExameService implements ExameOperations {
     return exame;
   }
 
-  async getExamesByUserId(userId: string):Promise<ExamesAndExameItemsResponseType> {
+  async getExamesByUserId(
+    userId: string,
+  ): Promise<ExamesAndExameItemsResponseType> {
     const exames = await this.exameRepository.find({
       where: {
         user: { id: parseInt(userId) },
       },
     });
-     const exameItensMap = new Map<Exame,ExameItem[]>;
-    for(const exame of exames){
-      const exameItems = await this.exameItemservice.getExameItemsByExameId(exame.id)
-      exameItensMap.set(exame,exameItems)
+
+    const exameItensMap = new Map<Exame, ExameItem[]>();
+    for (const exame of exames) {
+      const exameItems = await this.exameItemservice.getExameItemsByExameId(
+        exame.id,
+      );
+      exameItensMap.set(exame, exameItems);
     }
-    console.log(exameItensMap)
     return ExameAssembler.assembleExameAndExameItemsToDto(exameItensMap);
   }
 
+  async getExameItemsFromAllExamsByUser(userId: string): Promise<any> {
+    const exames = await this.getExamesByUserId(userId);
+    const examesPorData = exames.sort((a, b) => {
+      const dataA = new Date(a.data);
+      const dataB = new Date(b.data);
+      return dataB.getTime() - dataA.getTime();
+    });
+    const itensMap = new Map<string, any[]>();
+    examesPorData.forEach((exame) => {
+      exame.itens.forEach((item) => {
+        let itemaSerAdicionado = null;
+        if (!itensMap.get(item.metrica)) {
+          itensMap.set(item.metrica, []);
+          itemaSerAdicionado = {
+            data: exame.data,
+            medida: item.medida,
+            isAtual: true,
+            isAlterado: 'todo',
+          };
+        } else {
+          itemaSerAdicionado = {
+            data: exame.data,
+            medida: item.medida,
+            isAtual: false,
+            isAlterado: 'todo',
+          };
+        }
+        const conteudo = itensMap.get(item.metrica);
+        conteudo.push(itemaSerAdicionado);
+      });
+    });
 
+    return Object.fromEntries([...itensMap]);
+  }
   // async updateExame(id: string, data: UpdateExameDto): Promise<any> {
   //   const exame = await this.getExameById(id);
   //   await this.exameRepository.update(exame, { ...data });

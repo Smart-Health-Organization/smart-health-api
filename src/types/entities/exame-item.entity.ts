@@ -1,6 +1,6 @@
+import { Exame } from '@app/types/entities/exame.entity';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
-import { Exame } from 'src/types/entities/exame.entity';
 import {
   Column,
   Entity,

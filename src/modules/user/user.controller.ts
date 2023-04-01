@@ -1,4 +1,4 @@
-import { ExameItemOperations } from '@modules/exame copy/exame-item.operations';
+import { ExameItemOperations } from '@modules/exame-item/exame-item.operations';
 import { ExameOperations } from '@modules/exame/exame.operations';
 import {
   ExameAndExameItemsResponseType,
@@ -82,6 +82,18 @@ export class UserController {
   ): Promise<ExamesAndExameItemsResponseType> {
     const exames = await this.exameService.getExamesByUserId(id);
     return exames;
+  }
+
+  @Get(':id/exame-items')
+  @ApiOkResponse({
+    description: 'Exames returned',
+    type: [ExameAndExameItemsResponseType],
+  })
+  async findExameItems(@Param('id') id: string): Promise<any> {
+    const exameItems = await this.exameService.getExameItemsFromAllExamsByUser(
+      id,
+    );
+    return exameItems;
   }
 
   @Patch('/:id')

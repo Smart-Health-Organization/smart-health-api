@@ -1,6 +1,6 @@
+import { ExameItem } from '@app/types/entities/exame-item.entity';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
-import { ExameItem } from 'src/types/entities/exame-item.entity';
 import { Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @ObjectType()

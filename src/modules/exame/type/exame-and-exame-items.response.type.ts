@@ -1,7 +1,7 @@
 import {
   ArrayOfExameItemResponseType,
   ExameItemResponseType,
-} from '@modules/exame copy/type/exame-item.response.type';
+} from '@modules/exame-item/type/exame-item.response.type';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class ExameAndExameItemsResponseType {

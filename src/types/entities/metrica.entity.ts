@@ -1,7 +1,7 @@
+import { Limite } from '@app/types/entities/limite.entity';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 
 import { ApiProperty } from '@nestjs/swagger';
-import { Limite } from 'src/types/entities/limite.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @ObjectType()
