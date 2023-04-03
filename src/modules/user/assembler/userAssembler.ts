@@ -24,4 +24,14 @@ export class UserAssembler {
 
     return usersDto;
   }
+
+  static assembleUserToDto(user: User): UserResponseDto {
+    return {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      login: user.login,
+      age: user.age,
+    };
+  }
 }

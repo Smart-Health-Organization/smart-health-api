@@ -1,6 +1,6 @@
+import { Exame } from '@app/types/entities/exame.entity';
 import { Field, HideField, ID, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
-import { Exame } from 'src/types/entities/exame.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { hashPasswordTransform } from './../../helpers/crypto';
 

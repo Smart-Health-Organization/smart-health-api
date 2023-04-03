@@ -1,7 +1,14 @@
+import { Exame } from '@app/types/entities/exame.entity';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
-import { Exame } from 'src/types/entities/exame.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { ResultadoExameItem } from './resultado-exame.entity';
 
 @ObjectType()
 @Entity()
@@ -19,11 +26,11 @@ export class ExameItem {
   })
   metrica: string;
 
-  @Column()
+  @Column('float')
   @ApiProperty({
     example: 200,
   })
-  medida: string;
+  medida: number;
 
   @Column()
   @ApiProperty({
@@ -31,6 +38,9 @@ export class ExameItem {
   })
   unidade: string;
 
-  @ManyToOne(() => Exame, (exame) => exame.exameItens)
+  @ManyToOne(() => Exame, (exame) => exame.itens)
   exame: Exame;
+
+  @OneToOne(() => ResultadoExameItem)
+  resultado: ResultadoExameItem;
 }

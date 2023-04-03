@@ -1,0 +1,6 @@
+[
+  { "id": 5, "metrica": "ldl", "medida": 100, "unidade": "g" },
+  { "id": 6, "metrica": "hdl", "medida": 100.6, "unidade": "g" },
+  { "id": 7, "metrica": "t3", "medida": 100, "unidade": "g" },
+  { "id": 8, "metrica": "t4", "medida": 100, "unidade": "g" }
+]

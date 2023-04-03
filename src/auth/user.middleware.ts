@@ -21,7 +21,6 @@ export class UserMiddleware implements NestMiddleware {
       // Add the user object to the request object
       req['user'] = decoded;
       const url = req.originalUrl;
-      console.log(url);
       const match = url.match(/\/users\/(\d+)/);
       if (match) {
         const id = parseInt(match[1]);

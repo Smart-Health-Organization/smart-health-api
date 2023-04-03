@@ -5,6 +5,8 @@
 #ORM config
 ormconfig.json
 .env
+.env-dev
+schema.gql
 
 #graphql
 schema.gql
@@ -40,3 +42,5 @@ lerna-debug.log*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+package-lock.json
