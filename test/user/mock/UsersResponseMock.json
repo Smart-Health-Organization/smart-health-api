@@ -1,12 +1,16 @@
-[{
-    "name" : "Thiago Sanches",
+[
+  {
+    "id": 1,
+    "name": "Thiago Sanches",
     "email": "thi.sanches@hotmail.com",
     "age": 22,
     "login": "thisanches07"
-    },
-    {
-        "name" : "Pedro Paulo",
-        "email": "pedro.paulo@hotmail.com",
-        "age": 22,
-        "login": "pedropaulo"
-        }]
+  },
+  {
+    "id": 2,
+    "name": "Pedro Paulo",
+    "email": "pedro.paulo@hotmail.com",
+    "age": 22,
+    "login": "pedropaulo"
+  }
+]

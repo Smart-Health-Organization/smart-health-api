@@ -1,0 +1,84 @@
+{
+  "data": {
+    "hdl": [
+      {
+        "data": "Sat Apr 01 2023 11:16:36 GMT-0300 (Brasilia Standard Time)",
+        "isAlterado": "todo",
+        "isAtual": true,
+        "medida": 100.6
+      },
+      {
+        "data": "Sat Apr 01 2023 09:54:43 GMT-0300 (Brasilia Standard Time)",
+        "isAlterado": "todo",
+        "isAtual": false,
+        "medida": 100.6
+      },
+      {
+        "data": "Sat Apr 01 2023 09:52:25 GMT-0300 (Brasilia Standard Time)",
+        "isAlterado": "todo",
+        "isAtual": false,
+        "medida": 100.6
+      }
+    ],
+    "ldl": [
+      {
+        "data": "Sat Apr 01 2023 11:16:36 GMT-0300 (Brasilia Standard Time)",
+        "isAlterado": "todo",
+        "isAtual": true,
+        "medida": 100
+      },
+      {
+        "data": "Sat Apr 01 2023 09:54:43 GMT-0300 (Brasilia Standard Time)",
+        "isAlterado": "todo",
+        "isAtual": false,
+        "medida": 100
+      },
+      {
+        "data": "Sat Apr 01 2023 09:52:25 GMT-0300 (Brasilia Standard Time)",
+        "isAlterado": "todo",
+        "isAtual": false,
+        "medida": 100
+      }
+    ],
+    "t3": [
+      {
+        "data": "Sat Apr 01 2023 11:16:36 GMT-0300 (Brasilia Standard Time)",
+        "isAlterado": "todo",
+        "isAtual": true,
+        "medida": 100
+      },
+      {
+        "data": "Sat Apr 01 2023 09:54:43 GMT-0300 (Brasilia Standard Time)",
+        "isAlterado": "todo",
+        "isAtual": false,
+        "medida": 100
+      },
+      {
+        "data": "Sat Apr 01 2023 09:52:25 GMT-0300 (Brasilia Standard Time)",
+        "isAlterado": "todo",
+        "isAtual": false,
+        "medida": 100
+      }
+    ],
+    "t4": [
+      {
+        "data": "Sat Apr 01 2023 11:16:36 GMT-0300 (Brasilia Standard Time)",
+        "isAlterado": "todo",
+        "isAtual": true,
+        "medida": 100
+      },
+      {
+        "data": "Sat Apr 01 2023 09:54:43 GMT-0300 (Brasilia Standard Time)",
+        "isAlterado": "todo",
+        "isAtual": false,
+        "medida": 100
+      },
+      {
+        "data": "Sat Apr 01 2023 09:52:25 GMT-0300 (Brasilia Standard Time)",
+        "isAlterado": "todo",
+        "isAtual": false,
+        "medida": 100
+      }
+    ]
+  }
+}
