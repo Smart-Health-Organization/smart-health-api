@@ -1,3 +1,6 @@
+import { Metrica } from '@app/types/entities/metrica.entity';
+import { ResultadoExameItem } from '@app/types/entities/resultado-exame.entity';
+import { MetricaService } from '@modules/metrica/metrica.service';
 import { ExameItem } from 'src/types/entities/exame-item.entity';
 import { Repository } from 'typeorm';
 import { ExameItemService } from '../../src/modules/exame-item/exame-item.service';
@@ -10,8 +13,11 @@ var exameItemsFromAllExamesResponse = require('./mock/exameItemsFromAllExamesRes
 describe('UserService', () => {
   let exameService: ExameService;
   let exameItemService: ExameItemService;
+  let metricaService: MetricaService;
   let exameMockRepository: Partial<Repository<Exame>>;
   let exameItemMockRepository: Partial<Repository<ExameItem>>;
+  let resultadoMockRepository: Partial<Repository<ResultadoExameItem>>;
+  let metricaMockRepository: Partial<Repository<Metrica>>;
 
   //criando beforeEach para ser rodado antes de cada teste
   beforeEach(() => {
@@ -22,9 +28,20 @@ describe('UserService', () => {
     exameItemMockRepository = {
       find: jest.fn().mockReturnValue(exameItemsMock),
     };
+    resultadoMockRepository = {
+      find: jest.fn().mockReturnValue(0),
+    };
+    metricaMockRepository = {
+      find: jest.fn().mockReturnValue(0),
+    };
+    metricaService = new MetricaService(
+      metricaMockRepository as Repository<Metrica>,
+    );
     //instanciando o serviço
     exameItemService = new ExameItemService(
       exameItemMockRepository as Repository<ExameItem>,
+      resultadoMockRepository as Repository<ResultadoExameItem>,
+      metricaService,
     );
     exameService = new ExameService(
       exameMockRepository as Repository<Exame>,

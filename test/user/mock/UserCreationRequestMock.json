@@ -1,7 +1,8 @@
 {
-    "name" : "Thiago Sanches",
-    "email": "thi.sanches@hotmail.com",
-    "age": 22,
-    "login": "thisanches07",
-    "password": "thiagoLegal"
+  "name": "Thiago Sanches",
+  "email": "thi.sanches@hotmail.com",
+  "age": 22,
+  "sexo": "masculino",
+  "login": "thisanches07",
+  "password": "thiagoLegal"
 }

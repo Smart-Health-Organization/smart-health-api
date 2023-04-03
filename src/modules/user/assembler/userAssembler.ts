@@ -9,6 +9,7 @@ export class UserAssembler {
       email: user.email,
       login: user.login,
       age: user.age,
+      sexo: user.sexo,
     };
   }
   static assembleUsersToDto(user: User[]): UserResponseDto[] {
@@ -19,6 +20,7 @@ export class UserAssembler {
         email: user.email,
         login: user.login,
         age: user.age,
+        sexo: user.sexo,
       };
     });
 
@@ -32,6 +34,7 @@ export class UserAssembler {
       email: user.email,
       login: user.login,
       age: user.age,
+      sexo: user.sexo,
     };
   }
 }

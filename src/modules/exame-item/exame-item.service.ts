@@ -1,5 +1,8 @@
 import { ExameItem } from '@app/types/entities/exame-item.entity';
-import { Injectable } from '@nestjs/common';
+import { ResultadoExameItem } from '@app/types/entities/resultado-exame.entity';
+import { Tokens } from '@app/utils/tokens';
+import { MetricaOperations } from '@modules/metrica/metrica.operations';
+import { Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ExameItemInsertDto } from 'src/types/dtos/exame-item.insert.dto';
 import { Repository } from 'typeorm';
@@ -11,6 +14,12 @@ export class ExameItemService implements ExameItemOperations {
   constructor(
     @InjectRepository(ExameItem)
     private exameItemRepository: Repository<ExameItem>,
+
+    @InjectRepository(ResultadoExameItem)
+    private resultadoRepository: Repository<ResultadoExameItem>,
+
+    @Inject(Tokens.METRICA_OPERATIONS)
+    private readonly metricaService: MetricaOperations,
   ) {}
   async createExameItems(
     exame: Exame,
@@ -18,13 +27,17 @@ export class ExameItemService implements ExameItemOperations {
   ): Promise<any> {
     const allExameItensSaved = [];
     for (const exameItem of exameItens) {
-      const exameItemCreated = this.exameItemRepository.create({
+      const metrica = await this.metricaService.getMetricaByName(
+        exameItem.metrica.toUpperCase(),
+      );
+      const exameItemCreated = await this.exameItemRepository.create({
         exame,
         metrica: exameItem.metrica,
         medida: exameItem.medida,
         unidade: exameItem.unidade,
       });
       const exameSaved = await this.exameItemRepository.save(exameItemCreated);
+
       allExameItensSaved.push(exameSaved);
     }
     return allExameItensSaved;

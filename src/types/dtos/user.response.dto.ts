@@ -19,6 +19,11 @@ export class UserResponseDto {
   age: number;
 
   @ApiProperty({
+    example: 'masculino',
+  })
+  sexo: string;
+
+  @ApiProperty({
     example: 'thi.sanches@hotmail.com',
   })
   email: string;
