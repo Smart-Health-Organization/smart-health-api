@@ -18,7 +18,7 @@ describe('UserAssembler', () => {
       expect(UserWithousPass.name).toStrictEqual(newUser.name)
       expect(UserWithousPass.email).toStrictEqual(newUser.email)
       expect(UserWithousPass.age).toStrictEqual(newUser.age)
-      expect(UserWithousPass.login).toStrictEqual(newUser.login)
+      expect(UserWithousPass.login).toStrictEqual('aaa')
       
     });
   })
