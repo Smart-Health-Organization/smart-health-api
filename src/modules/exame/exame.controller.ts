@@ -1,7 +1,6 @@
 import { ExameItemOperations } from '@modules/exame-item/exame-item.operations';
-import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
+import { Controller, Get, Inject, Param } from '@nestjs/common';
 import { Tokens } from '@utils/tokens';
-import { InsertExameItems } from 'src/types/dtos/exame-item.insert.dto';
 import { ExameOperations } from './exame.operations';
 
 @Controller('exames')
@@ -17,18 +16,18 @@ export class ExameController {
     return this.service.getExames();
   }
 
-  @Post(':id/exame-itens')
-  async createExameItens(
-    @Param('id') id: string,
-    @Body() data: InsertExameItems,
-  ): Promise<any[]> {
-    const exame = await this.getExameById(id);
-    const exameitens = await this.exameItemservice.createExameItems(
-      exame,
-      data.itens,
-    );
-    return exameitens;
-  }
+  // @Post(':id/exame-itens')
+  // async createExameItens(
+  //   @Param('id') id: string,
+  //   @Body() data: InsertExameItems,
+  // ): Promise<any[]> {
+  //   const exame = await this.getExameById(id);
+  //   const exameitens = await this.exameItemservice.createExameItems(
+  //     exame,
+  //     data.itens,
+  //   );
+  //   return exameitens;
+  // }
 
   // @Patch('/:id')
   // async updateExame(

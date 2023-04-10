@@ -44,6 +44,45 @@ export class InsertLimitesEMetricas1679766502904 implements MigrationInterface {
       alto: 140,
       unidade: 'mg/dL',
     });
+
+    const metricaHDL = await queryRunner.manager.save(Metrica, { nome: 'HDL' });
+
+    await queryRunner.manager.save(Limite, {
+      sexo: 'feminino',
+      metrica: metricaHDL,
+      idadeInicio: 0,
+      idadeFim: 19,
+      baixo: 110,
+      alto: 129,
+      unidade: 'mg/dL',
+    });
+    await queryRunner.manager.save(Limite, {
+      sexo: 'feminino',
+      metrica: metricaHDL,
+      idadeInicio: 20,
+      idadeFim: 49,
+      baixo: 130,
+      alto: 140,
+      unidade: 'mg/dL',
+    });
+    await queryRunner.manager.save(Limite, {
+      sexo: 'masculino',
+      metrica: metricaHDL,
+      idadeInicio: 0,
+      idadeFim: 19,
+      baixo: 110,
+      alto: 129,
+      unidade: 'mg/dL',
+    });
+    await queryRunner.manager.save(Limite, {
+      sexo: 'masculino',
+      metrica: metricaHDL,
+      idadeInicio: 20,
+      idadeFim: 49,
+      baixo: 130,
+      alto: 140,
+      unidade: 'mg/dL',
+    });
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {

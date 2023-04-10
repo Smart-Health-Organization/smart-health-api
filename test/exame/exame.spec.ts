@@ -1,6 +1,8 @@
+import { Limite } from '@app/types/entities/limite.entity';
 import { Metrica } from '@app/types/entities/metrica.entity';
 import { ResultadoExameItem } from '@app/types/entities/resultado-exame.entity';
 import { MetricaService } from '@modules/metrica/metrica.service';
+import { LimiteService } from '@modules/metrica/modules/limite/limite.service';
 import { ExameItem } from 'src/types/entities/exame-item.entity';
 import { Repository } from 'typeorm';
 import { ExameItemService } from '../../src/modules/exame-item/exame-item.service';
@@ -14,10 +16,12 @@ describe('UserService', () => {
   let exameService: ExameService;
   let exameItemService: ExameItemService;
   let metricaService: MetricaService;
+  let limiteService: LimiteService;
   let exameMockRepository: Partial<Repository<Exame>>;
   let exameItemMockRepository: Partial<Repository<ExameItem>>;
   let resultadoMockRepository: Partial<Repository<ResultadoExameItem>>;
   let metricaMockRepository: Partial<Repository<Metrica>>;
+  let limiteMockRepository: Partial<Repository<Limite>>;
 
   //criando beforeEach para ser rodado antes de cada teste
   beforeEach(() => {
@@ -37,11 +41,15 @@ describe('UserService', () => {
     metricaService = new MetricaService(
       metricaMockRepository as Repository<Metrica>,
     );
+    limiteService = new LimiteService(
+      limiteMockRepository as Repository<Limite>,
+    );
     //instanciando o serviço
     exameItemService = new ExameItemService(
       exameItemMockRepository as Repository<ExameItem>,
       resultadoMockRepository as Repository<ResultadoExameItem>,
       metricaService,
+      limiteService,
     );
     exameService = new ExameService(
       exameMockRepository as Repository<Exame>,

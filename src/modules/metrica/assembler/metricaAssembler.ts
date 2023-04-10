@@ -35,6 +35,7 @@ export class ExameAssembler {
           metrica: item.metrica,
           medida: item.medida,
           unidade: item.unidade,
+          resultado: item.resultado,
         };
       });
 
