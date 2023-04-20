@@ -6,6 +6,7 @@ import { AppModule } from 'src/app/app.module';
 async function bootstrap() {
   dotenv.config();
   const app = await NestFactory.create(AppModule);
+  app.enableCors();
   app.useGlobalPipes(new ValidationPipe()); // passa a aplicar automaticamente a validação em todas as possibilidades
 
   const config = new DocumentBuilder()
