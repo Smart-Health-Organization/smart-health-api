@@ -4,6 +4,7 @@
     "name": "Thiago Sanches",
     "email": "thi.sanches@hotmail.com",
     "age": 22,
+    "sexo": "masculino",
     "login": "thisanches07"
   },
   {
@@ -11,6 +12,7 @@
     "name": "Pedro Paulo",
     "email": "pedro.paulo@hotmail.com",
     "age": 22,
+    "sexo": "masculino",
     "login": "pedropaulo"
   }
 ]

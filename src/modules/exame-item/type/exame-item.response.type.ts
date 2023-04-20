@@ -1,3 +1,4 @@
+import { ResultadoExameItem } from '@app/types/entities/resultado-exame.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class ExameItemResponseType {
@@ -20,6 +21,8 @@ export class ExameItemResponseType {
     example: 'mg/L',
   })
   unidade: string;
+
+  resultado: ResultadoExameItem;
 }
 
 export class ArrayOfExameItemResponseType extends Array<ExameItemResponseType> {}

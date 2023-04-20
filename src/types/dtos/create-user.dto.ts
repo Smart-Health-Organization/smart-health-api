@@ -22,6 +22,14 @@ export class CreateUserDto {
 
   @Field()
   @IsString()
+  @IsNotEmpty({ message: 'Sexo should not be empty' })
+  @ApiProperty({
+    example: 'masculino',
+  })
+  sexo: string;
+
+  @Field()
+  @IsString()
   @IsNotEmpty({ message: 'Email should not be empty' })
   @ApiProperty({
     example: 'thi.sanches@hotmail.com',

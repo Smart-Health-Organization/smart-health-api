@@ -4,4 +4,6 @@ export class Tokens {
   public static readonly USER_OPERATIONS = 'USER_TOKEN';
   public static readonly EXAME_OPERATIONS = 'EXAME_TOKEN';
   public static readonly EXAME_ITEM_OPERATIONS = 'EXAME_ITEM_TOKEN';
+  public static readonly METRICA_OPERATIONS = 'METRICA_TOKEN';
+  public static readonly LIMITE_OPERATIONS = 'LIMITE_TOKEN';
 }

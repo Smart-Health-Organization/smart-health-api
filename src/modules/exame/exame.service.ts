@@ -93,14 +93,14 @@ export class ExameService implements ExameOperations {
             data: exame.data,
             medida: item.medida,
             isAtual: true,
-            isAlterado: 'todo',
+            isAlterado: item.resultado.alterado,
           };
         } else {
           itemaSerAdicionado = {
             data: exame.data,
             medida: item.medida,
             isAtual: false,
-            isAlterado: 'todo',
+            isAlterado: item.resultado.alterado,
           };
         }
         const conteudo = itensMap.get(item.metrica);
