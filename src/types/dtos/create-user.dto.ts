@@ -24,7 +24,7 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty({ message: 'Sexo should not be empty' })
   @ApiProperty({
-    example: 22,
+    example: 'masculino',
   })
   sexo: string;
 
