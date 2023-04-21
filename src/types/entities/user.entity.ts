@@ -34,6 +34,12 @@ export class User {
 
   @Column()
   @ApiProperty({
+    example: 'masculino',
+  })
+  sexo: string;
+
+  @Column()
+  @ApiProperty({
     example: 'thisanches07',
   })
   login: string;

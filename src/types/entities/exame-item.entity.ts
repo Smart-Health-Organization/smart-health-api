@@ -4,6 +4,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   Column,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -42,5 +43,6 @@ export class ExameItem {
   exame: Exame;
 
   @OneToOne(() => ResultadoExameItem)
+  @JoinColumn()
   resultado: ResultadoExameItem;
 }

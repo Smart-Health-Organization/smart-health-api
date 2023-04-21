@@ -1,9 +1,12 @@
 import { BaseModule } from '@modules/base/base.module';
 import { ExameModule } from '@modules/exame/exame.module';
+import { MetricaModule } from '@modules/metrica/metrica.module';
+import { LimiteModule } from '@modules/metrica/modules/limite/limite.module';
 import { UserModule } from '@modules/user/user.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { RouterModule } from '@nestjs/core';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
@@ -25,6 +28,20 @@ const ormconfig = require('../../ormconfig.js');
     UserModule,
     AuthModule,
     ExameModule,
+    MetricaModule,
+    LimiteModule,
+    RouterModule.register([
+      {
+        path: 'metricas',
+        module: MetricaModule,
+        children: [
+          {
+            path: 'limtes',
+            module: LimiteModule,
+          },
+        ],
+      },
+    ]),
   ],
 })
 export class AppModule {

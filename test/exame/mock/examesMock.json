@@ -3,30 +3,126 @@
     "id": 2,
     "data": "Sat Apr 01 2023 09:52:25 GMT-0300 (Brasilia Standard Time)",
     "itens": [
-      { "id": 5, "metrica": "ldl", "medida": 100, "unidade": "g" },
-      { "id": 6, "metrica": "hdl", "medida": 100.6, "unidade": "g" },
-      { "id": 7, "metrica": "t3", "medida": 100, "unidade": "g" },
-      { "id": 8, "metrica": "t4", "medida": 100, "unidade": "g" }
+      {
+        "id": 5,
+        "metrica": "ldl",
+        "medida": 100,
+        "unidade": "g",
+        "resultado": {
+          "alterado": true
+        }
+      },
+      {
+        "id": 6,
+        "metrica": "hdl",
+        "medida": 100.6,
+        "unidade": "g",
+        "resultado": {
+          "alterado": true
+        }
+      },
+      {
+        "id": 7,
+        "metrica": "t3",
+        "medida": 100,
+        "unidade": "g",
+        "resultado": {
+          "alterado": true
+        }
+      },
+      {
+        "id": 8,
+        "metrica": "t4",
+        "medida": 100,
+        "unidade": "g",
+        "resultado": {
+          "alterado": true
+        }
+      }
     ]
   },
   {
     "id": 3,
     "data": "Sat Apr 01 2023 09:54:43 GMT-0300 (Brasilia Standard Time)",
     "itens": [
-      { "id": 5, "metrica": "ldl", "medida": 100, "unidade": "g" },
-      { "id": 6, "metrica": "hdl", "medida": 100.6, "unidade": "g" },
-      { "id": 7, "metrica": "t3", "medida": 100, "unidade": "g" },
-      { "id": 8, "metrica": "t4", "medida": 100, "unidade": "g" }
+      {
+        "id": 5,
+        "metrica": "ldl",
+        "medida": 100,
+        "unidade": "g",
+        "resultado": {
+          "alterado": true
+        }
+      },
+      {
+        "id": 6,
+        "metrica": "hdl",
+        "medida": 100.6,
+        "unidade": "g",
+        "resultado": {
+          "alterado": true
+        }
+      },
+      {
+        "id": 7,
+        "metrica": "t3",
+        "medida": 100,
+        "unidade": "g",
+        "resultado": {
+          "alterado": true
+        }
+      },
+      {
+        "id": 8,
+        "metrica": "t4",
+        "medida": 100,
+        "unidade": "g",
+        "resultado": {
+          "alterado": true
+        }
+      }
     ]
   },
   {
     "id": 4,
     "data": "Sat Apr 01 2023 11:16:36 GMT-0300 (Brasilia Standard Time)",
     "itens": [
-      { "id": 5, "metrica": "ldl", "medida": 100, "unidade": "g" },
-      { "id": 6, "metrica": "hdl", "medida": 100.6, "unidade": "g" },
-      { "id": 7, "metrica": "t3", "medida": 100, "unidade": "g" },
-      { "id": 8, "metrica": "t4", "medida": 100, "unidade": "g" }
+      {
+        "id": 5,
+        "metrica": "ldl",
+        "medida": 100,
+        "unidade": "g",
+        "resultado": {
+          "alterado": true
+        }
+      },
+      {
+        "id": 6,
+        "metrica": "hdl",
+        "medida": 100.6,
+        "unidade": "g",
+        "resultado": {
+          "alterado": true
+        }
+      },
+      {
+        "id": 7,
+        "metrica": "t3",
+        "medida": 100,
+        "unidade": "g",
+        "resultado": {
+          "alterado": true
+        }
+      },
+      {
+        "id": 8,
+        "metrica": "t4",
+        "medida": 100,
+        "unidade": "g",
+        "resultado": {
+          "alterado": true
+        }
+      }
     ]
   }
 ]
