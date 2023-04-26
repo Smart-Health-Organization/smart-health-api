@@ -3,6 +3,7 @@ import { Metrica } from '@app/types/entities/metrica.entity';
 import { ResultadoExameItem } from '@app/types/entities/resultado-exame.entity';
 import { MetricaService } from '@modules/metrica/metrica.service';
 import { LimiteService } from '@modules/metrica/modules/limite/limite.service';
+import { PdfManipulatorService } from '@modules/pdf-manipulator/pdf-manipulator.service';
 import { ExameItem } from 'src/types/entities/exame-item.entity';
 import { Repository } from 'typeorm';
 import { ExameItemService } from '../../src/modules/exame-item/exame-item.service';
@@ -54,6 +55,8 @@ describe('UserService', () => {
     exameService = new ExameService(
       exameMockRepository as Repository<Exame>,
       exameItemService,
+      metricaService,
+      new PdfManipulatorService(),
     );
   });
 
