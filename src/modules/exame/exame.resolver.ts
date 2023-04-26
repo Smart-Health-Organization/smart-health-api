@@ -28,7 +28,7 @@ export class ExameResolver {
   async createExame(
     @Args('data') data: CreateExameDto,
   ): Promise<ExameResponseDto> {
-    const exame = await this.exameService.createExame(data.user);
+    const exame = await this.exameService.createExame(data.user,data.data);
     return exame;
   }
 

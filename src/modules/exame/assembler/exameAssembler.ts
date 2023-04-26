@@ -1,3 +1,4 @@
+import { InsertExameItems } from '@app/types/dtos/exame-item.insert.dto';
 import { UserAssembler } from '@modules/user/assembler/userAssembler';
 import { ExameResponseDto } from 'src/types/dtos/exame.response.dto';
 import { ExameItem } from 'src/types/entities/exame-item.entity';
@@ -47,5 +48,20 @@ export class ExameAssembler {
     });
 
     return allExamesWithItems;
+  }
+
+  static assemblePdfExameToInsertExameItems(
+    itens: object,
+  ): Omit<InsertExameItems, 'data'> {
+    const response = [];
+    for (let metrica in itens) {
+      response.push({
+        metrica: metrica,
+        medida: itens[metrica].valor,
+        unidade: itens[metrica].unidade,
+      });
+    }
+
+    return { itens: response };
   }
 }

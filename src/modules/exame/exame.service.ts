@@ -12,6 +12,8 @@ import { ExameItem } from '@app/types/entities/exame-item.entity';
 import { User } from '@app/types/entities/user.entity';
 import { Tokens } from '@app/utils/tokens';
 import { ExameItemsMapResponseType } from '@modules/exame/type/exame-items-map.response.type';
+import { MetricaOperations } from '@modules/metrica/metrica.operations';
+import { PdfManipulatorOperations } from '@modules/pdf-manipulator/pdf-manipulator.operations';
 import { Repository } from 'typeorm';
 import { Exame } from '../../types/entities/exame.entity';
 import { ExameAssembler } from './assembler/exameAssembler';
@@ -25,11 +27,20 @@ export class ExameService implements ExameOperations {
     private exameRepository: Repository<Exame>,
     @Inject(Tokens.EXAME_ITEM_OPERATIONS)
     private readonly exameItemservice: ExameItemOperations,
+    @Inject(Tokens.METRICA_OPERATIONS)
+    private readonly metricaService: MetricaOperations,
+    @Inject(Tokens.PDF_OPERATIONS)
+    private readonly pdfManipulatorService: PdfManipulatorOperations,
   ) {}
-  async createExame(user: User): Promise<ExameResponseDto> {
+  async createExame(user: User, data: string): Promise<ExameResponseDto> {
+    const dateParts = data.split('/');
+    const year = parseInt(dateParts[2], 10);
+    const month = parseInt(dateParts[1], 10) - 1;
+    const day = parseInt(dateParts[0], 10);
+    const formattedFata = new Date(year, month, day);
     const exame = this.exameRepository.create({
       user,
-      data: new Date().toString(),
+      data: formattedFata.toString(),
     });
     const exameSaved = await this.exameRepository.save(exame);
     if (!exameSaved) {
@@ -110,6 +121,101 @@ export class ExameService implements ExameOperations {
 
     return { data: Object.fromEntries([...itensMap]) };
   }
+
+  async readExamesBasedOnMetricas(file: any) {
+    //busca metricas no banco de dados
+    let metricas = await this.metricaService.getMetricas();
+
+    //chama pdf-manipulator e retorna paginas em string
+    const pdfPagesStringArray = await this.pdfManipulatorService.readPdf(file);
+
+    //baseado nas paginas e nas metricas recuperadas do banco de dados,
+    // monta os itens do exame com seu valor e unidades
+    const createdMap = this.populateMapWithItems(pdfPagesStringArray, metricas);
+
+    return createdMap;
+  }
+
+  populateMapWithItems(pdfPagesStringArray, metricas) {
+    //map principal
+    const itensMap = new Map<string, { valor: number; unidade: string }>();
+
+    //map contendo unidades de cada metrica
+    const unidadeMetricasSet = new Map<string, string>();
+
+    const metricasByName = [];
+
+    metricas.forEach((metrica) => {
+      const { nome, unidade } = metrica;
+      unidadeMetricasSet.set(nome, unidade);
+      metricasByName.push(nome);
+    });
+
+    //chama funcao para popular intensMap
+    this.createMapBasedOnPdf(
+      pdfPagesStringArray,
+      metricasByName,
+      unidadeMetricasSet,
+      itensMap,
+    );
+
+    //retorna map
+    return itensMap;
+  }
+
+  createMapBasedOnPdf(
+    pdfPagesStringArray: string[],
+    metricasByName: string[],
+    unidadeMetricasSet: Map<string, string>,
+    itensMap: Map<string, { valor: number; unidade: string }>,
+  ) {
+    for (let i = 0; i < pdfPagesStringArray.length; i++) {
+      let itemEncontrado = [];
+      // percorre cada metrica por nome
+      for (let j = 0; j < metricasByName.length; j++) {
+        //verifica estrutura de HDL e padroniza
+        if (pdfPagesStringArray[i].includes('H.D.L.')) {
+          pdfPagesStringArray[i] = pdfPagesStringArray[i].replace(
+            'H.D.L.',
+            'HDL',
+          );
+
+          // separa pagina por palavra para verificar presença de metrica
+        }
+
+        if (pdfPagesStringArray[i].split(' ').includes(metricasByName[j])) {
+          itemEncontrado.push(metricasByName[j]);
+        }
+      }
+
+      //verifica se um item foi encontrado
+      if (itemEncontrado.length > 0) {
+        //passa pelo regex para pegar palavra "resultado" da respectiva medida
+        for (let item of itemEncontrado) {
+          const regex = new RegExp(
+            `\\b${item}\\b.*?R\\s*E\\s*S\\s*U\\s*L\\s*T\\s*A\\s*D\\s*O\\s*:\\s*(\\d+(?:[.,]\\d+)?)|\\b${item}\\b.*?\\bR\\s*E\\s*S\\s*U\\s*L\\s*T\\s*A\\s*D\\s*O\\s*(\\d+(?:[.,]\\d+)?)|\\b${item}\\b.*?(?:R\\s*E\\s*S\\s*U\\s*L\\s*T\\s*A\\s*D\\s*O\\s*[: ])?(\\d{1,3}(?:[.,]\\d{1,2})?)\\b`,
+            'gi',
+          );
+
+          const match = regex.exec(pdfPagesStringArray[i]);
+          //verifica match com regex
+          if (match) {
+            //recupera valor apos a palavra resultado
+            let valorEncontrado = match[1] || match[2] || match[3];
+            const valor = +valorEncontrado.replace(',','.');
+
+            //recupera a unidade de medida baseado na metrica do banco de dados
+            const unidade = unidadeMetricasSet.get(item);
+
+            //popula map principal com metrica do banco, seu valor e unidade do banco de dados
+            
+            itensMap.set(item, { valor, unidade });
+          }
+        }
+      }
+    }
+  }
+
   // async updateExame(id: string, data: UpdateExameDto): Promise<any> {
   //   const exame = await this.getExameById(id);
   //   await this.exameRepository.update(exame, { ...data });

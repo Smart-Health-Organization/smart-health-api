@@ -20,6 +20,12 @@ export class Metrica {
   })
   nome: string;
 
+  @Column()
+  @ApiProperty({
+    example: 'mg/dL',
+  })
+  unidade: string;
+
   @OneToMany(() => Limite, (limite) => limite.metrica)
   limites: Limite[];
 }

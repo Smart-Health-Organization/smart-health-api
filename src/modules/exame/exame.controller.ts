@@ -1,5 +1,16 @@
+import { InsertExameItems } from '@app/types/dtos/exame-item.insert.dto';
 import { ExameItemOperations } from '@modules/exame-item/exame-item.operations';
-import { Controller, Get, Inject, Param } from '@nestjs/common';
+import { ExameAssembler } from '@modules/exame/assembler/exameAssembler';
+import {
+  Controller,
+  Get,
+  Inject,
+  Param,
+  Post,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { Tokens } from '@utils/tokens';
 import { ExameOperations } from './exame.operations';
 
@@ -14,6 +25,20 @@ export class ExameController {
   @Get()
   getExames() {
     return this.service.getExames();
+  }
+
+  @Post('/pdf')
+  @UseInterceptors(FileInterceptor('file'))
+  async readExamesBasedOnMetricas(
+    @UploadedFile() file,
+  ): Promise<Omit<InsertExameItems, 'data'>> {
+    const exameObject = Object.fromEntries(
+      await this.service.readExamesBasedOnMetricas(file),
+    );
+    let response =
+      ExameAssembler.assemblePdfExameToInsertExameItems(exameObject);
+
+    return response;
   }
 
   // @Post(':id/exame-itens')
