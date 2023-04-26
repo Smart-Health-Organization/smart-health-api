@@ -138,7 +138,7 @@ export class ExameService implements ExameOperations {
 
   populateMapWithItems(pdfPagesStringArray, metricas) {
     //map principal
-    const itensMap = new Map<string, { valor: string; unidade: string }>();
+    const itensMap = new Map<string, { valor: number; unidade: string }>();
 
     //map contendo unidades de cada metrica
     const unidadeMetricasSet = new Map<string, string>();
@@ -167,7 +167,7 @@ export class ExameService implements ExameOperations {
     pdfPagesStringArray: string[],
     metricasByName: string[],
     unidadeMetricasSet: Map<string, string>,
-    itensMap: Map<string, { valor: string; unidade: string }>,
+    itensMap: Map<string, { valor: number; unidade: string }>,
   ) {
     for (let i = 0; i < pdfPagesStringArray.length; i++) {
       let itemEncontrado = [];
@@ -201,12 +201,14 @@ export class ExameService implements ExameOperations {
           //verifica match com regex
           if (match) {
             //recupera valor apos a palavra resultado
-            const valor = match[1] || match[2] || match[3];
+            let valorEncontrado = match[1] || match[2] || match[3];
+            const valor = +valorEncontrado.replace(',','.');
 
             //recupera a unidade de medida baseado na metrica do banco de dados
             const unidade = unidadeMetricasSet.get(item);
 
             //popula map principal com metrica do banco, seu valor e unidade do banco de dados
+            
             itensMap.set(item, { valor, unidade });
           }
         }
