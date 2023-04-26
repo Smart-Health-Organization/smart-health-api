@@ -45,10 +45,4 @@ export class Limite {
     example: '20',
   })
   baixo: number;
-
-  @Column()
-  @ApiProperty({
-    example: 'mg/dL',
-  })
-  unidade: string;
 }

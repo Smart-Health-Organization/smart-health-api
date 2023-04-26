@@ -2,6 +2,7 @@ import { BaseModule } from '@modules/base/base.module';
 import { ExameModule } from '@modules/exame/exame.module';
 import { MetricaModule } from '@modules/metrica/metrica.module';
 import { LimiteModule } from '@modules/metrica/modules/limite/limite.module';
+import { PdfManipulatorModule } from '@modules/pdf-manipulator/pdf-manipulator.module';
 import { UserModule } from '@modules/user/user.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
@@ -30,6 +31,7 @@ const ormconfig = require('../../ormconfig.js');
     ExameModule,
     MetricaModule,
     LimiteModule,
+    PdfManipulatorModule,
     RouterModule.register([
       {
         path: 'metricas',

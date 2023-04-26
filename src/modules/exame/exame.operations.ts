@@ -5,12 +5,14 @@ import { ExamesAndExameItemsResponseType } from './type/exame-and-exame-items.re
 
 export interface ExameOperations {
   getExames(): Promise<ExameResponseDto[]>;
-  createExame(user: User): Promise<any>;
+  createExame(user: User, data: string): Promise<any>;
   getExameById(id: string): Promise<any>;
   getExamesByUserId(userId: string): Promise<ExamesAndExameItemsResponseType>;
   getExameItemsFromAllExamsByUser(
     userId: string,
   ): Promise<ExameItemsMapResponseType>;
+  readExamesBasedOnMetricas(file: any): Promise<any>;
+
   // updateExame(id: string, data: UpdateExameDto): Promise<any>;
   // deleteExame(id: string): Promise<boolean>;
 }

@@ -1,4 +1,6 @@
 import { ExameItemModule } from '@modules/exame-item/exame-item.module';
+import { MetricaModule } from '@modules/metrica/metrica.module';
+import { PdfManipulatorModule } from '@modules/pdf-manipulator/pdf-manipulator.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Tokens } from '@utils/tokens';
@@ -8,7 +10,12 @@ import { ExameResolver } from './exame.resolver';
 import { ExameService } from './exame.service';
 
 @Module({
-  imports: [ExameItemModule, TypeOrmModule.forFeature([Exame])],
+  imports: [
+    PdfManipulatorModule,
+    MetricaModule,
+    ExameItemModule,
+    TypeOrmModule.forFeature([Exame]),
+  ],
   controllers: [ExameController],
   providers: [
     ExameService,

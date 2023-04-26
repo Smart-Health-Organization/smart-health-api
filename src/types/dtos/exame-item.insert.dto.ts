@@ -1,3 +1,4 @@
+import { IsDateFormat } from '@app/utils/date-format';
 import { Field, InputType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
@@ -36,6 +37,13 @@ export class ExameItemInsertDto {
 }
 
 export class InsertExameItems {
+  @IsDateFormat()
+  @IsNotEmpty()
+  @ApiProperty({
+    example: '25/04/2023',
+  })
+  data: string;
+
   @Type(() => ExameItemInsertDto)
   @ValidateNested()
   @IsNotEmpty()
