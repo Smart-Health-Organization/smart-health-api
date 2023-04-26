@@ -123,52 +123,79 @@ export class ExameService implements ExameOperations {
   }
 
   async readExamesBasedOnMetricas(file: any) {
+    //busca metricas no banco de dados
     let metricas = await this.metricaService.getMetricas();
+
+    //chama pdf-manipulator e retorna paginas em string
+    const pdfPagesStringArray = await this.pdfManipulatorService.readPdf(file);
+
+    //baseado nas paginas e nas metricas recuperadas do banco de dados,
+    // monta os itens do exame com seu valor e unidades
+    const createdMap = this.populateMapWithItems(pdfPagesStringArray, metricas);
+
+    return createdMap;
+  }
+
+  populateMapWithItems(pdfPagesStringArray, metricas) {
+    //map principal
+    const itensMap = new Map<string, any>();
+
+    //map contendo unidades de cada metrica
     const unidadeMetricasSet = new Map<string, string>();
+
+    const metricasByName = [];
+
     metricas.forEach((metrica) => {
       const { nome, unidade } = metrica;
       unidadeMetricasSet.set(nome, unidade);
+      metricasByName.push(nome);
     });
-    const metricasByName = metricas.map((metrica) => {
-      return metrica.nome;
-    });
-    const map = new Map<string, any>();
-    const pdfPagesStringArray = await this.pdfManipulatorService.readPdf(file);
-    let itemEncontrado = '';
+    //percorre cada pagina
     for (let i = 0; i < pdfPagesStringArray.length; i++) {
+      let itemEncontrado = '';
+      // percorre cada metrica por nome
       for (let j = 0; j < metricasByName.length; j++) {
-        if (
-          pdfPagesStringArray[i]
-            .toUpperCase()
-            .split(' ')
-            .includes(metricasByName[j])
-        ) {
+        //verifica estrutura de HDL e padroniza
+        if (pdfPagesStringArray[i].includes('H.D.L.')) {
+          pdfPagesStringArray[i] = pdfPagesStringArray[i].replace(
+            'H.D.L.',
+            'HDL',
+          );
+
+          // separa pagina por palavra para verificar presença de metrica
+        }
+
+        if (pdfPagesStringArray[i].split(' ').includes(metricasByName[j])) {
           itemEncontrado = metricasByName[j];
           break;
         }
       }
+
+      //verifica se um item foi encontrado
       if (itemEncontrado !== '') {
-        if (itemEncontrado === 'H.D.L.') {
-          itemEncontrado = itemEncontrado.replace(/\./g, '');
-          pdfPagesStringArray[i] = pdfPagesStringArray[i].replace(
-            'H.D.L.',
-            itemEncontrado,
-          );
-        }
+        //passa pelo regex para pegar palavra "resultado" da respectiva medida
         const regex = new RegExp(
-          `\\b${itemEncontrado}\\b.*?R\\s*E\\s*S\\s*U\\s*L\\s*T\\s*A\\s*D\\s*O\\s*:\\s*(\\d+)|\\b${itemEncontrado}\\b.*?\\bR\\s*E\\s*S\\s*U\\s*L\\s*T\\s*A\\s*D\\s*O\\s*(\\d+(?:[.,]\\d+)?)`,
+          `\\b${itemEncontrado}\\b.*?R\\s*E\\s*S\\s*U\\s*L\\s*T\\s*A\\s*D\\s*O\\s*:\\s*(\\d+(?:[.,]\\d+)?)|\\b${itemEncontrado}\\b.*?\\bR\\s*E\\s*S\\s*U\\s*L\\s*T\\s*A\\s*D\\s*O\\s*(\\d+(?:[.,]\\d+)?)`,
           'gi',
         );
 
         const match = regex.exec(pdfPagesStringArray[i]);
+        //verifica match com regex
         if (match) {
+          //recupera valor apos a palavra resultado
           const valor = match[1] || match[2];
+
+          //recupera a unidade de medida baseado na metrica do banco de dados
           const unidade = unidadeMetricasSet.get(itemEncontrado);
-          map.set(itemEncontrado, { valor, unidade });
+
+          //popula map principal com metrica do banco, seu valor e unidade do banco de dados
+          itensMap.set(itemEncontrado, { valor, unidade });
         }
       }
     }
-    return map;
+
+    //retorna map
+    return itensMap;
   }
 
   // async updateExame(id: string, data: UpdateExameDto): Promise<any> {

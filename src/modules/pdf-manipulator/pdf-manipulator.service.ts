@@ -12,7 +12,7 @@ export class PdfManipulatorService implements PdfManipulatorOperations {
       const page = await pdf.getPage(i);
       const content = await page.getTextContent();
       const lines = RemoveEmpty(
-        content.items.map((item: TextItem) => item?.str || ''),
+        content.items.map((item: TextItem) => item?.str.toUpperCase() || ''),
       );
       pdfPages.push(lines.join(' '));
     }

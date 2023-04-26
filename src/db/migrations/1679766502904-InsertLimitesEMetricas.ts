@@ -90,48 +90,6 @@ export class InsertLimitesEMetricas1679766502904 implements MigrationInterface {
       unidade: 'mg/dL',
     });
 
-    const metricaHDLcomPontos = await queryRunner.manager.save(Metrica, {
-      nome: 'H.D.L.',
-      unidade: 'unidade H.D.L.',
-    });
-
-    await queryRunner.manager.save(Limite, {
-      sexo: 'feminino',
-      metrica: metricaHDLcomPontos,
-      idadeInicio: 0,
-      idadeFim: 19,
-      baixo: 110,
-      alto: 129,
-      unidade: 'mg/dL',
-    });
-    await queryRunner.manager.save(Limite, {
-      sexo: 'feminino',
-      metrica: metricaHDLcomPontos,
-      idadeInicio: 20,
-      idadeFim: 49,
-      baixo: 130,
-      alto: 140,
-      unidade: 'mg/dL',
-    });
-    await queryRunner.manager.save(Limite, {
-      sexo: 'masculino',
-      metrica: metricaHDLcomPontos,
-      idadeInicio: 0,
-      idadeFim: 19,
-      baixo: 110,
-      alto: 129,
-      unidade: 'mg/dL',
-    });
-    await queryRunner.manager.save(Limite, {
-      sexo: 'masculino',
-      metrica: metricaHDLcomPontos,
-      idadeInicio: 20,
-      idadeFim: 49,
-      baixo: 130,
-      alto: 140,
-      unidade: 'mg/dL',
-    });
-
     const metricaVLDL = await queryRunner.manager.save(Metrica, {
       nome: 'VLDL',
       unidade: 'unidade VLDL',
@@ -213,6 +171,21 @@ export class InsertLimitesEMetricas1679766502904 implements MigrationInterface {
       idadeFim: 49,
       baixo: 130,
       alto: 140,
+      unidade: 'mg/dL',
+    });
+
+    const metricaBHCGQUANTITATIVO = await queryRunner.manager.save(Metrica, {
+      nome: 'BHCG',
+      unidade: 'unidade BHCG',
+    });
+
+    await queryRunner.manager.save(Limite, {
+      sexo: 'feminino',
+      metrica: metricaBHCGQUANTITATIVO,
+      idadeInicio: 0,
+      idadeFim: 56,
+      baixo: 53,
+      alto: 58,
       unidade: 'mg/dL',
     });
   }
