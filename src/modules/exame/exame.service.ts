@@ -170,7 +170,7 @@ export class ExameService implements ExameOperations {
     itensMap: Map<string, { valor: string; unidade: string }>,
   ) {
     for (let i = 0; i < pdfPagesStringArray.length; i++) {
-      let itemEncontrado = '';
+      let itemEncontrado = [];
       // percorre cada metrica por nome
       for (let j = 0; j < metricasByName.length; j++) {
         //verifica estrutura de HDL e padroniza
@@ -184,30 +184,31 @@ export class ExameService implements ExameOperations {
         }
 
         if (pdfPagesStringArray[i].split(' ').includes(metricasByName[j])) {
-          itemEncontrado = metricasByName[j];
-          break;
+          itemEncontrado.push(metricasByName[j]);
         }
       }
 
       //verifica se um item foi encontrado
-      if (itemEncontrado !== '') {
+      if (itemEncontrado.length > 0) {
         //passa pelo regex para pegar palavra "resultado" da respectiva medida
-        const regex = new RegExp(
-          `\\b${itemEncontrado}\\b.*?R\\s*E\\s*S\\s*U\\s*L\\s*T\\s*A\\s*D\\s*O\\s*:\\s*(\\d+(?:[.,]\\d+)?)|\\b${itemEncontrado}\\b.*?\\bR\\s*E\\s*S\\s*U\\s*L\\s*T\\s*A\\s*D\\s*O\\s*(\\d+(?:[.,]\\d+)?)|\\b${itemEncontrado}\\b.*?(?:R\\s*E\\s*S\\s*U\\s*L\\s*T\\s*A\\s*D\\s*O\\s*[: ])?(\\d{1,3}(?:[.,]\\d{1,2})?)\\b`,
-          'gi',
-        );
+        for (let item of itemEncontrado) {
+          const regex = new RegExp(
+            `\\b${item}\\b.*?R\\s*E\\s*S\\s*U\\s*L\\s*T\\s*A\\s*D\\s*O\\s*:\\s*(\\d+(?:[.,]\\d+)?)|\\b${item}\\b.*?\\bR\\s*E\\s*S\\s*U\\s*L\\s*T\\s*A\\s*D\\s*O\\s*(\\d+(?:[.,]\\d+)?)|\\b${item}\\b.*?(?:R\\s*E\\s*S\\s*U\\s*L\\s*T\\s*A\\s*D\\s*O\\s*[: ])?(\\d{1,3}(?:[.,]\\d{1,2})?)\\b`,
+            'gi',
+          );
 
-        const match = regex.exec(pdfPagesStringArray[i]);
-        //verifica match com regex
-        if (match) {
-          //recupera valor apos a palavra resultado
-          const valor = match[1] || match[2] || match[3];
+          const match = regex.exec(pdfPagesStringArray[i]);
+          //verifica match com regex
+          if (match) {
+            //recupera valor apos a palavra resultado
+            const valor = match[1] || match[2] || match[3];
 
-          //recupera a unidade de medida baseado na metrica do banco de dados
-          const unidade = unidadeMetricasSet.get(itemEncontrado);
+            //recupera a unidade de medida baseado na metrica do banco de dados
+            const unidade = unidadeMetricasSet.get(item);
 
-          //popula map principal com metrica do banco, seu valor e unidade do banco de dados
-          itensMap.set(itemEncontrado, { valor, unidade });
+            //popula map principal com metrica do banco, seu valor e unidade do banco de dados
+            itensMap.set(item, { valor, unidade });
+          }
         }
       }
     }
