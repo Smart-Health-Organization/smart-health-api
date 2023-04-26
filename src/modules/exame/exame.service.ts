@@ -138,7 +138,7 @@ export class ExameService implements ExameOperations {
 
   populateMapWithItems(pdfPagesStringArray, metricas) {
     //map principal
-    const itensMap = new Map<string, any>();
+    const itensMap = new Map<string, { valor: string; unidade: string }>();
 
     //map contendo unidades de cada metrica
     const unidadeMetricasSet = new Map<string, string>();
@@ -150,7 +150,25 @@ export class ExameService implements ExameOperations {
       unidadeMetricasSet.set(nome, unidade);
       metricasByName.push(nome);
     });
-    //percorre cada pagina
+
+    //chama funcao para popular intensMap
+    this.createMapBasedOnPdf(
+      pdfPagesStringArray,
+      metricasByName,
+      unidadeMetricasSet,
+      itensMap,
+    );
+
+    //retorna map
+    return itensMap;
+  }
+
+  createMapBasedOnPdf(
+    pdfPagesStringArray: string[],
+    metricasByName: string[],
+    unidadeMetricasSet: Map<string, string>,
+    itensMap: Map<string, { valor: string; unidade: string }>,
+  ) {
     for (let i = 0; i < pdfPagesStringArray.length; i++) {
       let itemEncontrado = '';
       // percorre cada metrica por nome
@@ -175,7 +193,7 @@ export class ExameService implements ExameOperations {
       if (itemEncontrado !== '') {
         //passa pelo regex para pegar palavra "resultado" da respectiva medida
         const regex = new RegExp(
-          `\\b${itemEncontrado}\\b.*?R\\s*E\\s*S\\s*U\\s*L\\s*T\\s*A\\s*D\\s*O\\s*:\\s*(\\d+(?:[.,]\\d+)?)|\\b${itemEncontrado}\\b.*?\\bR\\s*E\\s*S\\s*U\\s*L\\s*T\\s*A\\s*D\\s*O\\s*(\\d+(?:[.,]\\d+)?)`,
+          `\\b${itemEncontrado}\\b.*?R\\s*E\\s*S\\s*U\\s*L\\s*T\\s*A\\s*D\\s*O\\s*:\\s*(\\d+(?:[.,]\\d+)?)|\\b${itemEncontrado}\\b.*?\\bR\\s*E\\s*S\\s*U\\s*L\\s*T\\s*A\\s*D\\s*O\\s*(\\d+(?:[.,]\\d+)?)|\\b${itemEncontrado}\\b.*?(?:R\\s*E\\s*S\\s*U\\s*L\\s*T\\s*A\\s*D\\s*O\\s*[: ])?(\\d{1,3}(?:[.,]\\d{1,2})?)\\b`,
           'gi',
         );
 
@@ -183,7 +201,7 @@ export class ExameService implements ExameOperations {
         //verifica match com regex
         if (match) {
           //recupera valor apos a palavra resultado
-          const valor = match[1] || match[2];
+          const valor = match[1] || match[2] || match[3];
 
           //recupera a unidade de medida baseado na metrica do banco de dados
           const unidade = unidadeMetricasSet.get(itemEncontrado);
@@ -193,9 +211,6 @@ export class ExameService implements ExameOperations {
         }
       }
     }
-
-    //retorna map
-    return itensMap;
   }
 
   // async updateExame(id: string, data: UpdateExameDto): Promise<any> {
