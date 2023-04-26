@@ -6,7 +6,10 @@ export class InsertLimitesEMetricas1679766502904 implements MigrationInterface {
   name = 'InsertLimitesEMetricas1679766502904';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
-    const metricaLDL = await queryRunner.manager.save(Metrica, { nome: 'LDL' });
+    const metricaLDL = await queryRunner.manager.save(Metrica, {
+      nome: 'LDL',
+      unidade: 'unidade LDL',
+    });
 
     await queryRunner.manager.save(Limite, {
       sexo: 'feminino',
@@ -45,7 +48,10 @@ export class InsertLimitesEMetricas1679766502904 implements MigrationInterface {
       unidade: 'mg/dL',
     });
 
-    const metricaHDL = await queryRunner.manager.save(Metrica, { nome: 'HDL' });
+    const metricaHDL = await queryRunner.manager.save(Metrica, {
+      nome: 'HDL',
+      unidade: 'unidade HDL',
+    });
 
     await queryRunner.manager.save(Limite, {
       sexo: 'feminino',
@@ -77,6 +83,132 @@ export class InsertLimitesEMetricas1679766502904 implements MigrationInterface {
     await queryRunner.manager.save(Limite, {
       sexo: 'masculino',
       metrica: metricaHDL,
+      idadeInicio: 20,
+      idadeFim: 49,
+      baixo: 130,
+      alto: 140,
+      unidade: 'mg/dL',
+    });
+
+    const metricaHDLcomPontos = await queryRunner.manager.save(Metrica, {
+      nome: 'H.D.L.',
+      unidade: 'unidade H.D.L.',
+    });
+
+    await queryRunner.manager.save(Limite, {
+      sexo: 'feminino',
+      metrica: metricaHDLcomPontos,
+      idadeInicio: 0,
+      idadeFim: 19,
+      baixo: 110,
+      alto: 129,
+      unidade: 'mg/dL',
+    });
+    await queryRunner.manager.save(Limite, {
+      sexo: 'feminino',
+      metrica: metricaHDLcomPontos,
+      idadeInicio: 20,
+      idadeFim: 49,
+      baixo: 130,
+      alto: 140,
+      unidade: 'mg/dL',
+    });
+    await queryRunner.manager.save(Limite, {
+      sexo: 'masculino',
+      metrica: metricaHDLcomPontos,
+      idadeInicio: 0,
+      idadeFim: 19,
+      baixo: 110,
+      alto: 129,
+      unidade: 'mg/dL',
+    });
+    await queryRunner.manager.save(Limite, {
+      sexo: 'masculino',
+      metrica: metricaHDLcomPontos,
+      idadeInicio: 20,
+      idadeFim: 49,
+      baixo: 130,
+      alto: 140,
+      unidade: 'mg/dL',
+    });
+
+    const metricaVLDL = await queryRunner.manager.save(Metrica, {
+      nome: 'VLDL',
+      unidade: 'unidade VLDL',
+    });
+
+    await queryRunner.manager.save(Limite, {
+      sexo: 'feminino',
+      metrica: metricaVLDL,
+      idadeInicio: 0,
+      idadeFim: 19,
+      baixo: 110,
+      alto: 129,
+      unidade: 'mg/dL',
+    });
+    await queryRunner.manager.save(Limite, {
+      sexo: 'feminino',
+      metrica: metricaVLDL,
+      idadeInicio: 20,
+      idadeFim: 49,
+      baixo: 130,
+      alto: 140,
+      unidade: 'mg/dL',
+    });
+    await queryRunner.manager.save(Limite, {
+      sexo: 'masculino',
+      metrica: metricaVLDL,
+      idadeInicio: 0,
+      idadeFim: 19,
+      baixo: 110,
+      alto: 129,
+      unidade: 'mg/dL',
+    });
+    await queryRunner.manager.save(Limite, {
+      sexo: 'masculino',
+      metrica: metricaVLDL,
+      idadeInicio: 20,
+      idadeFim: 49,
+      baixo: 130,
+      alto: 140,
+      unidade: 'mg/dL',
+    });
+
+    const metricaCREATININA = await queryRunner.manager.save(Metrica, {
+      nome: 'CREATININA',
+      unidade: 'unidade CREATININA',
+    });
+
+    await queryRunner.manager.save(Limite, {
+      sexo: 'feminino',
+      metrica: metricaCREATININA,
+      idadeInicio: 0,
+      idadeFim: 19,
+      baixo: 110,
+      alto: 129,
+      unidade: 'mg/dL',
+    });
+    await queryRunner.manager.save(Limite, {
+      sexo: 'feminino',
+      metrica: metricaCREATININA,
+      idadeInicio: 20,
+      idadeFim: 49,
+      baixo: 130,
+      alto: 140,
+      unidade: 'mg/dL',
+    });
+    await queryRunner.manager.save(Limite, {
+      sexo: 'masculino',
+      metrica: metricaCREATININA,
+      idadeInicio: 0,
+      idadeFim: 19,
+      baixo: 110,
+      alto: 129,
+      unidade: 'mg/dL',
+    });
+    await queryRunner.manager.save(Limite, {
+      sexo: 'masculino',
+      metrica: metricaCREATININA,
       idadeInicio: 20,
       idadeFim: 49,
       baixo: 130,

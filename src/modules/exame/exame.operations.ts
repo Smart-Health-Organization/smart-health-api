@@ -11,6 +11,8 @@ export interface ExameOperations {
   getExameItemsFromAllExamsByUser(
     userId: string,
   ): Promise<ExameItemsMapResponseType>;
+  readExamesBasedOnMetricas(file: any): Promise<any>;
+
   // updateExame(id: string, data: UpdateExameDto): Promise<any>;
   // deleteExame(id: string): Promise<boolean>;
 }

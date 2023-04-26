@@ -1,4 +1,3 @@
-export interface Operations {
-  readExamesBasedOnMetricas(file: any): Promise<any>;
-  
-  }
+export interface PdfManipulatorOperations {
+  readPdf(file: any): Promise<string[]>;
+}

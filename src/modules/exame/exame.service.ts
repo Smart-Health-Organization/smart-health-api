@@ -12,6 +12,8 @@ import { ExameItem } from '@app/types/entities/exame-item.entity';
 import { User } from '@app/types/entities/user.entity';
 import { Tokens } from '@app/utils/tokens';
 import { ExameItemsMapResponseType } from '@modules/exame/type/exame-items-map.response.type';
+import { MetricaOperations } from '@modules/metrica/metrica.operations';
+import { PdfManipulatorOperations } from '@modules/pdf-manipulator/pdf-manipulator.operations';
 import { Repository } from 'typeorm';
 import { Exame } from '../../types/entities/exame.entity';
 import { ExameAssembler } from './assembler/exameAssembler';
@@ -25,11 +27,15 @@ export class ExameService implements ExameOperations {
     private exameRepository: Repository<Exame>,
     @Inject(Tokens.EXAME_ITEM_OPERATIONS)
     private readonly exameItemservice: ExameItemOperations,
+    @Inject(Tokens.METRICA_OPERATIONS)
+    private readonly metricaService: MetricaOperations,
+    @Inject(Tokens.PDF_OPERATIONS)
+    private readonly pdfManipulatorService: PdfManipulatorOperations,
   ) {}
   async createExame(user: User, data: string): Promise<ExameResponseDto> {
     const dateParts = data.split('/');
     const year = parseInt(dateParts[2], 10);
-    const month = parseInt(dateParts[1], 10) - 1; // os meses em JavaScript são baseados em zero
+    const month = parseInt(dateParts[1], 10) - 1;
     const day = parseInt(dateParts[0], 10);
     const formattedFata = new Date(year, month, day);
     const exame = this.exameRepository.create({
@@ -115,6 +121,56 @@ export class ExameService implements ExameOperations {
 
     return { data: Object.fromEntries([...itensMap]) };
   }
+
+  async readExamesBasedOnMetricas(file: any) {
+    let metricas = await this.metricaService.getMetricas();
+    const unidadeMetricasSet = new Map<string, string>();
+    metricas.forEach((metrica) => {
+      const { nome, unidade } = metrica;
+      unidadeMetricasSet.set(nome, unidade);
+    });
+    const metricasByName = metricas.map((metrica) => {
+      return metrica.nome;
+    });
+    const map = new Map<string, any>();
+    const pdfPagesStringArray = await this.pdfManipulatorService.readPdf(file);
+    let itemEncontrado = '';
+    for (let i = 0; i < pdfPagesStringArray.length; i++) {
+      for (let j = 0; j < metricasByName.length; j++) {
+        if (
+          pdfPagesStringArray[i]
+            .toUpperCase()
+            .split(' ')
+            .includes(metricasByName[j])
+        ) {
+          itemEncontrado = metricasByName[j];
+          break;
+        }
+      }
+      if (itemEncontrado !== '') {
+        if (itemEncontrado === 'H.D.L.') {
+          itemEncontrado = itemEncontrado.replace(/\./g, '');
+          pdfPagesStringArray[i] = pdfPagesStringArray[i].replace(
+            'H.D.L.',
+            itemEncontrado,
+          );
+        }
+        const regex = new RegExp(
+          `\\b${itemEncontrado}\\b.*?R\\s*E\\s*S\\s*U\\s*L\\s*T\\s*A\\s*D\\s*O\\s*:\\s*(\\d+)|\\b${itemEncontrado}\\b.*?\\bR\\s*E\\s*S\\s*U\\s*L\\s*T\\s*A\\s*D\\s*O\\s*(\\d+(?:[.,]\\d+)?)`,
+          'gi',
+        );
+
+        const match = regex.exec(pdfPagesStringArray[i]);
+        if (match) {
+          const valor = match[1] || match[2];
+          const unidade = unidadeMetricasSet.get(itemEncontrado);
+          map.set(itemEncontrado, { valor, unidade });
+        }
+      }
+    }
+    return map;
+  }
+
   // async updateExame(id: string, data: UpdateExameDto): Promise<any> {
   //   const exame = await this.getExameById(id);
   //   await this.exameRepository.update(exame, { ...data });
