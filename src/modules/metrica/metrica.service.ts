@@ -12,7 +12,7 @@ export class MetricaService implements MetricaOperations {
     private metricaRepository: Repository<Metrica>,
   ) {}
 
-  async getMetricas(): Promise<any> {
+  async getMetricas(): Promise<Metrica[]> {
     const metricas = await this.metricaRepository.find();
     return metricas;
   }

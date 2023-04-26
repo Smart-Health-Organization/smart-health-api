@@ -2,10 +2,11 @@ import { Module } from "@nestjs/common";
 import { Tokens } from "@utils/tokens";
 import { PdfManipulatorController } from "./pdf-manipulator.controller";
 import { PdfManipulatorService } from "./pdf-manipulator.service";
+import { MetricaModule } from "@modules/metrica/metrica.module";
 
 
 @Module({
-  imports: [],
+  imports: [MetricaModule],
   controllers: [PdfManipulatorController],
   providers: [
     PdfManipulatorService,

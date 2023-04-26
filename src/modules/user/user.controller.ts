@@ -68,7 +68,7 @@ export class UserController {
     @Body() data: InsertExameItems,
   ): Promise<ExameResponseDto> {
     const user = await this.getUserById(id);
-    const exame = await this.exameService.createExame(user);
+    const exame = await this.exameService.createExame(user,data.data);
     await this.exameItemservice.createExameItems(user, exame, data.itens);
     return exame;
   }
