@@ -8,7 +8,7 @@ import { CreateUserDto } from 'src/types/dtos/create-user.dto';
 import { UserResponseDto } from 'src/types/dtos/user.response.dto';
 import { UserService } from './../modules/user/user.service';
 
-@ApiTags('Authentication')
+@ApiTags('Autenticação')
 @Controller('')
 export class AuthController {
   constructor(

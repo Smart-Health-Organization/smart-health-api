@@ -193,7 +193,7 @@ export class ExameService implements ExameOperations {
         //passa pelo regex para pegar palavra "resultado" da respectiva medida
         for (let item of itemEncontrado) {
           const regex = new RegExp(
-            `\\b${item}\\b.*?R\\s*E\\s*S\\s*U\\s*L\\s*T\\s*A\\s*D\\s*O\\s*:\\s*(\\d+(?:[.,]\\d+)?)|\\b${item}\\b.*?\\bR\\s*E\\s*S\\s*U\\s*L\\s*T\\s*A\\s*D\\s*O\\s*(\\d+(?:[.,]\\d+)?)|\\b${item}\\b.*?(?:R\\s*E\\s*S\\s*U\\s*L\\s*T\\s*A\\s*D\\s*O\\s*[: ])?(\\d{1,3}(?:[.,]\\d{1,2})?)\\b`,
+            `\\b${item}\\b.*?R\\s*E\\s*S\\s*U\\s*L\\s*T\\s*A\\s*D\\s*O\\s*:\\s*(\\d+(?:[.,]\\d+)?)|\\b${item}\\b.*?\\bR\\s*E\\s*S\\s*U\\s*L\\s*T\\s*A\\s*D\\s*O\\s*(\\d+(?:[.,]\\d+)?)|\\b${item}\\b\\s+(\\d{1,3}(?:[.,]\\d{1,2})?)\\b`,
             'gi',
           );
 
@@ -202,13 +202,13 @@ export class ExameService implements ExameOperations {
           if (match) {
             //recupera valor apos a palavra resultado
             let valorEncontrado = match[1] || match[2] || match[3];
-            const valor = +valorEncontrado.replace(',','.');
+            const valor = +valorEncontrado.replace(',', '.');
 
             //recupera a unidade de medida baseado na metrica do banco de dados
             const unidade = unidadeMetricasSet.get(item);
 
             //popula map principal com metrica do banco, seu valor e unidade do banco de dados
-            
+
             itensMap.set(item, { valor, unidade });
           }
         }

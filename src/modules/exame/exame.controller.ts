@@ -11,9 +11,11 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { ApiTags } from '@nestjs/swagger';
 import { Tokens } from '@utils/tokens';
 import { ExameOperations } from './exame.operations';
 
+@ApiTags('Exames')
 @Controller('exames')
 export class ExameController {
   constructor(
