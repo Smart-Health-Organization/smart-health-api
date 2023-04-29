@@ -3,16 +3,16 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsString } from 'class-validator';
 
 @InputType()
-export class ResetPassword {
+export class RedefinirSenhaInsertDto {
   @IsString()
   @ApiProperty({
-    example: 'oldPassword',
+    example: 'senhaAntiga',
   })
-  oldPassword: string;
+  senhaAntiga: string;
 
   @IsString()
   @ApiProperty({
-    example: 'newPassword',
+    example: 'NovaSenha',
   })
-  newPassword: string;
+  NovaSenha: string;
 }

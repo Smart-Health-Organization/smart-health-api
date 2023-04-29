@@ -1,16 +1,16 @@
+import { Usuario } from '@app/types/entities/usuario.entity';
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt/dist';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Tokens } from '@utils/tokens';
 import { AuthService } from 'src/auth/auth.service';
-import { UserService } from 'src/modules/user/user.service';
-import { User } from 'src/types/entities/user.entity';
+import { UsuarioService } from 'src/modules/usuario/usuario.service';
 import { AuthController } from './auth.controller';
 import { AuthResolver } from './auth.resolver';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forFeature([Usuario]),
     JwtModule.registerAsync({
       useFactory: () => ({
         secret: process.env.JWT_SECRET,
@@ -28,12 +28,12 @@ import { AuthResolver } from './auth.resolver';
       useClass: AuthService,
     },
     {
-      provide: Tokens.USER_OPERATIONS,
-      useClass: UserService,
+      provide: Tokens.USUARIO_OPERATIONS,
+      useClass: UsuarioService,
     },
     AuthService,
     AuthResolver,
-    UserService,
+    UsuarioService,
     // JwtStrategy,
   ],
   exports: [

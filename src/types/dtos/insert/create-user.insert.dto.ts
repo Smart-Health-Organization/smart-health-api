@@ -3,26 +3,26 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 @InputType()
-export class CreateUserDto {
+export class CreateUsuarioInsertDto {
   @Field()
   @IsString()
-  @IsNotEmpty({ message: 'Name should not be empty' })
+  @IsNotEmpty({ message: 'Nome é obrigatório' })
   @ApiProperty({
     example: 'Thiago Sanches',
   })
-  name: string;
+  nome: string;
 
   @Field()
   @IsNumber()
-  @IsNotEmpty({ message: 'Age should not be empty' })
+  @IsNotEmpty({ message: 'Idade é obrigatória' })
   @ApiProperty({
     example: 22,
   })
-  age: number;
+  idade: number;
 
   @Field()
   @IsString()
-  @IsNotEmpty({ message: 'Sexo should not be empty' })
+  @IsNotEmpty({ message: 'Sexo é obrigatório' })
   @ApiProperty({
     example: 'masculino',
   })
@@ -30,7 +30,7 @@ export class CreateUserDto {
 
   @Field()
   @IsString()
-  @IsNotEmpty({ message: 'Email should not be empty' })
+  @IsNotEmpty({ message: 'Email é obrigatória' })
   @ApiProperty({
     example: 'thi.sanches@hotmail.com',
   })
@@ -38,17 +38,9 @@ export class CreateUserDto {
 
   @Field()
   @IsString()
-  @IsNotEmpty({ message: 'Login should not be empty' })
+  @IsNotEmpty({ message: 'Senha é obrigatória' })
   @ApiProperty({
-    example: 'thisanches07',
+    example: 'uma senha qualquer',
   })
-  login: string;
-
-  @Field()
-  @IsString()
-  @IsNotEmpty({ message: 'Password should not be empty' })
-  @ApiProperty({
-    example: 'password',
-  })
-  password: string;
+  senha: string;
 }

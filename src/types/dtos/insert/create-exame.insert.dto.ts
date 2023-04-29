@@ -1,13 +1,13 @@
+import { Usuario } from '@app/types/entities/usuario.entity';
 import { Field, InputType } from '@nestjs/graphql';
 import { IsNotEmpty, IsString } from 'class-validator';
-import { User } from 'src/types/entities/user.entity';
 
 @InputType()
-export class CreateExameDto {
+export class CreateExameInsertDto {
   @Field()
   @IsString()
-  @IsNotEmpty({ message: 'Data should not be empty' })
+  @IsNotEmpty({ message: 'Data é obrigatória' })
   data: string;
 
-  user: User;
+  user: Usuario;
 }

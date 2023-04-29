@@ -4,7 +4,7 @@ type Item = {
   data: Date;
   medida: number;
   isAtual: boolean;
-  isAlterado: 'todo' | null;
+  isAlterado: 'true' | null;
 };
 
 type ExameItemsMapResponseData = Record<string, Item[]>;
@@ -20,7 +20,7 @@ export class ExameItemsMapResponseType {
           data: { type: 'string', format: 'date-time' },
           medida: { type: 'number' },
           isAtual: { type: 'boolean' },
-          isAlterado: { type: 'string', enum: ['todo', null] },
+          isAlterado: { type: 'boolean' },
         },
       },
     },

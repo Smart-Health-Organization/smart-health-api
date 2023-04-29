@@ -1,18 +1,18 @@
 [
   {
     "id": 1,
-    "name": "Thiago Sanches",
+    "nome": "Thiago Sanches",
     "email": "thi.sanches@hotmail.com",
-    "age": 22,
+    "idade": 22,
     "sexo": "masculino",
-    "login": "thisanches07"
+    "senha": "thiagoLegal"
   },
   {
     "id": 2,
-    "name": "Pedro Paulo",
+    "nome": "Pedro Paulo",
     "email": "pedro.paulo@hotmail.com",
-    "age": 22,
+    "idade": 22,
     "sexo": "masculino",
-    "login": "pedropaulo"
+    "senha": "pedropauloLegal"
   }
 ]

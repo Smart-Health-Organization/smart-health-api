@@ -10,7 +10,7 @@ export class AuthInput {
   email: string;
   @IsString()
   @ApiProperty({
-    example: 'password',
+    example: 'apenas uma senha',
   })
-  password: string;
+  senha: string;
 }

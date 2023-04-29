@@ -4,7 +4,7 @@ import { Tokens } from '@utils/tokens';
 import { MetricaOperations } from './metrica.operations';
 
 @ApiTags('Metricas')
-@Controller('metricas')
+@Controller()
 export class MetricaController {
   constructor(
     @Inject(Tokens.METRICA_OPERATIONS)

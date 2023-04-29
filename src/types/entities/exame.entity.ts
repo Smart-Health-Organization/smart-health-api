@@ -1,5 +1,5 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { User } from './user.entity';
+import { Usuario } from './usuario.entity';
 
 import { ExameItem } from '@app/types/entities/exame-item.entity';
 import { ApiProperty } from '@nestjs/swagger';
@@ -30,6 +30,6 @@ export class Exame {
   @OneToMany(() => ExameItem, (exameItem) => exameItem.exame)
   itens: ExameItem[];
 
-  @ManyToOne(() => User, (user) => user.exames)
-  user: User;
+  @ManyToOne(() => Usuario, (user) => user.exames)
+  user: Usuario;
 }
