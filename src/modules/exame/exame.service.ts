@@ -50,12 +50,6 @@ export class ExameService implements ExameOperations {
     return exameDto;
   }
 
-  async getExames(): Promise<ExameResponseDto[]> {
-    const exames = await this.exameRepository.find({ relations: ['user'] });
-    const examesDto = ExameAssembler.assembleExamesToDto(exames);
-    return examesDto;
-  }
-
   async getExameById(id: string): Promise<Exame> {
     const exame = await this.exameRepository.findOne({
       where: { id: parseInt(id) },
@@ -122,7 +116,7 @@ export class ExameService implements ExameOperations {
     return { data: Object.fromEntries([...itensMap]) };
   }
 
-  async readExamesBasedOnMetricas(file: any) {
+  async readExamesBasedOnMetricas(file) {
     //busca metricas no banco de dados
     let metricas = await this.metricaService.getMetricas();
 

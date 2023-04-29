@@ -9,7 +9,7 @@ export class AuthType {
     type: UsuarioResponseDto,
   })
   @Field(() => Usuario)
-  user: Usuario;
+  usuario: Usuario;
 
   @Field()
   @ApiProperty({

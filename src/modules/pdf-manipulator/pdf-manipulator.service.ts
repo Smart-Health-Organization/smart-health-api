@@ -6,7 +6,7 @@ import { PdfManipulatorOperations } from './pdf-manipulator.operations';
 
 @Injectable()
 export class PdfManipulatorService implements PdfManipulatorOperations {
-  private async transformPagesToFormattedStrings(pdf: any): Promise<string[]> {
+  private async transformPagesToFormattedStrings(pdf): Promise<string[]> {
     let pdfPages: string[] = [];
     for (let i = 1; i <= pdf.numPages; i++) {
       const page = await pdf.getPage(i);
@@ -19,7 +19,7 @@ export class PdfManipulatorService implements PdfManipulatorOperations {
     return pdfPages;
   }
 
-  async readPdf(file: any): Promise<string[]> {
+  async readPdf(file): Promise<string[]> {
     const buffer = Uint8Array.from(file.buffer);
     const pdf = (await pdfjsLib.getDocument(buffer)
       .promise) as pdfjsLib.PDFDocumentProxy;

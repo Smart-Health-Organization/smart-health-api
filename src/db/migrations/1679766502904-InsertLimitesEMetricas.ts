@@ -18,7 +18,6 @@ export class InsertLimitesEMetricas1679766502904 implements MigrationInterface {
       idadeFim: 19,
       baixo: 110,
       alto: 129,
-      unidade: 'mg/dL',
     });
     await queryRunner.manager.save(Limite, {
       sexo: 'feminino',
@@ -27,7 +26,6 @@ export class InsertLimitesEMetricas1679766502904 implements MigrationInterface {
       idadeFim: 49,
       baixo: 130,
       alto: 140,
-      unidade: 'mg/dL',
     });
     await queryRunner.manager.save(Limite, {
       sexo: 'masculino',
@@ -36,7 +34,6 @@ export class InsertLimitesEMetricas1679766502904 implements MigrationInterface {
       idadeFim: 19,
       baixo: 110,
       alto: 129,
-      unidade: 'mg/dL',
     });
     await queryRunner.manager.save(Limite, {
       sexo: 'masculino',
@@ -45,7 +42,6 @@ export class InsertLimitesEMetricas1679766502904 implements MigrationInterface {
       idadeFim: 49,
       baixo: 130,
       alto: 140,
-      unidade: 'mg/dL',
     });
 
     const metricaHDL = await queryRunner.manager.save(Metrica, {
@@ -60,7 +56,6 @@ export class InsertLimitesEMetricas1679766502904 implements MigrationInterface {
       idadeFim: 19,
       baixo: 110,
       alto: 129,
-      unidade: 'mg/dL',
     });
     await queryRunner.manager.save(Limite, {
       sexo: 'feminino',
@@ -69,7 +64,6 @@ export class InsertLimitesEMetricas1679766502904 implements MigrationInterface {
       idadeFim: 49,
       baixo: 130,
       alto: 140,
-      unidade: 'mg/dL',
     });
     await queryRunner.manager.save(Limite, {
       sexo: 'masculino',
@@ -78,7 +72,6 @@ export class InsertLimitesEMetricas1679766502904 implements MigrationInterface {
       idadeFim: 19,
       baixo: 110,
       alto: 129,
-      unidade: 'mg/dL',
     });
     await queryRunner.manager.save(Limite, {
       sexo: 'masculino',
@@ -87,7 +80,6 @@ export class InsertLimitesEMetricas1679766502904 implements MigrationInterface {
       idadeFim: 49,
       baixo: 130,
       alto: 140,
-      unidade: 'mg/dL',
     });
 
     const metricaVLDL = await queryRunner.manager.save(Metrica, {
@@ -102,7 +94,6 @@ export class InsertLimitesEMetricas1679766502904 implements MigrationInterface {
       idadeFim: 19,
       baixo: 110,
       alto: 129,
-      unidade: 'mg/dL',
     });
     await queryRunner.manager.save(Limite, {
       sexo: 'feminino',
@@ -111,7 +102,6 @@ export class InsertLimitesEMetricas1679766502904 implements MigrationInterface {
       idadeFim: 49,
       baixo: 130,
       alto: 140,
-      unidade: 'mg/dL',
     });
     await queryRunner.manager.save(Limite, {
       sexo: 'masculino',
@@ -120,7 +110,6 @@ export class InsertLimitesEMetricas1679766502904 implements MigrationInterface {
       idadeFim: 19,
       baixo: 110,
       alto: 129,
-      unidade: 'mg/dL',
     });
     await queryRunner.manager.save(Limite, {
       sexo: 'masculino',
@@ -129,7 +118,6 @@ export class InsertLimitesEMetricas1679766502904 implements MigrationInterface {
       idadeFim: 49,
       baixo: 130,
       alto: 140,
-      unidade: 'mg/dL',
     });
 
     const metricaCREATININA = await queryRunner.manager.save(Metrica, {
@@ -144,7 +132,6 @@ export class InsertLimitesEMetricas1679766502904 implements MigrationInterface {
       idadeFim: 19,
       baixo: 110,
       alto: 129,
-      unidade: 'mg/dL',
     });
     await queryRunner.manager.save(Limite, {
       sexo: 'feminino',
@@ -153,7 +140,6 @@ export class InsertLimitesEMetricas1679766502904 implements MigrationInterface {
       idadeFim: 49,
       baixo: 130,
       alto: 140,
-      unidade: 'mg/dL',
     });
     await queryRunner.manager.save(Limite, {
       sexo: 'masculino',
@@ -162,7 +148,6 @@ export class InsertLimitesEMetricas1679766502904 implements MigrationInterface {
       idadeFim: 19,
       baixo: 110,
       alto: 129,
-      unidade: 'mg/dL',
     });
     await queryRunner.manager.save(Limite, {
       sexo: 'masculino',
@@ -171,7 +156,6 @@ export class InsertLimitesEMetricas1679766502904 implements MigrationInterface {
       idadeFim: 49,
       baixo: 130,
       alto: 140,
-      unidade: 'mg/dL',
     });
 
     const metricaBHCGQUANTITATIVO = await queryRunner.manager.save(Metrica, {
@@ -186,7 +170,6 @@ export class InsertLimitesEMetricas1679766502904 implements MigrationInterface {
       idadeFim: 56,
       baixo: 53,
       alto: 58,
-      unidade: 'mg/dL',
     });
   }
 
@@ -203,7 +186,7 @@ export class InsertLimitesEMetricas1679766502904 implements MigrationInterface {
     await queryRunner.query(`DROP TABLE "limite"`);
     await queryRunner.query(`DROP TABLE "metrica"`);
     await queryRunner.query(`DROP TABLE "exame"`);
-    await queryRunner.query(`DROP TABLE "user"`);
+    await queryRunner.query(`DROP TABLE "usuario"`);
     await queryRunner.query(`DROP TABLE "exame_item"`);
     await queryRunner.query(`DROP TABLE "resultado_exame_item"`);
   }

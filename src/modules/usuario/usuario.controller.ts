@@ -4,14 +4,11 @@ import { RedefinirSenhaInsertDto } from '@app/types/dtos/insert/redefinir-senha.
 import { UpdateUsuarioInsertDto } from '@app/types/dtos/insert/update-usuario.insert.dto';
 import { ExameResponseDto } from '@app/types/dtos/response/exame.response.dto';
 import { UsuarioResponseDto } from '@app/types/dtos/response/user.response.dto';
-import { Usuario } from '@app/types/entities/usuario.entity';
 import { ExameItemOperations } from '@modules/exame-item/exame-item.operations';
 import { ExameOperations } from '@modules/exame/exame.operations';
-import {
-  ExameAndExameItemsResponseType,
-  ExamesAndExameItemsResponseType,
-} from '@modules/exame/type/exame-and-exame-items.response.type';
+import { ExamesAndExameItemsResponseType } from '@modules/exame/type/exame-and-exame-items.response.type';
 import { ExameItemsMapResponseType } from '@modules/exame/type/exame-items-map.response.type';
+import { UsuarioAssembler } from '@modules/usuario/assembler/usuarioAssembler';
 import { UsuarioOperations } from '@modules/usuario/usuario.operations';
 import {
   Body,
@@ -70,16 +67,26 @@ export class UsuarioController {
     @Param('id') id: string,
     @Body() data: CreateExameItems,
   ): Promise<ExameResponseDto> {
-    const user = await this.getUsuarioById(id);
+    const user = await this.service.getUsuarioById(id);
     const exame = await this.exameService.createExame(user, data.data);
-    await this.exameItemservice.createExameItems(user, exame, data.itens);
+    const exameToCreateItems = {
+      id: exame.id,
+      data: exame.data,
+      itens: exame.itens,
+      user: user,
+    };
+    await this.exameItemservice.createExameItems(
+      user,
+      exameToCreateItems,
+      data.itens,
+    );
     return exame;
   }
 
   @Get(':id/exames')
   @ApiOkResponse({
     description: 'Exames retornados',
-    type: [ExameAndExameItemsResponseType],
+    type: ExamesAndExameItemsResponseType,
   })
   async findExamesByUsuario(
     @Param('id') id: string,
@@ -93,7 +100,9 @@ export class UsuarioController {
     description: 'Itens de todos os exames retornados',
     type: ExameItemsMapResponseType,
   })
-  async findExameItems(@Param('id') id: string): Promise<any> {
+  async findExameItems(
+    @Param('id') id: string,
+  ): Promise<ExameItemsMapResponseType> {
     const exameItems = await this.exameService.getExameItemsFromAllExamsByUser(
       id,
     );
@@ -131,8 +140,10 @@ export class UsuarioController {
     description: 'Usiário criado',
     type: UsuarioResponseDto,
   })
-  async getUsuarioById(@Param('id') id: string): Promise<Usuario> {
-    return await this.service.getUsuarioById(id);
+  async getUsuarioById(@Param('id') id: string): Promise<UsuarioResponseDto> {
+    const user = await this.service.getUsuarioById(id);
+    const userDto = UsuarioAssembler.assembleUserToDto(user);
+    return userDto;
   }
 
   @Delete('/:id')

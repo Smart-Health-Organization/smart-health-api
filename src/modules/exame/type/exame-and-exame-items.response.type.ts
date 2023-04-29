@@ -21,4 +21,11 @@ export class ExameAndExameItemsResponseType {
   itens: ArrayOfExameItemResponseType;
 }
 
+export class ItemsDoExameResponseType {
+  @ApiProperty({
+    type: [ExameItemResponseType],
+  })
+  itens: ArrayOfExameItemResponseType;
+}
+
 export class ExamesAndExameItemsResponseType extends Array<ExameAndExameItemsResponseType> {}

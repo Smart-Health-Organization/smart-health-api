@@ -11,12 +11,6 @@ import { ExamesAndExameItemsResponseType } from './type/exame-and-exame-items.re
 export class ExameResolver {
   constructor(private exameService: ExameService) {}
 
-  @Query(() => [Exame])
-  async exames(): Promise<ExameResponseDto[]> {
-    const exames = await this.exameService.getExames();
-    return exames;
-  }
-
   @UseGuards(GqlAuthGuard)
   @Query(() => Exame)
   async findExameById(@Args('id') id: string): Promise<Exame> {

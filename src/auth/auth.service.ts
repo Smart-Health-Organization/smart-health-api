@@ -20,7 +20,7 @@ export class AuthService {
       throw new UnauthorizedException('Usuário ou senha incorretos');
     }
 
-    const validPassword = compareSync(data.password, user.senha);
+    const validPassword = compareSync(data.senha, user.senha);
 
     if (!validPassword) {
       throw new UnauthorizedException('Usuário ou senha incorretos');
@@ -28,7 +28,7 @@ export class AuthService {
 
     const token = await this.jwtToken(user);
     return {
-      user,
+      usuario: user,
       token,
     };
   }

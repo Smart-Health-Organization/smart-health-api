@@ -4,12 +4,19 @@ import { ExameItemsMapResponseType } from '@modules/exame/type/exame-items-map.r
 import { ExamesAndExameItemsResponseType } from './type/exame-and-exame-items.response.type';
 
 export interface ExameOperations {
-  getExames(): Promise<ExameResponseDto[]>;
-  createExame(user: Usuario, data: string): Promise<any>;
+  createExame(user: Usuario, data: string): Promise<ExameResponseDto>;
   getExameById(id: string): Promise<any>;
   getExamesByUserId(userId: string): Promise<ExamesAndExameItemsResponseType>;
   getExameItemsFromAllExamsByUser(
     userId: string,
   ): Promise<ExameItemsMapResponseType>;
-  readExamesBasedOnMetricas(file: any): Promise<any>;
+  readExamesBasedOnMetricas(file: any): Promise<
+    Map<
+      string,
+      {
+        valor: number;
+        unidade: string;
+      }
+    >
+  >;
 }

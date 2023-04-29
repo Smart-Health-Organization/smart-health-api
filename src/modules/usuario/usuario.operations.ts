@@ -8,7 +8,7 @@ export interface UsuarioOperations {
   getUsuarios(): Promise<UsuarioResponseDto[]>;
   postUsuario(data: CreateUsuarioInsertDto): Promise<UsuarioResponseDto>;
   getUsuarioById(id: string): Promise<Usuario>;
-  getUsuarioByEmail(email: string): Promise<Usuario>;
+  getUsuarioByEmail(email: string): Promise<UsuarioResponseDto>;
   updateUsuario(
     id: string,
     data: UpdateUsuarioInsertDto,

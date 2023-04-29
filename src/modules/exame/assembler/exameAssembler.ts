@@ -1,9 +1,11 @@
-import { CreateExameItems } from '@app/types/dtos/insert/exame-item.insert.dto';
 import { ExameResponseDto } from '@app/types/dtos/response/exame.response.dto';
 import { UsuarioAssembler } from '@modules/usuario/assembler/usuarioAssembler';
 import { ExameItem } from 'src/types/entities/exame-item.entity';
 import { Exame } from 'src/types/entities/exame.entity';
-import { ExamesAndExameItemsResponseType } from '../type/exame-and-exame-items.response.type';
+import {
+  ExamesAndExameItemsResponseType,
+  ItemsDoExameResponseType,
+} from '../type/exame-and-exame-items.response.type';
 
 export class ExameAssembler {
   static assembleCreateExameToDto(exame: Exame): ExameResponseDto {
@@ -11,6 +13,7 @@ export class ExameAssembler {
       id: exame.id,
       data: exame.data,
       user: UsuarioAssembler.assembleUserToDto(exame.user),
+      itens: exame.itens,
     };
   }
   static assembleExamesToDto(exame: Exame[]): ExameResponseDto[] {
@@ -19,6 +22,7 @@ export class ExameAssembler {
         id: exame.id,
         data: exame.data,
         user: { id: exame.user.id, nome: exame.user.nome },
+        itens: exame.itens,
       };
     });
 
@@ -52,7 +56,7 @@ export class ExameAssembler {
 
   static assemblePdfExameToInsertExameItems(
     itens: object,
-  ): Omit<CreateExameItems, 'data'> {
+  ): ItemsDoExameResponseType {
     const response = [];
     for (let metrica in itens) {
       response.push({
