@@ -20,4 +20,4 @@ RUN npm install bcrypt
 
 COPY . .
 
-CMD npm run start:dev & npm run migration:run
+CMD npm run start:dev
