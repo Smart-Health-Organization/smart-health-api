@@ -1,13 +1,13 @@
+import { CreateExameItemInsertDto } from '@app/types/dtos/insert/exame-item.insert.dto';
 import { ExameItem } from '@app/types/entities/exame-item.entity';
 import { Limite } from '@app/types/entities/limite.entity';
 import { ResultadoExameItem } from '@app/types/entities/resultado-exame.entity';
-import { User } from '@app/types/entities/user.entity';
+import { Usuario } from '@app/types/entities/usuario.entity';
 import { Tokens } from '@app/utils/tokens';
 import { MetricaOperations } from '@modules/metrica/metrica.operations';
 import { LimiteOperations } from '@modules/metrica/modules/limite/limite.operations';
 import { Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ExameItemInsertDto } from 'src/types/dtos/exame-item.insert.dto';
 import { Repository } from 'typeorm';
 import { Exame } from '../../types/entities/exame.entity';
 import { ExameItemOperations } from './exame-item.operations';
@@ -28,9 +28,9 @@ export class ExameItemService implements ExameItemOperations {
     private readonly limiteService: LimiteOperations,
   ) {}
   async createExameItems(
-    user: User,
+    user: Usuario,
     exame: Exame,
-    exameItens: ExameItemInsertDto[],
+    exameItens: CreateExameItemInsertDto[],
   ): Promise<any> {
     const allExameItensSaved = [];
     for (const exameItem of exameItens) {
@@ -43,8 +43,8 @@ export class ExameItemService implements ExameItemOperations {
       const limiteFiltered = limites.filter(
         (limite) =>
           limite.sexo === user.sexo &&
-          user.age >= limite.idadeInicio &&
-          user.age <= limite.idadeFim,
+          user.idade >= limite.idadeInicio &&
+          user.idade <= limite.idadeFim,
       );
 
       const resultadoExameItem = new ResultadoExameItem();

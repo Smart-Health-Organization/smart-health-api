@@ -7,9 +7,9 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { ExameResponseDto } from '@app/types/dtos/exame.response.dto';
+import { ExameResponseDto } from '@app/types/dtos/response/exame.response.dto';
 import { ExameItem } from '@app/types/entities/exame-item.entity';
-import { User } from '@app/types/entities/user.entity';
+import { Usuario } from '@app/types/entities/usuario.entity';
 import { Tokens } from '@app/utils/tokens';
 import { ExameItemsMapResponseType } from '@modules/exame/type/exame-items-map.response.type';
 import { MetricaOperations } from '@modules/metrica/metrica.operations';
@@ -32,7 +32,7 @@ export class ExameService implements ExameOperations {
     @Inject(Tokens.PDF_OPERATIONS)
     private readonly pdfManipulatorService: PdfManipulatorOperations,
   ) {}
-  async createExame(user: User, data: string): Promise<ExameResponseDto> {
+  async createExame(user: Usuario, data: string): Promise<ExameResponseDto> {
     const dateParts = data.split('/');
     const year = parseInt(dateParts[2], 10);
     const month = parseInt(dateParts[1], 10) - 1;
@@ -48,12 +48,6 @@ export class ExameService implements ExameOperations {
     }
     const exameDto = ExameAssembler.assembleCreateExameToDto(exameSaved);
     return exameDto;
-  }
-
-  async getExames(): Promise<ExameResponseDto[]> {
-    const exames = await this.exameRepository.find({ relations: ['user'] });
-    const examesDto = ExameAssembler.assembleExamesToDto(exames);
-    return examesDto;
   }
 
   async getExameById(id: string): Promise<Exame> {
@@ -122,7 +116,7 @@ export class ExameService implements ExameOperations {
     return { data: Object.fromEntries([...itensMap]) };
   }
 
-  async readExamesBasedOnMetricas(file: any) {
+  async readExamesBasedOnMetricas(file) {
     //busca metricas no banco de dados
     let metricas = await this.metricaService.getMetricas();
 
@@ -215,20 +209,4 @@ export class ExameService implements ExameOperations {
       }
     }
   }
-
-  // async updateExame(id: string, data: UpdateExameDto): Promise<any> {
-  //   const exame = await this.getExameById(id);
-  //   await this.exameRepository.update(exame, { ...data });
-
-  //   //cria-se esse objeto porque em update faltam propriedades do tipo exame
-  //   const exameUpdated = this.exameRepository.create({ ...exame, ...data });
-  //   return exameUpdated;
-  // }
-
-  // async deleteExame(id: string): Promise<boolean> {
-  //   await this.getExameById(id);
-  //   const deleted = await this.exameRepository.delete(id);
-  //   if (deleted) return true;
-  //   return false;
-  // }
 }

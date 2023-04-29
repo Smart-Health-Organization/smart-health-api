@@ -5,7 +5,6 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Tokens } from '@utils/tokens';
 import { ExameItem } from 'src/types/entities/exame-item.entity';
-import { ExameItemController } from './exame-item.controller';
 import { ExameItemResolver } from './exame-item.resolver';
 import { ExameItemService } from './exame-item.service';
 
@@ -16,7 +15,7 @@ import { ExameItemService } from './exame-item.service';
     TypeOrmModule.forFeature([ExameItem]),
     TypeOrmModule.forFeature([ResultadoExameItem]),
   ],
-  controllers: [ExameItemController],
+  controllers: [],
   providers: [
     ExameItemService,
     ExameItemResolver,

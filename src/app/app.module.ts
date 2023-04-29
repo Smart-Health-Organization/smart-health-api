@@ -3,7 +3,7 @@ import { ExameModule } from '@modules/exame/exame.module';
 import { MetricaModule } from '@modules/metrica/metrica.module';
 import { LimiteModule } from '@modules/metrica/modules/limite/limite.module';
 import { PdfManipulatorModule } from '@modules/pdf-manipulator/pdf-manipulator.module';
-import { UserModule } from '@modules/user/user.module';
+import { UsuarioModule } from '@modules/usuario/usuario.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
@@ -26,7 +26,7 @@ const ormconfig = require('../../ormconfig.js');
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
     BaseModule,
-    UserModule,
+    UsuarioModule,
     AuthModule,
     ExameModule,
     MetricaModule,
@@ -38,7 +38,7 @@ const ormconfig = require('../../ormconfig.js');
         module: MetricaModule,
         children: [
           {
-            path: 'limtes',
+            path: 'limites',
             module: LimiteModule,
           },
         ],

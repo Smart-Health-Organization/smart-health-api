@@ -1,3 +1,3 @@
 export interface PdfManipulatorOperations {
-  readPdf(file: any): Promise<string[]>;
+  readPdf(file): Promise<string[]>;
 }

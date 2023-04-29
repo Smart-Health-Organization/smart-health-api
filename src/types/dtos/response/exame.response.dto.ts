@@ -1,7 +1,8 @@
+import { IdENomeResponseType } from '@app/types/dtos/response/id-e-nome.response';
+import { ExameItem } from '@app/types/entities/exame-item.entity';
 import { InputType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
-import { IdAndNameResponseType } from 'src/types/id-and-name.response';
-import { UserResponseDto } from './user.response.dto';
+import { UsuarioResponseDto } from './user.response.dto';
 
 @InputType()
 export class ExameResponseDto {
@@ -15,10 +16,10 @@ export class ExameResponseDto {
   })
   data: string;
 
-  itens?: string;
+  itens: ExameItem[];
 
   @ApiProperty({
-    type: UserResponseDto,
+    type: UsuarioResponseDto,
   })
-  user: IdAndNameResponseType;
+  user: IdENomeResponseType;
 }

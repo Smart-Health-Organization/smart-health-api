@@ -2,7 +2,7 @@ import { InputType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 
 @InputType()
-export class UserResponseDto {
+export class UsuarioResponseDto {
   @ApiProperty({
     example: 1,
   })
@@ -11,12 +11,12 @@ export class UserResponseDto {
   @ApiProperty({
     example: 'Thiago Sanches',
   })
-  name: string;
+  nome: string;
 
   @ApiProperty({
     example: 22,
   })
-  age: number;
+  idade: number;
 
   @ApiProperty({
     example: 'masculino',
@@ -27,9 +27,4 @@ export class UserResponseDto {
     example: 'thi.sanches@hotmail.com',
   })
   email: string;
-
-  @ApiProperty({
-    example: 'thisanches07',
-  })
-  login: string;
 }
