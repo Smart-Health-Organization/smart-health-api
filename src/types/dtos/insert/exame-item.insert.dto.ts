@@ -38,7 +38,7 @@ export class CreateExameItemInsertDto {
 
 export class CreateExameItems {
   @IsDateFormat()
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'Data é obrigatória' })
   @ApiProperty({
     example: '25/04/2023',
   })
@@ -46,7 +46,7 @@ export class CreateExameItems {
 
   @Type(() => CreateExameItemInsertDto)
   @ValidateNested()
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'Itens são obrigatórios' })
   @ApiProperty({
     type: [CreateExameItemInsertDto],
   })

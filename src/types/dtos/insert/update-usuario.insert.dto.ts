@@ -4,7 +4,7 @@ import { IsNumber, IsOptional, IsString } from 'class-validator';
 @InputType()
 export class UpdateUsuarioInsertDto {
   @Field()
-  @IsString()
+  @IsString({ message: 'Nome deve ser um texto' })
   @IsOptional()
   nome?: string;
 
@@ -14,7 +14,7 @@ export class UpdateUsuarioInsertDto {
   idade?: number;
 
   @Field()
-  @IsString()
+  @IsString({ message: 'Email deve ser um texto' })
   @IsOptional()
   email?: string;
 }
