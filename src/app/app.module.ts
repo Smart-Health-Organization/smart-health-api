@@ -38,7 +38,7 @@ const ormconfig = require('../../ormconfig.js');
         module: MetricaModule,
         children: [
           {
-            path: 'limtes',
+            path: 'limites',
             module: LimiteModule,
           },
         ],
