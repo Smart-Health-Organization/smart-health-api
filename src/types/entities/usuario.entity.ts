@@ -2,11 +2,11 @@ import { Exame } from '@app/types/entities/exame.entity';
 import { Field, HideField, ID, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { hashPasswordTransform } from './../../helpers/crypto';
+import { hashPasswordTransform } from '../../helpers/crypto';
 
 @ObjectType()
 @Entity()
-export class User {
+export class Usuario {
   @PrimaryGeneratedColumn()
   @Field(() => ID)
   @ApiProperty({
@@ -18,13 +18,13 @@ export class User {
   @ApiProperty({
     example: 'Thiago Sanches',
   })
-  name: string;
+  nome: string;
 
   @Column()
   @ApiProperty({
     example: 22,
   })
-  age: number;
+  idade: number;
 
   @Column()
   @ApiProperty({
@@ -38,17 +38,11 @@ export class User {
   })
   sexo: string;
 
-  @Column()
-  @ApiProperty({
-    example: 'thisanches07',
-  })
-  login: string;
-
   @Column({
     transformer: hashPasswordTransform,
   })
   @HideField()
-  password: string;
+  senha: string;
 
   @OneToMany(() => Exame, (exame) => exame.user)
   @ApiProperty({

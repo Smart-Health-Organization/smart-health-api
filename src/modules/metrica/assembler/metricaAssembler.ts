@@ -1,5 +1,5 @@
-import { UserAssembler } from '@modules/user/assembler/userAssembler';
-import { ExameResponseDto } from 'src/types/dtos/exame.response.dto';
+import { ExameResponseDto } from '@app/types/dtos/response/exame.response.dto';
+import { UsuarioAssembler } from '@modules/usuario/assembler/usuarioAssembler';
 import { ExameItem } from 'src/types/entities/exame-item.entity';
 import { Exame } from 'src/types/entities/exame.entity';
 import { ExamesAndExameItemsResponseType } from '../type/exame-and-exame-items.response.type';
@@ -9,7 +9,7 @@ export class ExameAssembler {
     return {
       id: exame.id,
       data: exame.data,
-      user: UserAssembler.assembleUserToDto(exame.user),
+      user: UsuarioAssembler.assembleUserToDto(exame.user),
     };
   }
   static assembleExamesToDto(exame: Exame[]): ExameResponseDto[] {
@@ -17,7 +17,7 @@ export class ExameAssembler {
       return {
         id: exame.id,
         data: exame.data,
-        user: { id: exame.user.id, name: exame.user.name },
+        user: { id: exame.user.id, nome: exame.user.nome },
       };
     });
 

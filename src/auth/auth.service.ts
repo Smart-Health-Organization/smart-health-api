@@ -1,29 +1,29 @@
+import { Usuario } from '@app/types/entities/usuario.entity';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { compareSync } from 'bcrypt';
 import { AuthInput } from 'src/auth/dto/auth.input';
 import { AuthType } from 'src/auth/dto/auth.type';
-import { UserService } from 'src/modules/user/user.service';
-import { User } from 'src/types/entities/user.entity';
+import { UsuarioService } from 'src/modules/usuario/usuario.service';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private userService: UserService,
+    private userService: UsuarioService,
     private jwtService: JwtService,
   ) {}
 
   async validateUser(data: AuthInput): Promise<AuthType> {
-    const user = await this.userService.getUserByEmail(data.email);
+    const user = await this.userService.getUsuarioByEmail(data.email);
 
     if (!user) {
-      throw new UnauthorizedException('Incorrect login or password');
+      throw new UnauthorizedException('Usuário ou senha incorretos');
     }
 
-    const validPassword = compareSync(data.password, user.password);
+    const validPassword = compareSync(data.password, user.senha);
 
     if (!validPassword) {
-      throw new UnauthorizedException('Incorrect login or password');
+      throw new UnauthorizedException('Usuário ou senha incorretos');
     }
 
     const token = await this.jwtToken(user);
@@ -33,8 +33,8 @@ export class AuthService {
     };
   }
 
-  private async jwtToken(user: User): Promise<string> {
-    const payload = { username: user.name, sub: user.id };
+  private async jwtToken(user: Usuario): Promise<string> {
+    const payload = { username: user.nome, sub: user.id };
     return this.jwtService.signAsync(payload);
   }
 }

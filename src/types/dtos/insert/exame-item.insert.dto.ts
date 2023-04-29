@@ -10,10 +10,10 @@ import {
 } from 'class-validator';
 
 @InputType()
-export class ExameItemInsertDto {
+export class CreateExameItemInsertDto {
   @Field()
   @IsString()
-  @IsNotEmpty({ message: 'metrica should not be empty' })
+  @IsNotEmpty({ message: 'Métrica é obrigatória' })
   @ApiProperty({
     example: 'colesterol',
   })
@@ -36,7 +36,7 @@ export class ExameItemInsertDto {
   unidade: string;
 }
 
-export class InsertExameItems {
+export class CreateExameItems {
   @IsDateFormat()
   @IsNotEmpty()
   @ApiProperty({
@@ -44,11 +44,11 @@ export class InsertExameItems {
   })
   data: string;
 
-  @Type(() => ExameItemInsertDto)
+  @Type(() => CreateExameItemInsertDto)
   @ValidateNested()
   @IsNotEmpty()
   @ApiProperty({
-    type: [ExameItemInsertDto],
+    type: [CreateExameItemInsertDto],
   })
-  itens: ExameItemInsertDto[];
+  itens: CreateExameItemInsertDto[];
 }
