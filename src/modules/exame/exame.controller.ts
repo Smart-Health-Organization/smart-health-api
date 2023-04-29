@@ -2,7 +2,7 @@ import { ExameAssembler } from '@modules/exame/assembler/exameAssembler';
 import { ItemsDoExameResponseType } from '@modules/exame/type/exame-and-exame-items.response.type';
 import {
   Controller,
-  Get,
+  Post,
   Inject,
   UploadedFile,
   UseInterceptors,
@@ -19,7 +19,7 @@ export class ExameController {
     @Inject(Tokens.EXAME_OPERATIONS) private readonly service: ExameOperations,
   ) {}
 
-  @Get('/pdf')
+  @Post('/pdf')
   @ApiOkResponse({
     description: 'Pdf Lido com sucesso e itens retornados ',
     type: ItemsDoExameResponseType,
