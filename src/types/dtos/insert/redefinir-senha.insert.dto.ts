@@ -4,13 +4,13 @@ import { IsString } from 'class-validator';
 
 @InputType()
 export class RedefinirSenhaInsertDto {
-  @IsString()
+  @IsString({ message: 'Senha antiga deve ser um texto' })
   @ApiProperty({
     example: 'senhaAntiga',
   })
   senhaAntiga: string;
 
-  @IsString()
+  @IsString({ message: 'Senha nova deve ser um texto' })
   @ApiProperty({
     example: 'NovaSenha',
   })

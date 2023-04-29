@@ -5,7 +5,7 @@ import { IsNotEmpty, IsString } from 'class-validator';
 @InputType()
 export class CreateExameInsertDto {
   @Field()
-  @IsString()
+  @IsString({ message: 'Data deve ser um texto' })
   @IsNotEmpty({ message: 'Data é obrigatória' })
   data: string;
 
