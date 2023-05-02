@@ -36,15 +36,6 @@ export class UsuarioController {
     private readonly exameItemservice: ExameItemOperations,
   ) {}
 
-  @Get()
-  @ApiOkResponse({
-    description: 'Lista de usuarios ',
-    type: [UsuarioResponseDto],
-  })
-  async getUsuarios(): Promise<UsuarioResponseDto[]> {
-    return await this.service.getUsuarios();
-  }
-
   @Post()
   @ApiBody({ type: CreateUsuarioInsertDto })
   @ApiOkResponse({
