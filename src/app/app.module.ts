@@ -1,3 +1,4 @@
+import { UserMiddleware } from '@app/auth/user.middleware';
 import { BaseModule } from '@modules/base/base.module';
 import { ExameModule } from '@modules/exame/exame.module';
 import { MetricaModule } from '@modules/metrica/metrica.module';
@@ -56,9 +57,8 @@ export class AppModule {
         { path: '/graphql', method: RequestMethod.ALL },
       )
       .forRoutes('*');
-    //TODO -> remove this comment to limit user only to see this content in /users/:id
-    // consumer
-    //   .apply(UserMiddleware)
-    //   .forRoutes({ path: '/users/*', method: RequestMethod.ALL });
+    consumer
+      .apply(UserMiddleware)
+      .forRoutes({ path: '/usuarios/*', method: RequestMethod.ALL });
   }
 }

@@ -4,6 +4,7 @@ import { UpdateUsuarioInsertDto } from '@app/types/dtos/insert/update-usuario.in
 import { UsuarioResponseDto } from '@app/types/dtos/response/user.response.dto';
 import { UsuarioOperations } from '@modules/usuario/usuario.operations';
 import {
+  BadRequestException,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
@@ -29,9 +30,7 @@ export class UsuarioService implements UsuarioOperations {
   async postUsuario(data: CreateUsuarioInsertDto): Promise<UsuarioResponseDto> {
     const userAlredyExist = await this.getUsuarioByEmail(data.email);
     if (userAlredyExist) {
-      throw new InternalServerErrorException(
-        'Já existe um usuário com este email',
-      );
+      throw new BadRequestException('Já existe um usuário com este email');
     }
     const user = this.userRepository.create(data);
     const userSaved = await this.userRepository.save(user);
@@ -76,11 +75,12 @@ export class UsuarioService implements UsuarioOperations {
         'Já existe um usuário com este email',
       );
     }
-    await this.userRepository.update(user, { ...data });
+    await this.userRepository.update(user.id, { ...data });
 
     //cria-se esse objeto porque em update faltam propriedades do tipo user
-    const userUpdated = this.userRepository.create({ ...user, ...data });
-    await this.userRepository.save(userUpdated);
+    const userUpdated = await this.userRepository.findOne({
+      where: { id: user.id },
+    });
     return UsuarioAssembler.assembleCreateUsuarioParaDto(userUpdated);
   }
 

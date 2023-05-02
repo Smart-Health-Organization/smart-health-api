@@ -21,13 +21,13 @@ export class UserMiddleware implements NestMiddleware {
       // Add the user object to the request object
       req['user'] = decoded;
       const url = req.originalUrl;
-      const match = url.match(/\/users\/(\d+)/);
+      const match = url.match(/\/usuarios\/(\d+)/);
       if (match) {
         const id = parseInt(match[1]);
         if (req.user['sub'] != id) {
           return res
             .status(401)
-            .json({ message: 'You cannot have access for this user' });
+            .json({ message: 'Você não pode acessar os dados deste usuário' });
         }
       }
 
