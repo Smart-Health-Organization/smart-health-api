@@ -8,10 +8,11 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiConsumes, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Tokens } from '@utils/tokens';
 import { ExameOperations } from './exame.operations';
 
+@ApiBearerAuth()
 @ApiTags('Exames')
 @Controller('exames')
 export class ExameController {
@@ -20,6 +21,18 @@ export class ExameController {
   ) {}
 
   @Post('/pdf')
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        file: {
+          type: 'string',
+          format: 'binary',
+        },
+      },
+    },
+  })
   @ApiOkResponse({
     description: 'Pdf Lido com sucesso e itens retornados ',
     type: ItemsDoExameResponseType,
