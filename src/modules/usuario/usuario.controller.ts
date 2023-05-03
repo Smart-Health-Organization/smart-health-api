@@ -21,9 +21,10 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Tokens } from '@utils/tokens';
 
+@ApiBearerAuth()
 @ApiTags('Usuario')
 @Controller('usuarios')
 export class UsuarioController {
