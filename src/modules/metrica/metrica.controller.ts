@@ -1,8 +1,9 @@
 import { Controller, Get, Inject } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Tokens } from '@utils/tokens';
 import { MetricaOperations } from './metrica.operations';
 
+@ApiBearerAuth()
 @ApiTags('Metricas')
 @Controller()
 export class MetricaController {
