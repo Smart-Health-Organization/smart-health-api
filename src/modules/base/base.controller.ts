@@ -1,8 +1,9 @@
 import { Controller, Get, Inject } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Tokens } from '@utils/tokens';
 import { Operations } from './base.operations';
 
+@ApiBearerAuth()
 @ApiTags('Base')
 @Controller('helloworld')
 export class BaseController {
