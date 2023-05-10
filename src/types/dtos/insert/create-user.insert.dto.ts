@@ -15,7 +15,7 @@ export class CreateUsuarioInsertDto {
   @Field()
   @IsNumber()
   @IsNotEmpty({ message: 'Idade é obrigatória' })
-  @Min(0)
+  @Min(0, { message: 'Idade deve ser maior que 0' })
   @ApiProperty({
     example: 22,
   })
