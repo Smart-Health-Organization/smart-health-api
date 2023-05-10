@@ -58,6 +58,7 @@ export class UsuarioController {
     @Param('id') id: string,
     @Body() data: CreateExameItems,
   ): Promise<ExameResponseDto> {
+    this.exameItemservice.verifyDuplicateMetrics(data.itens);
     const user = await this.service.getUsuarioById(id);
     const exame = await this.exameService.createExame(user, data.data);
     const exameToCreateItems = {

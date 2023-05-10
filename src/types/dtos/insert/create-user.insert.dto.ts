@@ -1,6 +1,6 @@
 import { Field, InputType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsNumber, IsString, Min } from 'class-validator';
 
 @InputType()
 export class CreateUsuarioInsertDto {
@@ -15,6 +15,7 @@ export class CreateUsuarioInsertDto {
   @Field()
   @IsNumber()
   @IsNotEmpty({ message: 'Idade é obrigatória' })
+  @Min(0)
   @ApiProperty({
     example: 22,
   })

@@ -1,8 +1,8 @@
 import { ExameItemOperations } from '@modules/exame-item/exame-item.operations';
 import {
+  BadRequestException,
   Inject,
   Injectable,
-  InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -44,7 +44,7 @@ export class ExameService implements ExameOperations {
     });
     const exameSaved = await this.exameRepository.save(exame);
     if (!exameSaved) {
-      throw new InternalServerErrorException('Exame was not created');
+      throw new BadRequestException('Exame was not created');
     }
     const exameDto = ExameAssembler.assembleCreateExameToDto(exameSaved);
     return exameDto;
