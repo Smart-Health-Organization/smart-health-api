@@ -6,7 +6,6 @@ import { UsuarioOperations } from '@modules/usuario/usuario.operations';
 import {
   BadRequestException,
   Injectable,
-  InternalServerErrorException,
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -35,7 +34,7 @@ export class UsuarioService implements UsuarioOperations {
     const user = this.userRepository.create(data);
     const userSaved = await this.userRepository.save(user);
     if (!userSaved) {
-      throw new InternalServerErrorException('Usuário não foi criado');
+      throw new BadRequestException('Usuário não foi criado');
     }
     const userDto = UsuarioAssembler.assembleCreateUsuarioParaDto(userSaved);
     return userDto;

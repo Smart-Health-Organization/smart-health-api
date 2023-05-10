@@ -1,12 +1,11 @@
-import { CreateExameItemInsertDto } from '@app/types/dtos/insert/exame-item.insert.dto';
+import { CreateExameItemInsertDtoArray } from '@app/types/dtos/insert/exame-item.insert.dto';
 import { ExameItem } from '@app/types/entities/exame-item.entity';
-import { Limite } from '@app/types/entities/limite.entity';
 import { ResultadoExameItem } from '@app/types/entities/resultado-exame.entity';
 import { Usuario } from '@app/types/entities/usuario.entity';
 import { Tokens } from '@app/utils/tokens';
 import { MetricaOperations } from '@modules/metrica/metrica.operations';
 import { LimiteOperations } from '@modules/metrica/modules/limite/limite.operations';
-import { Inject, Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Exame } from '../../types/entities/exame.entity';
@@ -30,17 +29,18 @@ export class ExameItemService implements ExameItemOperations {
   async createExameItems(
     user: Usuario,
     exame: Exame,
-    exameItens: CreateExameItemInsertDto[],
+    exameItens: CreateExameItemInsertDtoArray,
   ): Promise<any> {
     const allExameItensSaved = [];
+
     for (const exameItem of exameItens) {
       const metrica = await this.metricaService.getMetricaByName(
         exameItem.metrica.toUpperCase(),
       );
-      const limites: Limite[] = await this.limiteService.getLimitesByMetricaId(
-        metrica.id.toString(),
-      );
-      const limiteFiltered = limites.filter(
+      const limites = metrica
+        ? await this.limiteService.getLimitesByMetricaId(metrica.id.toString())
+        : null;
+      const limiteFiltered = limites?.filter(
         (limite) =>
           limite.sexo === user.sexo &&
           user.idade >= limite.idadeInicio &&
@@ -49,13 +49,14 @@ export class ExameItemService implements ExameItemOperations {
 
       const resultadoExameItem = new ResultadoExameItem();
 
-      resultadoExameItem.limite = limiteFiltered[0];
+      resultadoExameItem.limite = limiteFiltered ? limiteFiltered[0] : null;
 
-      resultadoExameItem.alterado =
-        exameItem.medida < limiteFiltered[0].alto &&
-        exameItem.medida > limiteFiltered[0].baixo
+      resultadoExameItem.alterado = limiteFiltered
+        ? exameItem.medida < limiteFiltered[0].alto &&
+          exameItem.medida > limiteFiltered[0].baixo
           ? false
-          : true;
+          : true
+        : true;
 
       const resultadoCreated = await this.resultadoRepository.create(
         resultadoExameItem,
@@ -85,5 +86,28 @@ export class ExameItemService implements ExameItemOperations {
     });
 
     return exameItems;
+  }
+
+  verifyDuplicateMetrics(array: CreateExameItemInsertDtoArray) {
+    const metrics: string[] = array.map((item) => item.metrica);
+    const duplicates: string = metrics
+      .reduce(
+        (acc: string[], currentValue: string, index: number, arr: string[]) => {
+          if (
+            arr.indexOf(currentValue) !== index &&
+            acc.indexOf(currentValue) === -1
+          ) {
+            acc.push(currentValue);
+          }
+          return acc;
+        },
+        [],
+      )
+      .join(', ');
+    if (duplicates) {
+      throw new BadRequestException(
+        `Não foi possível criar exame pos existem métricas repetidas: [${duplicates}]`,
+      );
+    }
   }
 }

@@ -36,6 +36,8 @@ export class CreateExameItemInsertDto {
   unidade: string;
 }
 
+export class CreateExameItemInsertDtoArray extends Array<CreateExameItemInsertDto> {}
+
 export class CreateExameItems {
   @IsDateFormat()
   @IsNotEmpty({ message: 'Data é obrigatória' })
@@ -50,5 +52,5 @@ export class CreateExameItems {
   @ApiProperty({
     type: [CreateExameItemInsertDto],
   })
-  itens: CreateExameItemInsertDto[];
+  itens: CreateExameItemInsertDtoArray;
 }
