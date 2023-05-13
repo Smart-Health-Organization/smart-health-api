@@ -126,6 +126,9 @@ export class ExameService implements ExameOperations {
     //baseado nas paginas e nas metricas recuperadas do banco de dados,
     // monta os itens do exame com seu valor e unidades
     const createdMap = this.populateMapWithItems(pdfPagesStringArray, metricas);
+    if (!createdMap.size) {
+      throw new BadRequestException('PDF lido mas nenhum item foi encontrado');
+    }
 
     return createdMap;
   }
