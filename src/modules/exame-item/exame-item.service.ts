@@ -89,6 +89,11 @@ export class ExameItemService implements ExameItemOperations {
   }
 
   verifyDuplicateMetrics(array: CreateExameItemInsertDtoArray) {
+    if (!!array) {
+      throw new BadRequestException(
+        'Não é possível criar exame sem nenhum item',
+      );
+    }
     const metrics: string[] = array.map((item) => item.metrica);
     const duplicates: string = metrics
       .reduce(
