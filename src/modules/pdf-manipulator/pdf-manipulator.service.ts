@@ -14,7 +14,7 @@ export class PdfManipulatorService implements PdfManipulatorOperations {
       const lines = RemoveEmpty(
         content.items.map((item: TextItem) => item.str.toUpperCase() || ''),
       );
-      pdfPages.push(lines.join(' '));
+      pdfPages.push(lines.join(' ').replace(/\s+/g, ' '));
     }
     return pdfPages;
   }

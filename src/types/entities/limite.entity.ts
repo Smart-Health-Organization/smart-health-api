@@ -34,13 +34,13 @@ export class Limite {
   })
   idadeFim: number;
 
-  @Column()
+  @Column({ type: 'double precision' })
   @ApiProperty({
     example: '100',
   })
   alto: number;
 
-  @Column()
+  @Column({ type: 'double precision' })
   @ApiProperty({
     example: '20',
   })

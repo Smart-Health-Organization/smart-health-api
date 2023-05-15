@@ -180,17 +180,17 @@ export class ExameService implements ExameOperations {
           // separa pagina por palavra para verificar presença de metrica
         }
 
-        if (pdfPagesStringArray[i].split(' ').includes(metricasByName[j])) {
+        if (pdfPagesStringArray[i].includes(metricasByName[j])) {
           itemEncontrado.push(metricasByName[j]);
         }
       }
 
       //verifica se um item foi encontrado
-      if (itemEncontrado.length > 0) {
+      if (!!itemEncontrado.length) {
         //passa pelo regex para pegar palavra "resultado" da respectiva medida
         for (let item of itemEncontrado) {
           const regex = new RegExp(
-            `\\b${item}\\b.*?R\\s*E\\s*S\\s*U\\s*L\\s*T\\s*A\\s*D\\s*O\\s*:\\s*(\\d+(?:[.,]\\d+)?)|\\b${item}\\b.*?\\bR\\s*E\\s*S\\s*U\\s*L\\s*T\\s*A\\s*D\\s*O\\s*(\\d+(?:[.,]\\d+)?)|\\b${item}\\b\\s+(\\d{1,3}(?:[.,]\\d{1,2})?)\\b`,
+            `${item}.*?R\\s*E\\s*S\\s*U\\s*L\\s*T\\s*A\\s*D\\s*O\\s*:\\s*(\\d+(?:[.,]\\d+)?)|${item}.*?R\\s*E\\s*S\\s*U\\s*L\\s*T\\s*A\\s*D\\s*O\\s*S\\s*:\\s*(\\d+(?:[.,]\\d+)?)|\\b${item}\\b.*?\\bR\\s*E\\s*S\\s*U\\s*L\\s*T\\s*A\\s*D\\s*O\\s*(\\d+(?:[.,]\\d+)?)|\\b${item}\\b\\s+(\\d{1,3}(?:[.,]\\d{1,2})?)\\b`,
             'gi',
           );
 
@@ -198,7 +198,7 @@ export class ExameService implements ExameOperations {
           //verifica match com regex
           if (match) {
             //recupera valor apos a palavra resultado
-            let valorEncontrado = match[1] || match[2] || match[3];
+            let valorEncontrado = match[1] || match[2] || match[3] || match[4];
             const valor = +valorEncontrado.replace(',', '.');
 
             //recupera a unidade de medida baseado na metrica do banco de dados
