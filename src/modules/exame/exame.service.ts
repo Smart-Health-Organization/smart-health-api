@@ -97,6 +97,7 @@ export class ExameService implements ExameOperations {
           itemaSerAdicionado = {
             data: exame.data,
             medida: item.medida,
+            unidade: item.unidade,
             isAtual: true,
             isAlterado: item.resultado.alterado,
           };
@@ -104,6 +105,7 @@ export class ExameService implements ExameOperations {
           itemaSerAdicionado = {
             data: exame.data,
             medida: item.medida,
+            unidade: item.unidade,
             isAtual: false,
             isAlterado: item.resultado.alterado,
           };
