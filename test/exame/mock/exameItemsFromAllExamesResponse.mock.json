@@ -5,19 +5,22 @@
         "data": "Sat Apr 01 2023 11:16:36 GMT-0300 (Brasilia Standard Time)",
         "isAlterado": true,
         "isAtual": true,
-        "medida": 100.6
+        "medida": 100.6,
+        "unidade": "g"
       },
       {
         "data": "Sat Apr 01 2023 09:54:43 GMT-0300 (Brasilia Standard Time)",
         "isAlterado": true,
         "isAtual": false,
-        "medida": 100.6
+        "medida": 100.6,
+        "unidade": "g"
       },
       {
         "data": "Sat Apr 01 2023 09:52:25 GMT-0300 (Brasilia Standard Time)",
         "isAlterado": true,
         "isAtual": false,
-        "medida": 100.6
+        "medida": 100.6,
+        "unidade": "g"
       }
     ],
     "ldl": [
@@ -25,19 +28,22 @@
         "data": "Sat Apr 01 2023 11:16:36 GMT-0300 (Brasilia Standard Time)",
         "isAlterado": true,
         "isAtual": true,
-        "medida": 100
+        "medida": 100,
+        "unidade": "g"
       },
       {
         "data": "Sat Apr 01 2023 09:54:43 GMT-0300 (Brasilia Standard Time)",
         "isAlterado": true,
         "isAtual": false,
-        "medida": 100
+        "medida": 100,
+        "unidade": "g"
       },
       {
         "data": "Sat Apr 01 2023 09:52:25 GMT-0300 (Brasilia Standard Time)",
         "isAlterado": true,
         "isAtual": false,
-        "medida": 100
+        "medida": 100,
+        "unidade": "g"
       }
     ],
     "t3": [
@@ -45,19 +51,22 @@
         "data": "Sat Apr 01 2023 11:16:36 GMT-0300 (Brasilia Standard Time)",
         "isAlterado": true,
         "isAtual": true,
-        "medida": 100
+        "medida": 100,
+        "unidade": "g"
       },
       {
         "data": "Sat Apr 01 2023 09:54:43 GMT-0300 (Brasilia Standard Time)",
         "isAlterado": true,
         "isAtual": false,
-        "medida": 100
+        "medida": 100,
+        "unidade": "g"
       },
       {
         "data": "Sat Apr 01 2023 09:52:25 GMT-0300 (Brasilia Standard Time)",
         "isAlterado": true,
         "isAtual": false,
-        "medida": 100
+        "medida": 100,
+        "unidade": "g"
       }
     ],
     "t4": [
@@ -65,19 +74,22 @@
         "data": "Sat Apr 01 2023 11:16:36 GMT-0300 (Brasilia Standard Time)",
         "isAlterado": true,
         "isAtual": true,
-        "medida": 100
+        "medida": 100,
+        "unidade": "g"
       },
       {
         "data": "Sat Apr 01 2023 09:54:43 GMT-0300 (Brasilia Standard Time)",
         "isAlterado": true,
         "isAtual": false,
-        "medida": 100
+        "medida": 100,
+        "unidade": "g"
       },
       {
         "data": "Sat Apr 01 2023 09:52:25 GMT-0300 (Brasilia Standard Time)",
         "isAlterado": true,
         "isAtual": false,
-        "medida": 100
+        "medida": 100,
+        "unidade": "g"
       }
     ]
   }
