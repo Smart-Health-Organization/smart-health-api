@@ -19,6 +19,7 @@ export class ExameItemsMapResponseType {
         properties: {
           data: { type: 'string', format: 'date-time' },
           medida: { type: 'number' },
+          unidade: { type: 'string' },
           isAtual: { type: 'boolean' },
           isAlterado: { type: 'boolean' },
         },

@@ -493,7 +493,7 @@ export class InsertLimitesEMetricas1679766502904 implements MigrationInterface {
 
     const metricaTsh = await queryRunner.manager.save(Metrica, {
       nome: 'TSH',
-      unidade: 'mcUI/mL',
+      unidade: 'µUI/mL',
     });
 
     await queryRunner.manager.save(Limite, {
