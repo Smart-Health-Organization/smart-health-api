@@ -21,7 +21,9 @@ export class ResultadoExameItem {
   })
   id: number;
 
-  @OneToOne(() => ExameItem, (exameItem) => exameItem.resultado)
+  @OneToOne(() => ExameItem, (exameItem) => exameItem.resultado, {
+    onDelete: 'CASCADE',
+  })
   exameItem: ExameItem;
 
   @ManyToOne(() => Limite)

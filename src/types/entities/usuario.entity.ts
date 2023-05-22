@@ -44,7 +44,7 @@ export class Usuario {
   @HideField()
   senha: string;
 
-  @OneToMany(() => Exame, (exame) => exame.user)
+  @OneToMany(() => Exame, (exame) => exame.user, { cascade: true })
   @ApiProperty({
     type: [Exame],
   })
