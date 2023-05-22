@@ -26,14 +26,38 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
+# First steps
+Clone the repository with ```git clone```
 
+## Important observation
+<b>To run the app, you should change the branch to any of these branches: "prod" or "dev".</b>
+In some of these branches("prod" or "dev"), you can start the application with the steps bellow
+
+# Installation
+## [![My Skills](https://skills.thijs.gg/icons?i=docker)](https://skills.thijs.gg) - DOCKER 
+## Run docker containers
+```bash
+$ docker-compose up -d
+```
+### Run docker containers
+You can access smart-health-api on [localhost:3000](http://localhost:3000).<br>
+<b>To run it locally, you need to turn off smart-health-api container</b>
+
+## [![My Skills](https://skillicons.dev/icons?i=nodejs&theme=dark)](https://skillicons.dev) - LOCAL
+## copy .env
+```bash
+$ cp .env-example .env
+```
+
+### verify postgreSQL instance on docker or local
+
+## Run npm install
 ```bash
 $ npm install
 ```
 
 ## Running the app
-
+### Observation: to run the app in localhost, smart-health-api should be off, because it will use the same port
 ```bash
 # development
 $ npm run start
@@ -57,6 +81,25 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
+## swagger localhost
+https://smart-health-prod-xcaubn3uta-uc.a.run.app/api
+
+
+
+# PROD environment
+https://smart-health-prod-xcaubn3uta-uc.a.run.app
+
+## swagger PROD environment
+https://smart-health-prod-xcaubn3uta-uc.a.run.app/api
+
+# DEV environment
+https://smart-health-dev-xcaubn3uta-uc.a.run.app
+
+## swagger DEV environment
+https://smart-health-dev-xcaubn3uta-uc.a.run.app/api
+
+
 
 ## Support
 
