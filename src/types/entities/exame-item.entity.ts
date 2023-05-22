@@ -39,10 +39,10 @@ export class ExameItem {
   })
   unidade: string;
 
-  @ManyToOne(() => Exame, (exame) => exame.itens)
+  @ManyToOne(() => Exame, (exame) => exame.itens, { onDelete: 'CASCADE' })
   exame: Exame;
 
-  @OneToOne(() => ResultadoExameItem)
+  @OneToOne(() => ResultadoExameItem, { cascade: true })
   @JoinColumn()
   resultado: ResultadoExameItem;
 }

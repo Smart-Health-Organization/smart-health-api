@@ -27,9 +27,9 @@ export class Exame {
   })
   data: string;
 
-  @OneToMany(() => ExameItem, (exameItem) => exameItem.exame)
+  @OneToMany(() => ExameItem, (exameItem) => exameItem.exame, { cascade: true })
   itens: ExameItem[];
 
-  @ManyToOne(() => Usuario, (user) => user.exames)
+  @ManyToOne(() => Usuario, (user) => user.exames, { onDelete: 'CASCADE' })
   user: Usuario;
 }
