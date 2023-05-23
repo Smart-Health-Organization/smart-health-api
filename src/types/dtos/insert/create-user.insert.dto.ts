@@ -32,7 +32,7 @@ export class CreateUsuarioInsertDto {
   @Field()
   @IsString({ message: 'Email deve ser um texto' })
   @IsNotEmpty({ message: 'Email é obrigatório' })
-  @IsEmail()
+  @IsEmail({},{ message: 'Email com formato incorreto' })
   @ApiProperty({
     example: 'thi.sanches@hotmail.com',
   })
