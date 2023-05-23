@@ -1,25 +1,22 @@
-import { UserResponseDto } from "../../../src/types/dtos/user.response.dto";
-import { UserAssembler } from "../../../src/modules/user/assembler/userAssembler"
-var userCreationMock = require("../mock/UserCreationRequestMock.json")
+import { Usuario } from '@app/types/entities/usuario.entity';
+import { UsuarioAssembler } from '../../../src/modules/usuario/assembler/usuarioAssembler';
+var usuarioCreationMock = require('../mock/UsuarioCreationRequestMock.json');
 
-
-describe('UserAssembler', () => {
-
-  describe('assembleCreateUserToDto', () => {
+describe('UsuarioAssembler', () => {
+  describe('assembleCreateUsuarioToDto', () => {
     //teste para verificar se a função que transforma o usuário em DTO está funcionando corretamente
     it('should remove password from response', async () => {
       // Cria um novo usuário
-      const newUser =userCreationMock;
+      const novoUsuario: Usuario = usuarioCreationMock;
 
-      //chama o método assembleCreateUserToDto para transformar o retorno do banco em dto
-      const UserWithousPass = UserAssembler.assembleCreateUserToDto(newUser)
+      //chama o método assembleCreateUsuarioToDto para transformar o retorno do banco em dto
+      const UsuarioWithousPass =
+        UsuarioAssembler.assembleCreateUsuarioParaDto(novoUsuario);
 
       // Verifica se a função transformou corretamente o usuário em Dto
-      expect(UserWithousPass.name).toStrictEqual(newUser.name)
-      expect(UserWithousPass.email).toStrictEqual(newUser.email)
-      expect(UserWithousPass.age).toStrictEqual(newUser.age)
-      expect(UserWithousPass.login).toStrictEqual(newUser.login)
-      
+      expect(UsuarioWithousPass.nome).toStrictEqual(novoUsuario.nome);
+      expect(UsuarioWithousPass.email).toStrictEqual(novoUsuario.email);
+      expect(UsuarioWithousPass.idade).toStrictEqual(novoUsuario.idade);
     });
-  })
-})
+  });
+});

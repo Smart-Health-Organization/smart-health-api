@@ -6,13 +6,14 @@ import { AppModule } from 'src/app/app.module';
 async function bootstrap() {
   dotenv.config();
   const app = await NestFactory.create(AppModule);
+  app.enableCors();
   app.useGlobalPipes(new ValidationPipe()); // passa a aplicar automaticamente a validação em todas as possibilidades
 
   const config = new DocumentBuilder()
     .setTitle('Smart Health')
     .setDescription('The Smart Health API description')
     .setVersion('1.0')
-    .addTag('Healthy')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

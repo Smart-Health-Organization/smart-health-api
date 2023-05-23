@@ -12,7 +12,7 @@ export class AuthResolver {
     const response = await this.authService.validateUser(data);
 
     return {
-      user: response.user,
+      usuario: response.usuario,
       token: response.token,
     };
   }

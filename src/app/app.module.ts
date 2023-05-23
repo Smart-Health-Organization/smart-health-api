@@ -1,8 +1,14 @@
+import { UserMiddleware } from '@app/auth/user.middleware';
 import { BaseModule } from '@modules/base/base.module';
-import { UserModule } from '@modules/user/user.module';
+import { ExameModule } from '@modules/exame/exame.module';
+import { MetricaModule } from '@modules/metrica/metrica.module';
+import { LimiteModule } from '@modules/metrica/modules/limite/limite.module';
+import { PdfManipulatorModule } from '@modules/pdf-manipulator/pdf-manipulator.module';
+import { UsuarioModule } from '@modules/usuario/usuario.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { RouterModule } from '@nestjs/core';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
@@ -21,8 +27,24 @@ const ormconfig = require('../../ormconfig.js');
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
     BaseModule,
-    UserModule,
+    UsuarioModule,
     AuthModule,
+    ExameModule,
+    MetricaModule,
+    LimiteModule,
+    PdfManipulatorModule,
+    RouterModule.register([
+      {
+        path: 'metricas',
+        module: MetricaModule,
+        children: [
+          {
+            path: 'limites',
+            module: LimiteModule,
+          },
+        ],
+      },
+    ]),
   ],
 })
 export class AppModule {
@@ -35,9 +57,8 @@ export class AppModule {
         { path: '/graphql', method: RequestMethod.ALL },
       )
       .forRoutes('*');
-    //TODO -> remove this comment to limit user only to see this content in /users/:id
-    // consumer
-    //   .apply(UserMiddleware)
-    //   .forRoutes({ path: '/users/*', method: RequestMethod.ALL });
+    consumer
+      .apply(UserMiddleware)
+      .forRoutes({ path: '/usuarios/*', method: RequestMethod.ALL });
   }
 }

@@ -5,6 +5,8 @@
 #ORM config
 ormconfig.json
 .env
+.env-dev
+schema.gql
 
 #graphql
 schema.gql

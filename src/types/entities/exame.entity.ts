@@ -1,8 +1,8 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { User } from './user.entity';
+import { Usuario } from './usuario.entity';
 
+import { ExameItem } from '@app/types/entities/exame-item.entity';
 import { ApiProperty } from '@nestjs/swagger';
-import { ExameItem } from 'src/types/entities/exame-item.entity';
 import {
   Column,
   Entity,
@@ -27,12 +27,9 @@ export class Exame {
   })
   data: string;
 
-  @OneToMany(() => ExameItem, (exameItem) => exameItem.exame)
-  @ApiProperty({
-    type: [ExameItem],
-  })
-  exameItens: ExameItem[];
+  @OneToMany(() => ExameItem, (exameItem) => exameItem.exame, { cascade: true })
+  itens: ExameItem[];
 
-  @ManyToOne(() => User, (user) => user.exames)
-  user: User;
+  @ManyToOne(() => Usuario, (user) => user.exames, { onDelete: 'CASCADE' })
+  user: Usuario;
 }
