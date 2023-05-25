@@ -210,7 +210,7 @@ export class ExameService implements ExameOperations {
             const unidade = unidadeMetricasSet.get(item);
 
             //popula map principal com metrica do banco, seu valor e unidade do banco de dados
-
+            pdfPagesStringArray[i] = pdfPagesStringArray[i].replace(item, '');
             itensMap.set(item, { valor, unidade });
           }
         }
