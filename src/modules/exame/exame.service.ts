@@ -168,6 +168,8 @@ export class ExameService implements ExameOperations {
     unidadeMetricasSet: Map<string, string>,
     itensMap: Map<string, { valor: number; unidade: string }>,
   ) {
+    const arrayAux = metricasByName.sort((a, b) => b.length - a.length);
+
     for (let i = 0; i < pdfPagesStringArray.length; i++) {
       let itemEncontrado = [];
       // percorre cada metrica por nome
@@ -182,8 +184,9 @@ export class ExameService implements ExameOperations {
           // separa pagina por palavra para verificar presença de metrica
         }
 
-        if (pdfPagesStringArray[i].includes(metricasByName[j])) {
-          itemEncontrado.push(metricasByName[j]);
+        if (pdfPagesStringArray[i].includes(arrayAux[j])) {
+          itemEncontrado.push(arrayAux[j]);
+          arrayAux.splice(j, 1);
         }
       }
 
