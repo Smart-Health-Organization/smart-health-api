@@ -6,6 +6,7 @@
 ormconfig.json
 .env
 .env-dev
+.env-prod
 schema.gql
 
 #graphql
