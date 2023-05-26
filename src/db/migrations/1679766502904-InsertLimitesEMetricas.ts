@@ -600,16 +600,25 @@ export class InsertLimitesEMetricas1679766502904 implements MigrationInterface {
 
     const metricaBHCGQUANTITATIVO = await queryRunner.manager.save(Metrica, {
       nome: 'BHCG',
-      unidade: 'unidade BHCG',
+      unidade: 'mUI/mL',
     });
 
     await queryRunner.manager.save(Limite, {
       sexo: 'feminino',
       metrica: metricaBHCGQUANTITATIVO,
       idadeInicio: 0,
-      idadeFim: 56,
-      baixo: 53,
-      alto: 58,
+      idadeFim: 150,
+      baixo: 0,
+      alto: 5.8,
+    });
+
+    await queryRunner.manager.save(Limite, {
+      sexo: 'masculino',
+      metrica: metricaBHCGQUANTITATIVO,
+      idadeInicio: 0,
+      idadeFim: 150,
+      baixo: 0,
+      alto: 0,
     });
   }
 

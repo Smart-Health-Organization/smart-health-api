@@ -168,22 +168,23 @@ export class ExameService implements ExameOperations {
     unidadeMetricasSet: Map<string, string>,
     itensMap: Map<string, { valor: number; unidade: string }>,
   ) {
+    metricasByName = metricasByName.sort((a, b) => a.length - b.length);
+
     for (let i = 0; i < pdfPagesStringArray.length; i++) {
       let itemEncontrado = [];
       // percorre cada metrica por nome
-      for (let j = 0; j < metricasByName.length; j++) {
-        //verifica estrutura de HDL e padroniza
+      for (let j = metricasByName.length - 1; j >= 0; j--) {
+        // verifica estrutura de HDL e padroniza
         if (pdfPagesStringArray[i].includes('H.D.L.')) {
           pdfPagesStringArray[i] = pdfPagesStringArray[i].replace(
             'H.D.L.',
             'HDL',
           );
-
-          // separa pagina por palavra para verificar presença de metrica
         }
 
         if (pdfPagesStringArray[i].includes(metricasByName[j])) {
           itemEncontrado.push(metricasByName[j]);
+          metricasByName.splice(j, 1);
         }
       }
 
@@ -207,7 +208,7 @@ export class ExameService implements ExameOperations {
             const unidade = unidadeMetricasSet.get(item);
 
             //popula map principal com metrica do banco, seu valor e unidade do banco de dados
-
+            pdfPagesStringArray[i] = pdfPagesStringArray[i].replace(item, '');
             itensMap.set(item, { valor, unidade });
           }
         }
