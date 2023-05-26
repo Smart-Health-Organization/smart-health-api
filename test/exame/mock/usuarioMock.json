@@ -1,0 +1,9 @@
+{
+  "id": 3,
+  "nome": "Thiago",
+  "idade": 13,
+  "email": "thiago.sanches0703@gmail.com",
+  "sexo": "masculino",
+  "senha": "$2b$10$MxVBuv/FCRTYqcffj6Fcdu9klwADlgCJxmuNaGZZteDo1Vzjw0gPG",
+  "exames": []
+}

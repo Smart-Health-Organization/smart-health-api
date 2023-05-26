@@ -1,10 +1,10 @@
+import { ExameItem } from '@app/types/entities/exame-item.entity';
 import { ResultadoExameItem } from '@app/types/entities/resultado-exame.entity';
 import { MetricaModule } from '@modules/metrica/metrica.module';
 import { LimiteModule } from '@modules/metrica/modules/limite/limite.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Tokens } from '@utils/tokens';
-import { ExameItem } from 'src/types/entities/exame-item.entity';
 import { ExameItemResolver } from './exame-item.resolver';
 import { ExameItemService } from './exame-item.service';
 
