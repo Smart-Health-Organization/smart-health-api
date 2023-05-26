@@ -49,4 +49,14 @@ export class Usuario {
     type: [Exame],
   })
   exames: Exame[];
+
+  constructor(usuario?: Partial<Usuario>) {
+    this.id = usuario?.id;
+    this.nome = usuario?.nome;
+    this.idade = usuario?.idade;
+    this.email = usuario?.email;
+    this.sexo = usuario?.sexo;
+    this.senha = usuario?.senha;
+    this.exames = usuario?.exames;
+  }
 }
