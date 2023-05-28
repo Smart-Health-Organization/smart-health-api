@@ -67,6 +67,11 @@ export class UsuarioService implements UsuarioOperations {
     id: string,
     data: UpdateUsuarioInsertDto,
   ): Promise<UsuarioResponseDto> {
+    if (!Object.keys(data).length) {
+      throw new BadRequestException(
+        'É preciso alterar ao menos um campo para atualizar o usuário',
+      );
+    }
     const user = await this.getUsuarioById(id);
     if (data?.email) {
       const userAlredyExist = await this.getUsuarioByEmail(data.email);
