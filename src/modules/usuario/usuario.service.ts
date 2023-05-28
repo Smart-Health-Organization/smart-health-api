@@ -67,10 +67,17 @@ export class UsuarioService implements UsuarioOperations {
     id: string,
     data: UpdateUsuarioInsertDto,
   ): Promise<UsuarioResponseDto> {
+    if (!Object.keys(data).length) {
+      throw new BadRequestException(
+        'É preciso alterar ao menos um campo para atualizar o usuário',
+      );
+    }
     const user = await this.getUsuarioById(id);
-    const userAlredyExist = await this.getUsuarioByEmail(data.email);
-    if (userAlredyExist) {
-      throw new BadRequestException('Já existe um usuário com este email');
+    if (data?.email) {
+      const userAlredyExist = await this.getUsuarioByEmail(data.email);
+      if (userAlredyExist) {
+        throw new BadRequestException('Já existe um usuário com este email');
+      }
     }
     await this.userRepository.update(user.id, { ...data });
 
