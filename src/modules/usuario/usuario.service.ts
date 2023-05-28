@@ -68,9 +68,11 @@ export class UsuarioService implements UsuarioOperations {
     data: UpdateUsuarioInsertDto,
   ): Promise<UsuarioResponseDto> {
     const user = await this.getUsuarioById(id);
-    const userAlredyExist = await this.getUsuarioByEmail(data.email);
-    if (userAlredyExist) {
-      throw new BadRequestException('Já existe um usuário com este email');
+    if (data?.email) {
+      const userAlredyExist = await this.getUsuarioByEmail(data.email);
+      if (userAlredyExist) {
+        throw new BadRequestException('Já existe um usuário com este email');
+      }
     }
     await this.userRepository.update(user.id, { ...data });
 
