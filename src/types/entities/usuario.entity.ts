@@ -1,3 +1,4 @@
+import { ExameCompartilhado } from '@app/types/entities/exame-compartilhado.entity';
 import { Exame } from '@app/types/entities/exame.entity';
 import { Field, HideField, ID, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
@@ -49,4 +50,14 @@ export class Usuario {
     type: [Exame],
   })
   exames: Exame[];
+
+  @OneToMany(
+    () => ExameCompartilhado,
+    (exameCompartilhado) => exameCompartilhado.usuario,
+    { cascade: true },
+  )
+  @ApiProperty({
+    type: [ExameCompartilhado],
+  })
+  examesCompartilhados: ExameCompartilhado[];
 }

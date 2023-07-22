@@ -1,5 +1,6 @@
 import { UserMiddleware } from '@app/auth/user.middleware';
 import { BaseModule } from '@modules/base/base.module';
+import { ExameCompartilhadoModule } from '@modules/exame-compartilhado/exame-compartilhado.module';
 import { ExameModule } from '@modules/exame/exame.module';
 import { MetricaModule } from '@modules/metrica/metrica.module';
 import { LimiteModule } from '@modules/metrica/modules/limite/limite.module';
@@ -32,6 +33,7 @@ const ormconfig = require('../../ormconfig.js');
     ExameModule,
     MetricaModule,
     LimiteModule,
+    ExameCompartilhadoModule,
     PdfManipulatorModule,
     RouterModule.register([
       {

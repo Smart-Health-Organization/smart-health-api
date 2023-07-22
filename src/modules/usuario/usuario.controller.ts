@@ -1,9 +1,12 @@
 import { CreateUsuarioInsertDto } from '@app/types/dtos/insert/create-user.insert.dto';
+import { ExameCompartilhadoInsertDto } from '@app/types/dtos/insert/exame-compartilhado.request.dto';
 import { CreateExameItems } from '@app/types/dtos/insert/exame-item.insert.dto';
 import { RedefinirSenhaInsertDto } from '@app/types/dtos/insert/redefinir-senha.insert.dto';
 import { UpdateUsuarioInsertDto } from '@app/types/dtos/insert/update-usuario.insert.dto';
 import { ExameResponseDto } from '@app/types/dtos/response/exame.response.dto';
 import { UsuarioResponseDto } from '@app/types/dtos/response/user.response.dto';
+import { ExameCompartilhadoOperations } from '@modules/exame-compartilhado/exame-compartilhado.operations';
+import { ExameCompartilhadoResponse } from '@modules/exame-compartilhado/type/exame-compartilhado.response';
 import { ExameItemOperations } from '@modules/exame-item/exame-item.operations';
 import { ExameOperations } from '@modules/exame/exame.operations';
 import { ExamesAndExameItemsResponseType } from '@modules/exame/type/exame-and-exame-items.response.type';
@@ -21,7 +24,12 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { Tokens } from '@utils/tokens';
 
 @ApiBearerAuth()
@@ -35,6 +43,8 @@ export class UsuarioController {
     private readonly exameService: ExameOperations,
     @Inject(Tokens.EXAME_ITEM_OPERATIONS)
     private readonly exameItemservice: ExameItemOperations,
+    @Inject(Tokens.EXAME_COMPARTILHADO_OPERATIONS)
+    private readonly exameCompartilhadoService: ExameCompartilhadoOperations,
   ) {}
 
   @Post()
@@ -143,5 +153,20 @@ export class UsuarioController {
   @HttpCode(204)
   async deleteUsuario(@Param('id') id: string): Promise<void> {
     await this.service.deleteUsuario(id);
+  }
+
+  @Post('/:id/exames-compartilhados')
+  @HttpCode(201)
+  async createExameCompartilhado(
+    @Param('id') id: string,
+    @Body() data: ExameCompartilhadoInsertDto,
+  ): Promise<ExameCompartilhadoResponse> {
+    const usuario = await this.service.getUsuarioById(id);
+    const exameCompartilhado =
+      await this.exameCompartilhadoService.criarExameCompartilhado(
+        usuario,
+        data,
+      );
+    return exameCompartilhado;
   }
 }
