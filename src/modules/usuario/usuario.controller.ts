@@ -169,4 +169,11 @@ export class UsuarioController {
       );
     return exameCompartilhado;
   }
+
+  @Get('/:id/exames-compartilhados')
+  async getExamesCompartilhadosPorUsuario(@Param('id') id: string) {
+    return await this.exameCompartilhadoService.getExamesCompartilhadosPorUsuario(
+      id,
+    );
+  }
 }

@@ -4,7 +4,7 @@ import { Usuario } from '@app/types/entities/usuario.entity';
 import { Tokens } from '@app/utils/tokens';
 import { ExameCompartilhadoAssembler } from '@modules/exame-compartilhado/assembler/exame-compartilhado.assembler';
 import { ExameItemCompartilhadoOperations } from '@modules/exame-item-compartilhado/exame-item-compartilhado.operations';
-import { Inject, Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ExameCompartilhadoOperations } from './exame-compartilhado.operations';
@@ -13,7 +13,7 @@ import { ExameCompartilhadoOperations } from './exame-compartilhado.operations';
 export class ExameCompartilhadoService implements ExameCompartilhadoOperations {
   constructor(
     @InjectRepository(ExameCompartilhado)
-    private exameCompartilhadoRepository: Repository<ExameCompartilhado>,
+    private repository: Repository<ExameCompartilhado>,
     @Inject(Tokens.EXAME_ITEM_COMPARTILHADO_OPERATIONS)
     private readonly itemCompartilhadoService: ExameItemCompartilhadoOperations,
   ) {}
@@ -27,15 +27,12 @@ export class ExameCompartilhadoService implements ExameCompartilhadoOperations {
         ExameCompartilhadoAssembler.assembleExameCompartilhadorequestToEntity(
           exameComartilhadoRequest,
         );
-      const exameCompartilhadoCreiado =
-        this.exameCompartilhadoRepository.create({
-          usuario,
-          ...exameCompartilhado,
-        });
+      const exameCompartilhadoCreiado = this.repository.create({
+        usuario,
+        ...exameCompartilhado,
+      });
 
-      const exameSalvo = await this.exameCompartilhadoRepository.save(
-        exameCompartilhadoCreiado,
-      );
+      const exameSalvo = await this.repository.save(exameCompartilhadoCreiado);
       const itensResponse =
         await this.itemCompartilhadoService.criarExameItemCompartilhado(
           exameSalvo,
@@ -48,5 +45,18 @@ export class ExameCompartilhadoService implements ExameCompartilhadoOperations {
         itens: itensResponse,
       };
     }
+    throw new BadRequestException(
+      'Senha inválida! Não foi possível criar exame compartilhado.',
+    );
+  }
+
+  async getExamesCompartilhadosPorUsuario(id: string) {
+    const examesCompartilhados = await this.repository.find({
+      where: {
+        usuario: { id: parseInt(id) },
+      },
+    });
+
+    return examesCompartilhados;
   }
 }

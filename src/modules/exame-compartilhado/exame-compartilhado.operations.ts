@@ -7,4 +7,6 @@ export interface ExameCompartilhadoOperations {
     usuario: Usuario,
     data: ExameCompartilhadoInsertDto,
   ): Promise<ExameCompartilhadoResponse>;
+
+  getExamesCompartilhadosPorUsuario(id: string);
 }

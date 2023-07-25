@@ -13,8 +13,9 @@ export class ExameItemCompartilhadoService
 {
   constructor(
     @InjectRepository(ExameItemCompartilhado)
-    private exameItemCompartilhadoRepository: Repository<ExameItemCompartilhado>,
+    private repository: Repository<ExameItemCompartilhado>,
   ) {}
+
   async criarExameItemCompartilhado(
     exameCompartilhado: ExameCompartilhado,
     exameItemComartilhadoRequest: ExameItemsMapResponseData,
@@ -26,14 +27,13 @@ export class ExameItemCompartilhadoService
       );
 
     itensCompartilhados.forEach(async (item) => {
-      const exameItemCompartilhadoCriado =
-        this.exameItemCompartilhadoRepository.create({
-          exameCompartilhado,
-          ...item,
-        });
+      const exameItemCompartilhadoCriado = this.repository.create({
+        exameCompartilhado,
+        ...item,
+      });
       itensSalvos.push(exameItemCompartilhadoCriado);
 
-      const itemSalvo = await this.exameItemCompartilhadoRepository.save(
+      const itemSalvo = await this.repository.save(
         exameItemCompartilhadoCriado,
       );
     });

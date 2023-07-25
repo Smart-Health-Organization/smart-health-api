@@ -4,6 +4,7 @@ import { RedefinirSenhaInsertDto } from '@app/types/dtos/insert/redefinir-senha.
 import { UpdateUsuarioInsertDto } from '@app/types/dtos/insert/update-usuario.insert.dto';
 import { UsuarioResponseDto } from '@app/types/dtos/response/user.response.dto';
 import { Usuario } from '@app/types/entities/usuario.entity';
+import { ExameCompartilhadoResponse } from '@modules/exame-compartilhado/type/exame-compartilhado.response';
 
 export interface UsuarioOperations {
   getUsuarios(): Promise<UsuarioResponseDto[]>;
@@ -23,5 +24,7 @@ export interface UsuarioOperations {
   createExameCompartilhado(
     id: string,
     data: ExameCompartilhadoInsertDto,
-  ): Promise<any>;
+  ): Promise<ExameCompartilhadoResponse>;
+
+  getExamesCompartilhadosPorUsuario(id: string): Promise<any>;
 }
