@@ -25,7 +25,7 @@ export class UsuarioAssembler {
     return usersDto;
   }
 
-  static assembleUserToDto(user: Usuario): UsuarioResponseDto {
+  static assembleUsuarioToDto(user: Usuario): UsuarioResponseDto {
     return {
       id: user.id,
       nome: user.nome,

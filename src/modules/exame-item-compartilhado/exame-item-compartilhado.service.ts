@@ -38,8 +38,23 @@ export class ExameItemCompartilhadoService
       );
     });
 
-    return ExameItemCompartilhadoAssembler.assembleItemCreationToResponseType(
+    return ExameItemCompartilhadoAssembler.assembleItemEntityToResponseType(
       itensSalvos,
     );
+  }
+
+  async getExameItensCompartilhadosByExameId(exameId: number): Promise<any> {
+    const itens = await this.repository.find({
+      where: {
+        exameCompartilhado: {
+          id: exameId,
+        },
+      },
+    });
+
+    const itensResponse =
+      ExameItemCompartilhadoAssembler.assembleItemEntityToResponseType(itens);
+
+    return itensResponse;
   }
 }

@@ -1,5 +1,6 @@
 import { ExameItemsMapResponseData } from '@app/types/dtos/insert/exame-compartilhado.request.dto';
 import { ExameItemCompartilhadoInsertDto } from '@app/types/dtos/insert/exame-item-compartilhado.insert.dto';
+import { ExameItemsMapResponseType } from '@modules/exame/type/exame-items-map.response.type';
 import { ExameItemCompartilhado } from './../../../types/entities/exame-item-compartilhado.entity';
 
 const crypto = require('crypto');
@@ -26,10 +27,10 @@ export class ExameItemCompartilhadoAssembler {
     return itensFormatados;
   }
 
-  public static assembleItemCreationToResponseType(
+  public static assembleItemEntityToResponseType(
     entidades: ExameItemCompartilhado[],
-  ) {
-    const object = {};
+  ): ExameItemsMapResponseType {
+    const object = {} as ExameItemsMapResponseType;
     entidades.forEach((item) => {
       const { data, medida, unidade, isAtual, isAlterado } = item;
       if (!object[item.nome]) {

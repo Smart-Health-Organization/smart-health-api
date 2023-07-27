@@ -145,7 +145,7 @@ export class UsuarioController {
   })
   async getUsuarioById(@Param('id') id: string): Promise<UsuarioResponseDto> {
     const user = await this.service.getUsuarioById(id);
-    const userDto = UsuarioAssembler.assembleUserToDto(user);
+    const userDto = UsuarioAssembler.assembleUsuarioToDto(user);
     return userDto;
   }
 
