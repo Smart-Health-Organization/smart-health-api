@@ -1,10 +1,8 @@
 import { CreateUsuarioInsertDto } from '@app/types/dtos/insert/create-user.insert.dto';
-import { ExameCompartilhadoInsertDto } from '@app/types/dtos/insert/exame-compartilhado.request.dto';
 import { RedefinirSenhaInsertDto } from '@app/types/dtos/insert/redefinir-senha.insert.dto';
 import { UpdateUsuarioInsertDto } from '@app/types/dtos/insert/update-usuario.insert.dto';
 import { UsuarioResponseDto } from '@app/types/dtos/response/user.response.dto';
 import { Usuario } from '@app/types/entities/usuario.entity';
-import { ExameCompartilhadoResponse } from '@modules/exame-compartilhado/type/exame-compartilhado.response';
 
 export interface UsuarioOperations {
   getUsuarios(): Promise<UsuarioResponseDto[]>;
@@ -20,11 +18,6 @@ export interface UsuarioOperations {
     data: RedefinirSenhaInsertDto,
   ): Promise<UsuarioResponseDto>;
   deleteUsuario(id: string): Promise<boolean>;
-
-  createExameCompartilhado(
-    id: string,
-    data: ExameCompartilhadoInsertDto,
-  ): Promise<ExameCompartilhadoResponse>;
 
   getExamesCompartilhadosPorUsuario(id: string): Promise<any>;
 }

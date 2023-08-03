@@ -1,5 +1,4 @@
 import { CreateUsuarioInsertDto } from '@app/types/dtos/insert/create-user.insert.dto';
-import { ExameCompartilhadoInsertDto } from '@app/types/dtos/insert/exame-compartilhado.request.dto';
 import { RedefinirSenhaInsertDto } from '@app/types/dtos/insert/redefinir-senha.insert.dto';
 import { UpdateUsuarioInsertDto } from '@app/types/dtos/insert/update-usuario.insert.dto';
 import { UsuarioResponseDto } from '@app/types/dtos/response/user.response.dto';
@@ -26,14 +25,6 @@ export class UsuarioService implements UsuarioOperations {
     @InjectRepository(Usuario)
     private userRepository: Repository<Usuario>,
   ) {}
-
-  createExameCompartilhado(
-    id: string,
-    data: ExameCompartilhadoInsertDto,
-  ): Promise<any> {
-    console.log(id, data);
-    throw new Error('Method not implemented.');
-  }
 
   async postUsuario(data: CreateUsuarioInsertDto): Promise<UsuarioResponseDto> {
     const userAlredyExist = await this.getUsuarioByEmail(data.email);
