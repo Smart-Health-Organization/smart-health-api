@@ -1,3 +1,4 @@
+import { ExameCompartilhadoModule } from '@modules/exame-compartilhado/exame-compartilhado.module';
 import { ExameItemModule } from '@modules/exame-item/exame-item.module';
 import { ExameModule } from '@modules/exame/exame.module';
 import { UserResolver } from '@modules/usuario/user.resolver';
@@ -9,7 +10,12 @@ import { UsuarioController } from './usuario.controller';
 import { UsuarioService } from './usuario.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Usuario]), ExameModule, ExameItemModule],
+  imports: [
+    TypeOrmModule.forFeature([Usuario]),
+    ExameModule,
+    ExameItemModule,
+    ExameCompartilhadoModule,
+  ],
   controllers: [UsuarioController],
   providers: [
     UserResolver,
