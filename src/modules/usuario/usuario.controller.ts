@@ -171,9 +171,26 @@ export class UsuarioController {
   }
 
   @Get('/:id/exames-compartilhados')
+  @ApiOkResponse({
+    description: 'Usiário criado',
+    type: String,
+  })
   async getExamesCompartilhadosPorUsuario(@Param('id') id: string) {
     return await this.exameCompartilhadoService.getExamesCompartilhadosPorUsuario(
       id,
+    );
+  }
+
+  @Delete('/:userId/exames-compartilhados/:exameCompartilhadoId')
+  @HttpCode(204)
+  async deleteExameCompartilhado(
+    @Param('userId') userId: string,
+    @Param('exameCompartilhadoId') exameCompartilhadoId: string,
+  ): Promise<void> {
+    const usuario = await this.service.getUsuarioById(userId);
+    return await this.exameCompartilhadoService.deleteExamesCompartilhado(
+      usuario,
+      exameCompartilhadoId,
     );
   }
 }

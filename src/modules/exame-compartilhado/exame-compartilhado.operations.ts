@@ -14,4 +14,9 @@ export interface ExameCompartilhadoOperations {
   getExameCompartilhadoByLogin(login: string): Promise<boolean>;
 
   getExameCompartilhadoByLoginAndSenha(data: LoginRequest): Promise<any>;
+
+  deleteExamesCompartilhado(
+    usuario: Usuario,
+    exameCompartilhadoId: string,
+  ): Promise<any>;
 }

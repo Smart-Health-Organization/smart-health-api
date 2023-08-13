@@ -113,4 +113,18 @@ export class ExameCompartilhadoService implements ExameCompartilhadoOperations {
       itens: itens,
     };
   }
+
+  async deleteExamesCompartilhado(
+    usuario: Usuario,
+    exameCompartilhadoId: string,
+  ): Promise<boolean> {
+    const deleted = await this.repository.delete({
+      id: +exameCompartilhadoId,
+      usuario: usuario,
+    });
+
+    if (deleted) return true;
+
+    throw new BadRequestException('Exame Compartilhado não pode ser deletado');
+  }
 }

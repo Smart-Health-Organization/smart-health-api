@@ -31,6 +31,8 @@ export class ExameItemCompartilhado {
   @Column()
   isAlterado: boolean;
 
-  @ManyToOne(() => ExameCompartilhado, (exame) => exame.itens)
+  @ManyToOne(() => ExameCompartilhado, (exame) => exame.itens, {
+    onDelete: 'CASCADE',
+  })
   exameCompartilhado: ExameCompartilhado;
 }

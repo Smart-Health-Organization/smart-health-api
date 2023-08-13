@@ -1,5 +1,5 @@
+import { ExameItemsMapResponseData } from '@app/types/dtos/insert/exame-compartilhado.insert.dto';
 import { UsuarioResponseDto } from '@app/types/dtos/response/user.response.dto';
-import { ExameItemsMapResponseType } from '@modules/exame/type/exame-items-map.response.type';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class ExameEItensCompartilhadoResponse {
@@ -14,7 +14,20 @@ export class ExameEItensCompartilhadoResponse {
   usuario: UsuarioResponseDto;
 
   @ApiProperty({
-    type: ExameItemsMapResponseType,
+    type: 'object',
+    additionalProperties: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          data: { type: 'string', format: 'date-time' },
+          medida: { type: 'number' },
+          unidade: { type: 'string' },
+          isAtual: { type: 'boolean' },
+          isAlterado: { type: 'boolean' },
+        },
+      },
+    },
   })
-  itens: ExameItemsMapResponseType;
+  itens: ExameItemsMapResponseData;
 }

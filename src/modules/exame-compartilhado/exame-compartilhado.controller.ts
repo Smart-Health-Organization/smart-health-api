@@ -1,6 +1,6 @@
 import { ExameEItensCompartilhadoResponse } from '@modules/exame-compartilhado/type/exame-e-itens-compartilhados.response';
 import { LoginRequest } from '@modules/exame-compartilhado/type/login.request';
-import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Param } from '@nestjs/common';
 import { ApiBearerAuth, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Tokens } from '@utils/tokens';
 import { ExameCompartilhadoOperations } from './exame-compartilhado.operations';
@@ -23,7 +23,7 @@ export class ExameCompartilhadoController {
     return this.service.getExameCompartilhadoByLogin(login);
   }
 
-  @Post()
+  @Get()
   @ApiOkResponse({
     description: 'Retorna itens do exame compartilhado',
     type: ExameEItensCompartilhadoResponse,

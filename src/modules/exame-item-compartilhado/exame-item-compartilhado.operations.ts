@@ -1,6 +1,5 @@
 import { ExameItemsMapResponseData } from '@app/types/dtos/insert/exame-compartilhado.request.dto';
 import { ExameCompartilhado } from '@app/types/entities/exame-compartilhado.entity';
-import { ExameItemsMapResponseType } from '@modules/exame/type/exame-items-map.response.type';
 
 export interface ExameItemCompartilhadoOperations {
   criarExameItemCompartilhado(
@@ -10,5 +9,5 @@ export interface ExameItemCompartilhadoOperations {
 
   getExameItensCompartilhadosByExameId(
     exameId: number,
-  ): Promise<ExameItemsMapResponseType>;
+  ): Promise<ExameItemsMapResponseData>;
 }
