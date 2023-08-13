@@ -63,11 +63,13 @@ export class ExameCompartilhadoService implements ExameCompartilhadoOperations {
   async getExamesCompartilhadosPorUsuario(id: string) {
     const examesCompartilhados = await this.repository.find({
       where: {
-        usuario: { id: parseInt(id) },
+        usuario: { id: +id },
       },
     });
 
-    return examesCompartilhados;
+    return ExameCompartilhadoAssembler.assembleExameCompartilhadoInfo(
+      examesCompartilhados,
+    );
   }
 
   async getExameCompartilhadoByLogin(login: string): Promise<boolean> {

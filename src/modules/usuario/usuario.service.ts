@@ -110,17 +110,4 @@ export class UsuarioService implements UsuarioOperations {
     if (deleted) return true;
     return false;
   }
-
-  async getExamesCompartilhadosPorUsuario(id: string): Promise<any> {
-    const user = await this.userRepository.findOne({
-      relations: ['exame_compartilhado'],
-      where: {
-        id: parseInt(id),
-      },
-    });
-    if (!user) {
-      throw new NotFoundException('Usuário não encontrado');
-    }
-    return user.examesCompartilhados;
-  }
 }

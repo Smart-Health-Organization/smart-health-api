@@ -18,6 +18,4 @@ export interface UsuarioOperations {
     data: RedefinirSenhaInsertDto,
   ): Promise<UsuarioResponseDto>;
   deleteUsuario(id: string): Promise<boolean>;
-
-  getExamesCompartilhadosPorUsuario(id: string): Promise<any>;
 }

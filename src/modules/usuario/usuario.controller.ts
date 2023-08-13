@@ -12,6 +12,7 @@ import { ExameOperations } from '@modules/exame/exame.operations';
 import { ExamesAndExameItemsResponseType } from '@modules/exame/type/exame-and-exame-items.response.type';
 import { ExameItemsMapResponseType } from '@modules/exame/type/exame-items-map.response.type';
 import { UsuarioAssembler } from '@modules/usuario/assembler/usuarioAssembler';
+import { UsuarioExameCompartilhadoResponseType } from '@modules/usuario/type/exame-compartilhado-response.type';
 import { UsuarioOperations } from '@modules/usuario/usuario.operations';
 import {
   Body,
@@ -173,7 +174,7 @@ export class UsuarioController {
   @Get('/:id/exames-compartilhados')
   @ApiOkResponse({
     description: 'Usiário criado',
-    type: String,
+    type: [UsuarioExameCompartilhadoResponseType],
   })
   async getExamesCompartilhadosPorUsuario(@Param('id') id: string) {
     return await this.exameCompartilhadoService.getExamesCompartilhadosPorUsuario(
