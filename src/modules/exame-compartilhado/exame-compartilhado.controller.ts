@@ -5,7 +5,6 @@ import { ApiBearerAuth, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Tokens } from '@utils/tokens';
 import { ExameCompartilhadoOperations } from './exame-compartilhado.operations';
 
-@ApiBearerAuth()
 @ApiTags('Exame Compartilhado')
 @Controller('exames-compartilhados')
 export class ExameCompartilhadoController {

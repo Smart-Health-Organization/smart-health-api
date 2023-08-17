@@ -25,7 +25,7 @@ export class ExameCompartilhadoService implements ExameCompartilhadoOperations {
     private repository: Repository<ExameCompartilhado>,
     @Inject(Tokens.EXAME_ITEM_COMPARTILHADO_OPERATIONS)
     private readonly itemCompartilhadoService: ExameItemCompartilhadoOperations,
-  ) {}
+  ) { }
 
   async criarExameCompartilhado(
     usuario: Usuario,
@@ -37,22 +37,15 @@ export class ExameCompartilhadoService implements ExameCompartilhadoOperations {
         ExameCompartilhadoAssembler.assembleExameCompartilhadorequestToEntity(
           exameComartilhadoRequest,
         );
-      const exameCompartilhadoCreiado = this.repository.create({
+
+      const exameSalvo = await this.repository.save({
         usuario,
         ...exameCompartilhado,
       });
 
-      const exameSalvo = await this.repository.save(exameCompartilhadoCreiado);
-      const itensResponse =
-        await this.itemCompartilhadoService.criarExameItemCompartilhado(
-          exameSalvo,
-          exameComartilhadoRequest.itens,
-        );
-
       return {
         titulo: exameSalvo.titulo,
         login: exameSalvo.login,
-        itens: itensResponse,
       };
     }
     throw new BadRequestException(
