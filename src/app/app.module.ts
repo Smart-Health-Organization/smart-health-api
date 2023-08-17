@@ -57,7 +57,8 @@ export class AppModule {
         { path: '/login', method: RequestMethod.POST },
         { path: '/signup', method: RequestMethod.POST },
         { path: '/graphql', method: RequestMethod.ALL },
-        { path: '/exames-compartilhados', method: RequestMethod.ALL },
+        { path: '/exames-compartilhados', method: RequestMethod.POST },
+        { path: '/exames-compartilhados/:login', method: RequestMethod.GET },
       )
       .forRoutes('*');
     consumer
