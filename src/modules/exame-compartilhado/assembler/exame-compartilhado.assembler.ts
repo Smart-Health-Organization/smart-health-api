@@ -20,6 +20,7 @@ export class ExameCompartilhadoAssembler {
       titulo,
       login: crypto.randomUUID(),
       senha,
+      itens: itensFormatados,
     };
   }
 

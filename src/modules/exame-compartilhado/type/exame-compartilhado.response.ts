@@ -8,7 +8,4 @@ export class ExameCompartilhadoResponse {
 
   @ApiProperty({ example: 'login' })
   login: string;
-
-  @ApiProperty({ type: ItemsDoExameResponseType })
-  itens: ExameItemsMapResponseData;
 }
