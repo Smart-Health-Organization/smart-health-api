@@ -86,13 +86,13 @@ export class ExameCompartilhadoService implements ExameCompartilhadoOperations {
     });
 
     if (!exameCompartilhado) {
-      throw new UnauthorizedException('login ou senha incorretos');
+      throw new UnauthorizedException('Login ou senha incorretos');
     }
 
     const validPassword = compareSync(data.senha, exameCompartilhado.senha);
 
     if (!validPassword) {
-      throw new UnauthorizedException('Usuário ou senha incorretos');
+      throw new UnauthorizedException('Login ou senha incorretos');
     }
 
     const itens =
