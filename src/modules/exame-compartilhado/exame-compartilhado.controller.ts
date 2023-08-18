@@ -1,11 +1,10 @@
 import { ExameEItensCompartilhadoResponse } from '@modules/exame-compartilhado/type/exame-e-itens-compartilhados.response';
 import { LoginRequest } from '@modules/exame-compartilhado/type/login.request';
 import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
-import { ApiBearerAuth, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Tokens } from '@utils/tokens';
 import { ExameCompartilhadoOperations } from './exame-compartilhado.operations';
 
-@ApiBearerAuth()
 @ApiTags('Exame Compartilhado')
 @Controller('exames-compartilhados')
 export class ExameCompartilhadoController {
