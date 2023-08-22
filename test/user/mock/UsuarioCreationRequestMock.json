@@ -1,7 +1,7 @@
 {
   "nome": "Thiago Sanches",
   "email": "thi.sanches@hotmail.com",
-  "idade": 22,
+  "dataDeNascimento": "07/03/2001",
   "sexo": "masculino",
   "senha": "thiagoLegal"
 }

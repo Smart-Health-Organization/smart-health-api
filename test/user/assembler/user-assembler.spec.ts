@@ -16,7 +16,7 @@ describe('UsuarioAssembler', () => {
       // Verifica se a função transformou corretamente o usuário em Dto
       expect(UsuarioWithousPass.nome).toStrictEqual(novoUsuario.nome);
       expect(UsuarioWithousPass.email).toStrictEqual(novoUsuario.email);
-      expect(UsuarioWithousPass.idade).toStrictEqual(novoUsuario.idade);
+      expect(UsuarioWithousPass.dataDeNascimento).toStrictEqual(novoUsuario.dataDeNascimento);
     });
   });
 });

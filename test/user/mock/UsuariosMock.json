@@ -3,7 +3,7 @@
     "id": 1,
     "nome": "Thiago Sanches",
     "email": "thi.sanches@hotmail.com",
-    "idade": 22,
+    "dataDeNascimento": "07/03/2001",
     "sexo": "masculino",
     "senha": "thiagoLegal"
   },
@@ -11,7 +11,7 @@
     "id": 2,
     "nome": "Pedro Paulo",
     "email": "pedro.paulo@hotmail.com",
-    "idade": 22,
+    "dataDeNascimento": "07/03/2001",
     "sexo": "masculino",
     "senha": "pedropauloLegal"
   }
