@@ -23,9 +23,9 @@ export class Usuario {
 
   @Column()
   @ApiProperty({
-    example: 22,
+    type: '07/03/2001',
   })
-  idade: number;
+  dataDeNascimento: string;
 
   @Column()
   @ApiProperty({

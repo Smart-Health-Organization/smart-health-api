@@ -14,9 +14,9 @@ export class UsuarioResponseDto {
   nome: string;
 
   @ApiProperty({
-    example: 22,
+    type: '07/03/2001',
   })
-  idade: number;
+  dataDeNascimento: string;
 
   @ApiProperty({
     example: 'masculino',

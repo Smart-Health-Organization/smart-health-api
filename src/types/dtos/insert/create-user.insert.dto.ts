@@ -1,6 +1,6 @@
 import { Field, InputType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, IsNumber, IsString, Min } from 'class-validator';
+import {  IsEmail, IsNotEmpty, IsNumber, IsString, Min } from 'class-validator';
 
 @InputType()
 export class CreateUsuarioInsertDto {
@@ -13,13 +13,12 @@ export class CreateUsuarioInsertDto {
   nome: string;
 
   @Field()
-  @IsNumber()
-  @IsNotEmpty({ message: 'Idade é obrigatória' })
-  @Min(0, { message: 'Idade deve ser maior que 0' })
+  @IsString({ message: 'Data deve ser um texto' })
+  @IsNotEmpty({ message: 'Data de nascimento é obrigatória' })
   @ApiProperty({
-    example: 22,
+    type: Date,
   })
-  idade: number;
+  dataDeNascimento: string;
 
   @Field()
   @IsNotEmpty({ message: 'Sexo deve ser um texto' })

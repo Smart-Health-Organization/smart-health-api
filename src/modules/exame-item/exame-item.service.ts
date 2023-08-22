@@ -40,11 +40,14 @@ export class ExameItemService implements ExameItemOperations {
       const limites = metrica
         ? await this.limiteService.getLimitesByMetricaId(metrica.id.toString())
         : null;
+
+        const idade = this.calcularIdade(user.dataDeNascimento)
+        
       const limiteFiltered = limites?.filter(
         (limite) =>
           limite.sexo === user.sexo &&
-          user.idade >= limite.idadeInicio &&
-          user.idade <= limite.idadeFim,
+          idade >= limite.idadeInicio &&
+          idade <= limite.idadeFim,
       );
 
       const resultadoExameItem = new ResultadoExameItem();
@@ -114,5 +117,24 @@ export class ExameItemService implements ExameItemOperations {
         `Não foi possível criar exame pos existem métricas repetidas: [${duplicates}]`,
       );
     }
+  }
+
+   calcularIdade(dataNascimento: string): number {
+    const hoje = new Date();
+    const dataNascimentoFormatada = new Date(dataNascimento);
+    const anoNascimento = dataNascimentoFormatada.getFullYear()
+    const mesNascimento = dataNascimentoFormatada.getMonth()
+    const diaNascimento = dataNascimentoFormatada.getDay()
+    const anoAtual = hoje.getFullYear();
+    const mesAtual = hoje.getMonth();
+    const diaAtual = hoje.getDate();
+  
+    let idade = anoAtual - anoNascimento;
+  
+    if (mesAtual < mesNascimento || (mesAtual === mesNascimento && diaAtual < diaNascimento)) {
+      idade--;
+    }
+  
+    return idade;
   }
 }
