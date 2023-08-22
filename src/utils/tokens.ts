@@ -7,7 +7,9 @@ export class Tokens {
   public static readonly METRICA_OPERATIONS = 'METRICA_TOKEN';
   public static readonly LIMITE_OPERATIONS = 'LIMITE_TOKEN';
   public static readonly PDF_OPERATIONS = 'PDF_TOKEN';
-  public static readonly EXAME_COMPARTILHADO_OPERATIONS = 'EXAME_COMPARTILHADO';
+  public static readonly META_OPERATIONS = 'META_TOKEN';
+  public static readonly EXAME_COMPARTILHADO_OPERATIONS =
+    'EXAME_COMPARTILHADO_TOKEN';
   public static readonly EXAME_ITEM_COMPARTILHADO_OPERATIONS =
-    'EXAME_ITEM_COMPARTILHADO';
+    'EXAME_ITEM_COMPARTILHADO_TOKEN';
 }

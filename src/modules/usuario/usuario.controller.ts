@@ -11,6 +11,7 @@ import { ExameItemOperations } from '@modules/exame-item/exame-item.operations';
 import { ExameOperations } from '@modules/exame/exame.operations';
 import { ExamesAndExameItemsResponseType } from '@modules/exame/type/exame-and-exame-items.response.type';
 import { ExameItemsMapResponseType } from '@modules/exame/type/exame-items-map.response.type';
+import { MetaService } from '@modules/metas/meta.service';
 import { UsuarioAssembler } from '@modules/usuario/assembler/usuarioAssembler';
 import { UsuarioExameCompartilhadoResponseType } from '@modules/usuario/type/exame-compartilhado-response.type';
 import { UsuarioOperations } from '@modules/usuario/usuario.operations';
@@ -46,6 +47,8 @@ export class UsuarioController {
     private readonly exameItemservice: ExameItemOperations,
     @Inject(Tokens.EXAME_COMPARTILHADO_OPERATIONS)
     private readonly exameCompartilhadoService: ExameCompartilhadoOperations,
+    @Inject(Tokens.META_OPERATIONS)
+    private readonly metaService: MetaService,
   ) {}
 
   @Post()
