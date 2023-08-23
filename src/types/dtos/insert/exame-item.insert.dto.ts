@@ -42,7 +42,7 @@ export class CreateExameItems {
   @IsDateFormat()
   @IsNotEmpty({ message: 'Data é obrigatória' })
   @ApiProperty({
-    example: '25/04/2023',
+    example: '2023-08-23T00:00:00',
   })
   data: string;
 

@@ -17,6 +17,7 @@ export class CreateUsuarioInsertDto {
   @IsNotEmpty({ message: 'Data de nascimento é obrigatória' })
   @ApiProperty({
     type: Date,
+    example: '1996-08-17T00:00:00',
   })
   dataDeNascimento: string;
 
