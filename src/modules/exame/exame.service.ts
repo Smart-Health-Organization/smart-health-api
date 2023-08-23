@@ -35,7 +35,7 @@ export class ExameService implements ExameOperations {
   async createExame(user: Usuario, data: string): Promise<ExameResponseDto> {
     const exame = this.exameRepository.create({
       user,
-      data: (new Date(data)).toString(),
+      data: (new Date(data)).toISOString(),
     });
     const exameSaved = await this.exameRepository.save(exame);
     if (!exameSaved) {

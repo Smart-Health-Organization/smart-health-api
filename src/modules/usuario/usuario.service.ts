@@ -32,7 +32,7 @@ export class UsuarioService implements UsuarioOperations {
       throw new BadRequestException('Já existe um usuário com este email');
     }
     
-    data.dataDeNascimento = (new Date(data.dataDeNascimento)).toString();
+    data.dataDeNascimento = (new Date(data.dataDeNascimento)).toISOString();
     const user = this.userRepository.create(data);
     const userSaved = await this.userRepository.save(user);
     if (!userSaved) {

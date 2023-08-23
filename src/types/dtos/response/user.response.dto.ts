@@ -14,7 +14,8 @@ export class UsuarioResponseDto {
   nome: string;
 
   @ApiProperty({
-    type: '07/03/2001',
+    type: Date,
+    example: '2001-03-07T00:00:00.000Z',
   })
   dataDeNascimento: string;
 
