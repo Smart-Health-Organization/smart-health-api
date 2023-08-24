@@ -23,15 +23,21 @@ export class Meta {
 
   @Column()
   @ApiProperty({
-    example: '21/03/2001',
+    example: 'Apenas um titulo',
   })
-  dataInicio: string;
+  titulo: string;
 
   @Column()
   @ApiProperty({
     example: '21/03/2001',
   })
-  dataFim: string;
+  dataInicio: Date;
+
+  @Column()
+  @ApiProperty({
+    example: '21/03/2001',
+  })
+  dataFim: Date;
 
   @Column()
   @ApiProperty({
@@ -55,4 +61,10 @@ export class Meta {
     type: [Bioimpedancia],
   })
   bioimpedancias: Bioimpedancia[];
+
+  @Column()
+  @ApiProperty({
+    example: false,
+  })
+  isConcluida: boolean;
 }

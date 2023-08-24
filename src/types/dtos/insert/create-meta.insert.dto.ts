@@ -27,4 +27,17 @@ export class CreateMetaInsertDto {
     type: Date,
   })
   dataFim: string;
+
+  @IsNotEmpty({ message: 'Massa magra é obrigatória' })
+  @ApiProperty({
+    example: 15,
+  })
+  massaMagra: number;
+
+  @Field()
+  @IsNotEmpty({ message: 'Gordura Corporal é obrigatória' })
+  @ApiProperty({
+    example: 20,
+  })
+  gorduraCorporal: number;
 }

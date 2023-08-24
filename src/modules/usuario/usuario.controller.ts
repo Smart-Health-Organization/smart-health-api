@@ -1,3 +1,4 @@
+import { CreateMetaInsertDto } from '@app/types/dtos/insert/create-meta.insert.dto';
 import { CreateUsuarioInsertDto } from '@app/types/dtos/insert/create-user.insert.dto';
 import { ExameCompartilhadoInsertDto } from '@app/types/dtos/insert/exame-compartilhado.request.dto';
 import { CreateExameItems } from '@app/types/dtos/insert/exame-item.insert.dto';
@@ -196,5 +197,20 @@ export class UsuarioController {
       usuario,
       exameCompartilhadoId,
     );
+  }
+
+  @Get('/:usuarioId/metas')
+  async getMetasByUsuarioId(@Param('usuarioId') usuarioId: string) {
+    const usuario = await this.service.getUsuarioById(usuarioId);
+    return await this.metaService.getMetasByUsuarioId(usuario.id);
+  }
+
+  @Post('/:usuarioId/metas')
+  async postMetasByUsuarioId(
+    @Param('usuarioId') usuarioId: string,
+    @Body() data: CreateMetaInsertDto,
+  ) {
+    const usuario = await this.service.getUsuarioById(usuarioId);
+    return await this.metaService.postMetas(usuario, data);
   }
 }

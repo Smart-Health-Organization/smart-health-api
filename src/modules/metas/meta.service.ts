@@ -1,15 +1,84 @@
 import { CreateMetaInsertDto } from '@app/types/dtos/insert/create-meta.insert.dto';
-import { MetaResponseDto } from '@app/types/dtos/response/meta.response.dto';
+import {
+  GetMetasResponseDto,
+  MetaResponseDto,
+} from '@app/types/dtos/response/meta.response.dto';
+import { Meta } from '@app/types/entities/meta.entity';
 import { Usuario } from '@app/types/entities/usuario.entity';
-import { Injectable } from '@nestjs/common';
-import { Operations } from './meta.operations';
+import { MetaAssembler } from '@modules/metas/assembler/meta.assembler';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { MetaOperations } from './meta.operations';
 
 @Injectable()
-export class MetaService implements Operations {
-  getMetasByUsuario(usuario: Usuario): MetaResponseDto[] {
-    throw new Error('Method not implemented.');
+export class MetaService implements MetaOperations {
+  constructor(
+    @InjectRepository(Meta)
+    private metaRepository: Repository<Meta>,
+  ) {}
+  async getMetasByUsuarioId(usuarioId: number): Promise<GetMetasResponseDto> {
+    const metas = await this.metaRepository.find({
+      where: { user: { id: usuarioId } },
+    });
+
+    if (!metas) {
+      throw new NotFoundException('Usuário ainda não possui metas');
+    }
+
+    const metasDto = MetaAssembler.assembleMetasToResponse(metas);
+
+    return metasDto;
   }
-  createMetas(usuario: Usuario, meta: CreateMetaInsertDto): MetaResponseDto {
-    throw new Error('Method not implemented.');
+  async postMetas(
+    usuario: Usuario,
+    meta: CreateMetaInsertDto,
+  ): Promise<MetaResponseDto> {
+    const datasInicio = meta.dataInicio.split('-');
+    const dataInicio = new Date(
+      +datasInicio[2],
+      +datasInicio[1] - 1,
+      +datasInicio[0],
+    );
+
+    const datasFim = meta.dataFim.split('-');
+    const dataFim = new Date(+datasFim[2], +datasFim[1] - 1, +datasFim[0]);
+
+    const dataAtual = new Date();
+
+    if (dataInicio > dataFim) {
+      throw new BadRequestException(
+        'A data de início não pode ser maior do que a data de fim.',
+      );
+    } else if (dataInicio < dataAtual || dataFim < dataAtual) {
+      throw new BadRequestException('Não é possível criar datas no passado.');
+    } else {
+      const metaExistente = await this.metaRepository.find({
+        where: {
+          isConcluida: false,
+        },
+      });
+      if (!metaExistente.length) {
+        const metaSalva = await this.metaRepository.save({
+          ...meta,
+          user: usuario,
+          dataInicio,
+          dataFim,
+          isConcluida: false,
+        });
+
+        if (!metaSalva) {
+          throw new BadRequestException('Meta não foi criada');
+        }
+
+        const metaCriadaDto = MetaAssembler.assembleMetaToResponse(metaSalva);
+        return metaCriadaDto;
+      }
+      throw new BadRequestException('Você ainda possui metas em aberto');
+    }
   }
 }

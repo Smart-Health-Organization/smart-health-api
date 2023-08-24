@@ -15,17 +15,34 @@ export class MetaResponseDto {
   titulo: string;
 
   @ApiProperty({
-    type: '07/03/2001',
+    type: '07-03-2001',
   })
-  dataInicio: string;
+  dataInicio: Date;
 
   @ApiProperty({
-    example: '07/03/2001',
+    example: '07-03-2001',
   })
-  dataFim: string;
+  dataFim: Date;
+
+  @ApiProperty({
+    example: 10,
+  })
+  massaMagra: number;
+
+  @ApiProperty({
+    example: 15,
+  })
+  gorduraCorporal: number;
 
   @ApiProperty({
     type: BioimpedanciaResponseDto,
   })
   bioimpedancias: BioimpedanciaResponseDto;
+
+  @ApiProperty({
+    example: false,
+  })
+  isConcluida: boolean;
 }
+
+export class GetMetasResponseDto extends Array<MetaResponseDto> {}

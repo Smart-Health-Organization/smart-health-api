@@ -44,7 +44,7 @@ export class ExameService implements ExameOperations {
     });
     const exameSaved = await this.exameRepository.save(exame);
     if (!exameSaved) {
-      throw new BadRequestException('Exame was not created');
+      throw new BadRequestException('Exame não foi criado');
     }
     const exameDto = ExameAssembler.assembleCreateExameToDto(exameSaved);
     return exameDto;
