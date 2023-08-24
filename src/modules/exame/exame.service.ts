@@ -33,14 +33,9 @@ export class ExameService implements ExameOperations {
     private readonly pdfManipulatorService: PdfManipulatorOperations,
   ) {}
   async createExame(user: Usuario, data: string): Promise<ExameResponseDto> {
-    const dateParts = data.split('/');
-    const year = parseInt(dateParts[2], 10);
-    const month = parseInt(dateParts[1], 10) - 1;
-    const day = parseInt(dateParts[0], 10);
-    const formattedFata = new Date(year, month, day);
     const exame = this.exameRepository.create({
       user,
-      data: formattedFata.toString(),
+      data: (new Date(data)).toISOString(),
     });
     const exameSaved = await this.exameRepository.save(exame);
     if (!exameSaved) {

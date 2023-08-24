@@ -7,7 +7,7 @@ export class UsuarioAssembler {
       id: user.id,
       nome: user.nome,
       email: user.email,
-      idade: user.idade,
+      dataDeNascimento: (new Date(user.dataDeNascimento)).toISOString(),
       sexo: user.sexo,
     };
   }
@@ -17,7 +17,7 @@ export class UsuarioAssembler {
         id: user.id,
         nome: user.nome,
         email: user.email,
-        idade: user.idade,
+        dataDeNascimento: user.dataDeNascimento,
         sexo: user.sexo,
       };
     });
@@ -30,7 +30,7 @@ export class UsuarioAssembler {
       id: user.id,
       nome: user.nome,
       email: user.email,
-      idade: user.idade,
+      dataDeNascimento: user.dataDeNascimento,
       sexo: user.sexo,
     };
   }
