@@ -22,6 +22,7 @@ export class ExameCompartilhadoInsertDto {
   })
   confirmacaoSenha: string;
 
+  @ApiProperty()
   itens: ExameItemsMapResponseData;
 }
 

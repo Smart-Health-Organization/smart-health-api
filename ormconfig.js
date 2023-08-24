@@ -10,4 +10,5 @@ module.exports = {
   migrations: ['dist/migrations/*.{.ts,*.js}'],
   migrationsRun: true,
   synchronize: 'true',
+  poolSize: 1,
 };
