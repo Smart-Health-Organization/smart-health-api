@@ -21,6 +21,7 @@ export class MetaService implements MetaOperations {
     @InjectRepository(Meta)
     private metaRepository: Repository<Meta>,
   ) {}
+
   async getMetasByUsuarioId(usuarioId: number): Promise<GetMetasResponseDto> {
     const metas = await this.metaRepository.find({
       where: { user: { id: usuarioId } },
@@ -80,5 +81,34 @@ export class MetaService implements MetaOperations {
       }
       throw new BadRequestException('Você ainda possui metas em aberto');
     }
+  }
+
+  async concluirMeta(
+    usuarioId: number,
+    metaId: number,
+  ): Promise<MetaResponseDto> {
+    const meta = await this.metaRepository.findOne({
+      where: { id: metaId, user: { id: usuarioId } },
+    });
+    await this.metaRepository.update(metaId, { isConcluida: true });
+    return MetaAssembler.assembleMetaToResponse({ ...meta, isConcluida: true });
+  }
+
+  async getMetaById(metaId: number): Promise<Meta> {
+    const meta = await this.metaRepository.findOne({
+      where: { id: metaId },
+    });
+
+    if (!meta) {
+      throw new NotFoundException('Meta não encontrada');
+    }
+    return meta;
+  }
+
+  async deleteMeta(metaId: number): Promise<boolean> {
+    await this.getMetaById(metaId);
+    const deleted = await this.metaRepository.delete(metaId);
+    if (deleted) return true;
+    return false;
   }
 }

@@ -5,6 +5,7 @@ import { CreateExameItems } from '@app/types/dtos/insert/exame-item.insert.dto';
 import { RedefinirSenhaInsertDto } from '@app/types/dtos/insert/redefinir-senha.insert.dto';
 import { UpdateUsuarioInsertDto } from '@app/types/dtos/insert/update-usuario.insert.dto';
 import { ExameResponseDto } from '@app/types/dtos/response/exame.response.dto';
+import { MetaResponseDto } from '@app/types/dtos/response/meta.response.dto';
 import { UsuarioResponseDto } from '@app/types/dtos/response/user.response.dto';
 import { ExameCompartilhadoOperations } from '@modules/exame-compartilhado/exame-compartilhado.operations';
 import { ExameCompartilhadoResponse } from '@modules/exame-compartilhado/type/exame-compartilhado.response';
@@ -12,7 +13,7 @@ import { ExameItemOperations } from '@modules/exame-item/exame-item.operations';
 import { ExameOperations } from '@modules/exame/exame.operations';
 import { ExamesAndExameItemsResponseType } from '@modules/exame/type/exame-and-exame-items.response.type';
 import { ExameItemsMapResponseType } from '@modules/exame/type/exame-items-map.response.type';
-import { MetaService } from '@modules/metas/meta.service';
+import { MetaOperations } from '@modules/metas/meta.operations';
 import { UsuarioAssembler } from '@modules/usuario/assembler/usuarioAssembler';
 import { UsuarioExameCompartilhadoResponseType } from '@modules/usuario/type/exame-compartilhado-response.type';
 import { UsuarioOperations } from '@modules/usuario/usuario.operations';
@@ -49,7 +50,7 @@ export class UsuarioController {
     @Inject(Tokens.EXAME_COMPARTILHADO_OPERATIONS)
     private readonly exameCompartilhadoService: ExameCompartilhadoOperations,
     @Inject(Tokens.META_OPERATIONS)
-    private readonly metaService: MetaService,
+    private readonly metaService: MetaOperations,
   ) {}
 
   @Post()
@@ -199,12 +200,20 @@ export class UsuarioController {
     );
   }
 
+  @ApiOkResponse({
+    description: 'Metas do usuário recuperadas',
+    type: [MetaResponseDto],
+  })
   @Get('/:usuarioId/metas')
   async getMetasByUsuarioId(@Param('usuarioId') usuarioId: string) {
     const usuario = await this.service.getUsuarioById(usuarioId);
     return await this.metaService.getMetasByUsuarioId(usuario.id);
   }
 
+  @ApiOkResponse({
+    description: 'Meta criada',
+    type: MetaResponseDto,
+  })
   @Post('/:usuarioId/metas')
   async postMetasByUsuarioId(
     @Param('usuarioId') usuarioId: string,
@@ -212,5 +221,24 @@ export class UsuarioController {
   ) {
     const usuario = await this.service.getUsuarioById(usuarioId);
     return await this.metaService.postMetas(usuario, data);
+  }
+
+  @ApiOkResponse({
+    description: 'Meta concluída',
+    type: MetaResponseDto,
+  })
+  @Patch('/:usuarioId/metas/:metaId')
+  async concluirMeta(
+    @Param('usuarioId') usuarioId: string,
+    @Param('metaId') metaId: string,
+  ) {
+    await this.service.getUsuarioById(usuarioId);
+    return await this.metaService.concluirMeta(+usuarioId, +metaId);
+  }
+
+  @Delete('/:usuarioId/metas/:metaId')
+  @HttpCode(204)
+  async deletarMeta(@Param('metaId') metaId: string) {
+    return await this.metaService.deleteMeta(+metaId);
   }
 }

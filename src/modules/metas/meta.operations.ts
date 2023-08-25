@@ -12,4 +12,7 @@ export interface MetaOperations {
     usuario: Usuario,
     meta: CreateMetaInsertDto,
   ): Promise<MetaResponseDto>;
+
+  concluirMeta(usuarioId: number, metaId: number): Promise<MetaResponseDto>;
+  deleteMeta(metaId: number): Promise<boolean>;
 }
