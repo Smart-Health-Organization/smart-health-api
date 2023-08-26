@@ -7,7 +7,7 @@ export class UsuarioAssembler {
       id: user.id,
       nome: user.nome,
       email: user.email,
-      dataDeNascimento: user.dataDeNascimento,
+      dataDeNascimento: (new Date(user.dataDeNascimento)).toISOString(),
       sexo: user.sexo,
     };
   }

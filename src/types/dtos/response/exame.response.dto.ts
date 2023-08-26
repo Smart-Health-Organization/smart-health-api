@@ -12,7 +12,8 @@ export class ExameResponseDto {
   id: number;
 
   @ApiProperty({
-    example: 'Thu Mar 30 2023 17:19:08 GMT-0300 (Brasilia Standard Time)',
+    type: Date,
+    example: '2023-08-23T00:00:00.000Z',
   })
   data: string;
 

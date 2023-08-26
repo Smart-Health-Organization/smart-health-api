@@ -24,7 +24,7 @@ export class Usuario {
 
   @Column()
   @ApiProperty({
-    type: '07/03/2001',
+    type: '2001-07-03T00:00:00.000Z',
   })
   dataDeNascimento: string;
 

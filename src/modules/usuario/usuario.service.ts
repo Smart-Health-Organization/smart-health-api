@@ -32,14 +32,9 @@ export class UsuarioService implements UsuarioOperations {
       throw new BadRequestException('Já existe um usuário com este email');
     }
 
-    const dateParts = data.dataDeNascimento.split('/');
-    const year = parseInt(dateParts[2], 10);
-    const month = parseInt(dateParts[1], 10) - 1;
-    const day = parseInt(dateParts[0], 10);
-    const formattedFata = new Date(year, month, day);
-    data.dataDeNascimento = formattedFata.toString();
-    const usuario = this.usuarioRepository.create(data);
-    const usuarioSaved = await this.usuarioRepository.save(usuario);
+    data.dataDeNascimento = new Date(data.dataDeNascimento).toISOString();
+    const user = this.usuarioRepository.create(data);
+    const usuarioSaved = await this.usuarioRepository.save(user);
     if (!usuarioSaved) {
       throw new BadRequestException('Usuário não foi criado');
     }
