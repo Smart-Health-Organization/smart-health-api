@@ -17,7 +17,7 @@ export class MetaAssembler {
       dataFim,
       massaMagra,
       gorduraCorporal,
-      bioimpedancias,
+      antropometrias,
       isConcluida,
     } = meta;
     return {
@@ -28,7 +28,7 @@ export class MetaAssembler {
       massaMagra,
       gorduraCorporal,
       isConcluida,
-      bioimpedancias,
+      antropometrias,
     };
   }
 }

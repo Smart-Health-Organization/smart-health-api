@@ -1,7 +1,7 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { Usuario } from './usuario.entity';
 
-import { Bioimpedancia } from '@app/types/entities/bioimpedancia.entity';
+import { Antropometria } from '@app/types/entities/antropometria.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import {
   Column,
@@ -54,13 +54,13 @@ export class Meta {
   @ManyToOne(() => Usuario, (user) => user.exames, { onDelete: 'CASCADE' })
   user: Usuario;
 
-  @OneToMany(() => Bioimpedancia, (bioimpedancia) => bioimpedancia.meta, {
+  @OneToMany(() => Antropometria, (antropometria) => antropometria.meta, {
     cascade: true,
   })
   @ApiProperty({
-    type: [Bioimpedancia],
+    type: [Antropometria],
   })
-  bioimpedancias: Bioimpedancia[];
+  antropometrias: Antropometria[];
 
   @Column()
   @ApiProperty({

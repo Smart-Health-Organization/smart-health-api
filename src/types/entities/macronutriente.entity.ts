@@ -1,6 +1,6 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 
-import { Bioimpedancia } from '@app/types/entities/bioimpedancia.entity';
+import { Antropometria } from '@app/types/entities/antropometria.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
@@ -33,9 +33,9 @@ export class Macronutriente {
   quantidade: number;
 
   @ManyToOne(
-    () => Bioimpedancia,
-    (bioimpedancia) => bioimpedancia.macronutrientes,
+    () => Antropometria,
+    (antropometria) => antropometria.macronutrientes,
     { onDelete: 'CASCADE' },
   )
-  bioimpedancia: Bioimpedancia;
+  antropometria: Antropometria;
 }

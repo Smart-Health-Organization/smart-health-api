@@ -13,7 +13,7 @@ import {
 
 @ObjectType()
 @Entity()
-export class Bioimpedancia {
+export class Antropometria {
   @PrimaryGeneratedColumn()
   @Field(() => ID)
   @ApiProperty({
@@ -87,10 +87,10 @@ export class Bioimpedancia {
   })
   atividadeFisicaSemanal: number;
 
-  @ManyToOne(() => Meta, (meta) => meta.bioimpedancias, { onDelete: 'CASCADE' })
+  @ManyToOne(() => Meta, (meta) => meta.antropometrias, { onDelete: 'CASCADE' })
   meta: Meta;
 
-  @OneToMany(() => Macronutriente, (macro) => macro.bioimpedancia, {
+  @OneToMany(() => Macronutriente, (macro) => macro.antropometria, {
     cascade: true,
   })
   @ApiProperty({

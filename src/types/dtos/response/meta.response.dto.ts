@@ -1,4 +1,4 @@
-import { BioimpedanciaResponseDto } from '@app/types/dtos/response/bioimpedancia.response.dto';
+import { AntropometriaResponseDto } from '@app/types/dtos/response/antropometria.response.dto';
 import { InputType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -35,9 +35,9 @@ export class MetaResponseDto {
   gorduraCorporal: number;
 
   @ApiProperty({
-    type: BioimpedanciaResponseDto,
+    type: AntropometriaResponseDto,
   })
-  bioimpedancias: BioimpedanciaResponseDto;
+  antropometrias: AntropometriaResponseDto;
 
   @ApiProperty({
     example: false,
