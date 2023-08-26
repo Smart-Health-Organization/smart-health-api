@@ -5,7 +5,7 @@ import { Exame } from 'src/types/entities/exame.entity';
 
 export interface ExameItemOperations {
   createExameItems(
-    user: Usuario,
+    usuario: Usuario,
     exame: Exame,
     exameItens: CreateExameItemInsertDtoArray,
   ): Promise<any>;

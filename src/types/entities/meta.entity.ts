@@ -51,8 +51,10 @@ export class Meta {
   })
   gorduraCorporal: number;
 
-  @ManyToOne(() => Usuario, (user) => user.exames, { onDelete: 'CASCADE' })
-  user: Usuario;
+  @ManyToOne(() => Usuario, (usuario) => usuario.exames, {
+    onDelete: 'CASCADE',
+  })
+  usuario: Usuario;
 
   @OneToMany(() => Antropometria, (antropometria) => antropometria.meta, {
     cascade: true,

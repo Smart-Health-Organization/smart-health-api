@@ -12,7 +12,7 @@ export class ExameAssembler {
     return {
       id: exame.id,
       data: exame.data,
-      user: UsuarioAssembler.assembleUsuarioToDto(exame.user),
+      usuario: UsuarioAssembler.assembleUsuarioToDto(exame.usuario),
       itens: exame.itens,
     };
   }
@@ -21,7 +21,7 @@ export class ExameAssembler {
       return {
         id: exame.id,
         data: exame.data,
-        user: { id: exame.user.id, nome: exame.user.nome },
+        usuario: { id: exame.usuario.id, nome: exame.usuario.nome },
         itens: exame.itens,
       };
     });

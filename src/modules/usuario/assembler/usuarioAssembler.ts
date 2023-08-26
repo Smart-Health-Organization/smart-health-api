@@ -1,4 +1,4 @@
-import { UsuarioResponseDto } from '@app/types/dtos/response/user.response.dto';
+import { UsuarioResponseDto } from '@app/types/dtos/response/usuario.response.dto';
 import { Usuario } from '@app/types/entities/usuario.entity';
 
 export class UsuarioAssembler {

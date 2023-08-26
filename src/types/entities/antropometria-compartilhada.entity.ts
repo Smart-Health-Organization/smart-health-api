@@ -1,8 +1,6 @@
+import { MacronutrienteCompartilhado } from '@app/types/entities/macronutriente-compartilhado.entity';
+import { MetaCompartilhada } from '@app/types/entities/meta-compartilhada.entity';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-
-import { Macronutriente } from '@app/types/entities/macronutriente.entity';
-import { MedidasParaCalculo } from '@app/types/entities/medidas-para-calculo';
-import { Meta } from '@app/types/entities/meta.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import {
   Column,
@@ -14,7 +12,7 @@ import {
 
 @ObjectType()
 @Entity()
-export class Antropometria extends MedidasParaCalculo {
+export class AntropometriaCompartilhada {
   @PrimaryGeneratedColumn()
   @Field(() => ID)
   @ApiProperty({
@@ -70,14 +68,22 @@ export class Antropometria extends MedidasParaCalculo {
   })
   atividadeFisicaSemanal: number;
 
-  @ManyToOne(() => Meta, (meta) => meta.antropometrias, { onDelete: 'CASCADE' })
-  meta: Meta;
+  @ManyToOne(
+    () => MetaCompartilhada,
+    (meta) => meta.antropometriasCompartilhadas,
+    { onDelete: 'CASCADE' },
+  )
+  metaCompartilhada: MetaCompartilhada;
 
-  @OneToMany(() => Macronutriente, (macro) => macro.antropometria, {
-    cascade: true,
-  })
+  @OneToMany(
+    () => MacronutrienteCompartilhado,
+    (macro) => macro.antropometriaCompartilhada,
+    {
+      cascade: true,
+    },
+  )
   @ApiProperty({
-    type: [Macronutriente],
+    type: [MacronutrienteCompartilhado],
   })
-  macronutrientes: Macronutriente[];
+  macronutrientesCompartilhados: MacronutrienteCompartilhado[];
 }

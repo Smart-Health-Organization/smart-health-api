@@ -27,7 +27,7 @@ export class ExameItemService implements ExameItemOperations {
     private readonly limiteService: LimiteOperations,
   ) {}
   async createExameItems(
-    user: Usuario,
+    usuario: Usuario,
     exame: Exame,
     exameItens: CreateExameItemInsertDtoArray,
   ): Promise<any> {
@@ -41,11 +41,11 @@ export class ExameItemService implements ExameItemOperations {
         ? await this.limiteService.getLimitesByMetricaId(metrica.id.toString())
         : null;
 
-        const idade = this.calcularIdade(user.dataDeNascimento)
-        
+      const idade = this.calcularIdade(usuario.dataDeNascimento);
+
       const limiteFiltered = limites?.filter(
         (limite) =>
-          limite.sexo === user.sexo &&
+          limite.sexo === usuario.sexo &&
           idade >= limite.idadeInicio &&
           idade <= limite.idadeFim,
       );
@@ -119,22 +119,25 @@ export class ExameItemService implements ExameItemOperations {
     }
   }
 
-   calcularIdade(dataNascimento: string): number {
+  calcularIdade(dataNascimento: string): number {
     const hoje = new Date();
     const dataNascimentoFormatada = new Date(dataNascimento);
-    const anoNascimento = dataNascimentoFormatada.getFullYear()
-    const mesNascimento = dataNascimentoFormatada.getMonth()
-    const diaNascimento = dataNascimentoFormatada.getDay()
+    const anoNascimento = dataNascimentoFormatada.getFullYear();
+    const mesNascimento = dataNascimentoFormatada.getMonth();
+    const diaNascimento = dataNascimentoFormatada.getDay();
     const anoAtual = hoje.getFullYear();
     const mesAtual = hoje.getMonth();
     const diaAtual = hoje.getDate();
-  
+
     let idade = anoAtual - anoNascimento;
-  
-    if (mesAtual < mesNascimento || (mesAtual === mesNascimento && diaAtual < diaNascimento)) {
+
+    if (
+      mesAtual < mesNascimento ||
+      (mesAtual === mesNascimento && diaAtual < diaNascimento)
+    ) {
       idade--;
     }
-  
+
     return idade;
   }
 }

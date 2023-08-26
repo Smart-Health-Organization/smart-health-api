@@ -24,7 +24,7 @@ export class MetaService implements MetaOperations {
 
   async getMetasByUsuarioId(usuarioId: number): Promise<GetMetasResponseDto> {
     const metas = await this.metaRepository.find({
-      where: { user: { id: usuarioId } },
+      where: { usuario: { id: usuarioId } },
     });
 
     if (!metas) {
@@ -66,7 +66,7 @@ export class MetaService implements MetaOperations {
       if (!metaExistente.length) {
         const metaSalva = await this.metaRepository.save({
           ...meta,
-          user: usuario,
+          usuario,
           dataInicio,
           dataFim,
           isConcluida: false,
@@ -88,7 +88,7 @@ export class MetaService implements MetaOperations {
     metaId: number,
   ): Promise<MetaResponseDto> {
     const meta = await this.metaRepository.findOne({
-      where: { id: metaId, user: { id: usuarioId } },
+      where: { id: metaId, usuario: { id: usuarioId } },
     });
     await this.metaRepository.update(metaId, { isConcluida: true });
     return MetaAssembler.assembleMetaToResponse({ ...meta, isConcluida: true });

@@ -1,5 +1,5 @@
-import { CreateUsuarioInsertDto } from '@app/types/dtos/insert/create-user.insert.dto';
-import { UsuarioResponseDto } from '@app/types/dtos/response/user.response.dto';
+import { CreateUsuarioInsertDto } from '@app/types/dtos/insert/create-usuario.insert.dto';
+import { UsuarioResponseDto } from '@app/types/dtos/response/usuario.response.dto';
 import { Body, Controller, Inject, Post } from '@nestjs/common';
 import { ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Tokens } from '@utils/tokens';
