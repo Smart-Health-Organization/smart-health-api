@@ -1,10 +1,12 @@
+import { Antropometria } from '@app/types/entities/antropometria.entity';
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { Tokens } from '@utils/tokens';
 import { AntropometriaController } from './antropometria.controller';
 import { AntropometriaService } from './antropometria.service';
 
 @Module({
-  imports: [],
+  imports: [TypeOrmModule.forFeature([Antropometria])],
   controllers: [AntropometriaController],
   providers: [
     {
@@ -19,4 +21,4 @@ import { AntropometriaService } from './antropometria.service';
     },
   ],
 })
-export class BaseModule {}
+export class AntropometriaModule {}

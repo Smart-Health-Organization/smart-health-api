@@ -37,7 +37,7 @@ export class MetaResponseDto {
   @ApiProperty({
     type: AntropometriaResponseDto,
   })
-  antropometrias: AntropometriaResponseDto;
+  antropometrias?: AntropometriaResponseDto;
 
   @ApiProperty({
     example: false,
