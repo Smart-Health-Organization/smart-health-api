@@ -32,14 +32,14 @@ export class ExameService implements ExameOperations {
     @Inject(Tokens.PDF_OPERATIONS)
     private readonly pdfManipulatorService: PdfManipulatorOperations,
   ) {}
-  async createExame(user: Usuario, data: string): Promise<ExameResponseDto> {
+  async createExame(usuario: Usuario, data: string): Promise<ExameResponseDto> {
     const exame = this.exameRepository.create({
-      user,
-      data: (new Date(data)).toISOString(),
+      usuario,
+      data: new Date(data).toISOString(),
     });
     const exameSaved = await this.exameRepository.save(exame);
     if (!exameSaved) {
-      throw new BadRequestException('Exame was not created');
+      throw new BadRequestException('Exame não foi criado');
     }
     const exameDto = ExameAssembler.assembleCreateExameToDto(exameSaved);
     return exameDto;
@@ -56,11 +56,11 @@ export class ExameService implements ExameOperations {
   }
 
   async getExamesByUserId(
-    userId: string,
+    usuarioId: string,
   ): Promise<ExamesAndExameItemsResponseType> {
     const exames = await this.exameRepository.find({
       where: {
-        user: { id: parseInt(userId) },
+        usuario: { id: parseInt(usuarioId) },
       },
     });
 
@@ -75,9 +75,9 @@ export class ExameService implements ExameOperations {
   }
 
   async getExameItemsFromAllExamsByUser(
-    userId: string,
+    usuarioId: string,
   ): Promise<ExameItemsMapResponseType> {
-    const exames = await this.getExamesByUserId(userId);
+    const exames = await this.getExamesByUserId(usuarioId);
     const examesPorData = exames.sort((a, b) => {
       const dataA = new Date(a.data);
       const dataB = new Date(b.data);

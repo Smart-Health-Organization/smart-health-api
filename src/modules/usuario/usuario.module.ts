@@ -1,6 +1,7 @@
 import { ExameCompartilhadoModule } from '@modules/exame-compartilhado/exame-compartilhado.module';
 import { ExameItemModule } from '@modules/exame-item/exame-item.module';
 import { ExameModule } from '@modules/exame/exame.module';
+import { MetaModule } from '@modules/metas/meta.module';
 import { UserResolver } from '@modules/usuario/user.resolver';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -13,6 +14,7 @@ import { UsuarioService } from './usuario.service';
   imports: [
     TypeOrmModule.forFeature([Usuario]),
     ExameModule,
+    MetaModule,
     ExameItemModule,
     ExameCompartilhadoModule,
   ],

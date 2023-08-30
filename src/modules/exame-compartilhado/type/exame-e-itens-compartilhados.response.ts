@@ -1,5 +1,5 @@
 import { ExameItemsMapResponseData } from '@app/types/dtos/insert/exame-compartilhado.insert.dto';
-import { UsuarioResponseDto } from '@app/types/dtos/response/user.response.dto';
+import { UsuarioResponseDto } from '@app/types/dtos/response/usuario.response.dto';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class ExameEItensCompartilhadoResponse {

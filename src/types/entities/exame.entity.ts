@@ -30,6 +30,8 @@ export class Exame {
   @OneToMany(() => ExameItem, (exameItem) => exameItem.exame, { cascade: true })
   itens: ExameItem[];
 
-  @ManyToOne(() => Usuario, (user) => user.exames, { onDelete: 'CASCADE' })
-  user: Usuario;
+  @ManyToOne(() => Usuario, (usuario) => usuario.exames, {
+    onDelete: 'CASCADE',
+  })
+  usuario: Usuario;
 }

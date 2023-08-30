@@ -1,6 +1,6 @@
-import { CreateUsuarioInsertDto } from '@app/types/dtos/insert/create-user.insert.dto';
+import { CreateUsuarioInsertDto } from '@app/types/dtos/insert/create-usuario.insert.dto';
 import { UpdateUsuarioInsertDto } from '@app/types/dtos/insert/update-usuario.insert.dto';
-import { UsuarioResponseDto } from '@app/types/dtos/response/user.response.dto';
+import { UsuarioResponseDto } from '@app/types/dtos/response/usuario.response.dto';
 import { Usuario } from '@app/types/entities/usuario.entity';
 import { UsuarioService } from '@modules/usuario/usuario.service';
 import { UseGuards } from '@nestjs/common';

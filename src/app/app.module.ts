@@ -2,6 +2,7 @@ import { UserMiddleware } from '@app/auth/user.middleware';
 import { BaseModule } from '@modules/base/base.module';
 import { ExameCompartilhadoModule } from '@modules/exame-compartilhado/exame-compartilhado.module';
 import { ExameModule } from '@modules/exame/exame.module';
+import { MetaModule } from '@modules/metas/meta.module';
 import { MetricaModule } from '@modules/metrica/metrica.module';
 import { LimiteModule } from '@modules/metrica/modules/limite/limite.module';
 import { PdfManipulatorModule } from '@modules/pdf-manipulator/pdf-manipulator.module';
@@ -35,6 +36,7 @@ const ormconfig = require('../../ormconfig.js');
     LimiteModule,
     ExameCompartilhadoModule,
     PdfManipulatorModule,
+    MetaModule,
     RouterModule.register([
       {
         path: 'metricas',

@@ -1,5 +1,6 @@
 import { ExameCompartilhado } from '@app/types/entities/exame-compartilhado.entity';
 import { Exame } from '@app/types/entities/exame.entity';
+import { Meta } from '@app/types/entities/meta.entity';
 import { Field, HideField, ID, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
@@ -45,11 +46,17 @@ export class Usuario {
   @HideField()
   senha: string;
 
-  @OneToMany(() => Exame, (exame) => exame.user, { cascade: true })
+  @OneToMany(() => Exame, (exame) => exame.usuario, { cascade: true })
   @ApiProperty({
     type: [Exame],
   })
   exames: Exame[];
+
+  @OneToMany(() => Meta, (meta) => meta.usuario, { cascade: true })
+  @ApiProperty({
+    type: [Meta],
+  })
+  metas: Meta[];
 
   @OneToMany(
     () => ExameCompartilhado,

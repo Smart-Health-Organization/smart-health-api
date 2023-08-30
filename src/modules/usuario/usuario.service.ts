@@ -1,7 +1,7 @@
-import { CreateUsuarioInsertDto } from '@app/types/dtos/insert/create-user.insert.dto';
+import { CreateUsuarioInsertDto } from '@app/types/dtos/insert/create-usuario.insert.dto';
 import { RedefinirSenhaInsertDto } from '@app/types/dtos/insert/redefinir-senha.insert.dto';
 import { UpdateUsuarioInsertDto } from '@app/types/dtos/insert/update-usuario.insert.dto';
-import { UsuarioResponseDto } from '@app/types/dtos/response/user.response.dto';
+import { UsuarioResponseDto } from '@app/types/dtos/response/usuario.response.dto';
 import { UsuarioOperations } from '@modules/usuario/usuario.operations';
 import {
   BadRequestException,
@@ -23,46 +23,47 @@ sgMail.setApiKey(
 export class UsuarioService implements UsuarioOperations {
   constructor(
     @InjectRepository(Usuario)
-    private userRepository: Repository<Usuario>,
+    private usuarioRepository: Repository<Usuario>,
   ) {}
 
   async postUsuario(data: CreateUsuarioInsertDto): Promise<UsuarioResponseDto> {
-    const userAlredyExist = await this.getUsuarioByEmail(data.email);
-    if (userAlredyExist) {
+    const usuarioAlredyExist = await this.getUsuarioByEmail(data.email);
+    if (usuarioAlredyExist) {
       throw new BadRequestException('Já existe um usuário com este email');
     }
-    
-    data.dataDeNascimento = (new Date(data.dataDeNascimento)).toISOString();
-    const user = this.userRepository.create(data);
-    const userSaved = await this.userRepository.save(user);
-    if (!userSaved) {
+
+    data.dataDeNascimento = new Date(data.dataDeNascimento).toISOString();
+    const user = this.usuarioRepository.create(data);
+    const usuarioSaved = await this.usuarioRepository.save(user);
+    if (!usuarioSaved) {
       throw new BadRequestException('Usuário não foi criado');
     }
-    const userDto = UsuarioAssembler.assembleCreateUsuarioParaDto(userSaved);
-    return userDto;
+    const usuarioDto =
+      UsuarioAssembler.assembleCreateUsuarioParaDto(usuarioSaved);
+    return usuarioDto;
   }
 
   async getUsuarios(): Promise<UsuarioResponseDto[]> {
-    const users = await this.userRepository.find();
-    const usersDto = UsuarioAssembler.assembleUsuariosParaDto(users);
-    return usersDto;
+    const usuarios = await this.usuarioRepository.find();
+    const usuariosDto = UsuarioAssembler.assembleUsuariosParaDto(usuarios);
+    return usuariosDto;
   }
 
   async getUsuarioByEmail(email: string): Promise<Usuario> {
-    const user = await this.userRepository.findOne({
+    const usuario = await this.usuarioRepository.findOne({
       where: { email },
     });
-    return user;
+    return usuario;
   }
 
   async getUsuarioById(id: string): Promise<Usuario> {
-    const user = await this.userRepository.findOne({
+    const usuario = await this.usuarioRepository.findOne({
       where: { id: parseInt(id) },
     });
-    if (!user) {
+    if (!usuario) {
       throw new NotFoundException('Usuário não encontrado');
     }
-    return user;
+    return usuario;
   }
 
   async updateUsuario(
@@ -74,41 +75,41 @@ export class UsuarioService implements UsuarioOperations {
         'É preciso alterar ao menos um campo para atualizar o usuário',
       );
     }
-    const user = await this.getUsuarioById(id);
+    const usuario = await this.getUsuarioById(id);
     if (data?.email) {
-      const userAlredyExist = await this.getUsuarioByEmail(data.email);
-      if (userAlredyExist) {
+      const usuarioAlredyExist = await this.getUsuarioByEmail(data.email);
+      if (usuarioAlredyExist) {
         throw new BadRequestException('Já existe um usuário com este email');
       }
     }
-    await this.userRepository.update(user.id, { ...data });
+    await this.usuarioRepository.update(usuario.id, { ...data });
 
-    //cria-se esse objeto porque em update faltam propriedades do tipo user
-    const userUpdated = await this.userRepository.findOne({
-      where: { id: user.id },
+    //cria-se esse objeto porque em update faltam propriedades do tipo usuario
+    const usuarioUpdated = await this.usuarioRepository.findOne({
+      where: { id: usuario.id },
     });
-    return UsuarioAssembler.assembleCreateUsuarioParaDto(userUpdated);
+    return UsuarioAssembler.assembleCreateUsuarioParaDto(usuarioUpdated);
   }
 
   async updateSenhaUsuario(
     id: string,
     data: RedefinirSenhaInsertDto,
   ): Promise<UsuarioResponseDto> {
-    const user = await this.getUsuarioById(id);
-    const validPassword = compareSync(data.senhaAntiga, user.senha);
+    const usuario = await this.getUsuarioById(id);
+    const validPassword = compareSync(data.senhaAntiga, usuario.senha);
 
     if (!validPassword) {
       throw new UnauthorizedException('Senha incorreta');
     }
-    await this.userRepository.update(id, { senha: data.NovaSenha });
+    await this.usuarioRepository.update(id, { senha: data.NovaSenha });
 
-    const userUpdated = await this.getUsuarioById(id);
-    return UsuarioAssembler.assembleCreateUsuarioParaDto(userUpdated);
+    const usuarioUpdated = await this.getUsuarioById(id);
+    return UsuarioAssembler.assembleCreateUsuarioParaDto(usuarioUpdated);
   }
 
   async deleteUsuario(id: string): Promise<boolean> {
     await this.getUsuarioById(id);
-    const deleted = await this.userRepository.delete(id);
+    const deleted = await this.usuarioRepository.delete(id);
     if (deleted) return true;
     return false;
   }
