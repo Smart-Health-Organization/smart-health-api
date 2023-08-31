@@ -36,4 +36,7 @@ export class AntropometriaResponseDto {
 
   @ApiProperty({ example: 1 })
   caloriasDiarias: number;
+
+  @ApiProperty({ example: 1 })
+  taxaMetabolicaBasal: number;
 }

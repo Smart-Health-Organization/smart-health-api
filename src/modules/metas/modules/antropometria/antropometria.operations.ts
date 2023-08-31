@@ -1,6 +1,7 @@
 import { CreateAntropometriaInsertDto } from '@app/types/dtos/insert/create-antropometria.insert.dto';
 import { AntropometriaResponseDto } from '@app/types/dtos/response/antropometria.response.dto';
 import { Meta } from '@app/types/entities/meta.entity';
+import { AntropometriaComparativoResponseData } from '@modules/metas/modules/antropometria/type/antropometria-comparativo.response.type';
 
 export interface AntropometriaOperations {
   createAntropometria(
@@ -11,4 +12,8 @@ export interface AntropometriaOperations {
   ): Promise<AntropometriaResponseDto>;
 
   getAntropometriasByMeta(metaId: number): Promise<AntropometriaResponseDto[]>;
+
+  getComparativoDeMedidas(
+    metaId: number,
+  ): Promise<AntropometriaComparativoResponseData>;
 }

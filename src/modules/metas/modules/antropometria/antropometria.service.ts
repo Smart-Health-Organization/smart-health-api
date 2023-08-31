@@ -4,6 +4,7 @@ import { AntropometriaResponseDto } from '@app/types/dtos/response/antropometria
 import { Antropometria } from '@app/types/entities/antropometria.entity';
 import { Meta } from '@app/types/entities/meta.entity';
 import { AntropometriaAssembler } from '@modules/metas/modules/antropometria/assembler/antropometria.assembler';
+import { AntropometriaComparativoResponseData } from '@modules/metas/modules/antropometria/type/antropometria-comparativo.response.type';
 import { Calculos } from '@modules/metas/modules/antropometria/type/calculos.type';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -16,6 +17,15 @@ export class AntropometriaService implements AntropometriaOperations {
     @InjectRepository(Antropometria)
     private repository: Repository<Antropometria>,
   ) {}
+
+  async getComparativoDeMedidas(
+    metaId: number,
+  ): Promise<AntropometriaComparativoResponseData> {
+    const antropometrias = await this.getAntropometriasByMeta(metaId);
+    const comparativos =
+      AntropometriaAssembler.assembleComparativos(antropometrias);
+    return comparativos;
+  }
   async getAntropometriasByMeta(
     metaId: number,
   ): Promise<AntropometriaResponseDto[]> {

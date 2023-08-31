@@ -276,4 +276,13 @@ export class UsuarioController {
   async getAntropometriasByMetaId(@Param('metaId') metaId: string) {
     return await this.antropometriaService.getAntropometriasByMeta(+metaId);
   }
+
+  @ApiOkResponse({
+    description: 'Metas do usuário recuperadas',
+    type: [MetaResponseDto],
+  })
+  @Get('/:usuarioId/metas/:metaId/antropometrias/comparativos')
+  async getComparativoDeMedidas(@Param('metaId') metaId: string) {
+    return await this.antropometriaService.getComparativoDeMedidas(+metaId);
+  }
 }
