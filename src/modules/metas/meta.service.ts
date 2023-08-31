@@ -55,6 +55,7 @@ export class MetaService implements MetaOperations {
       const metaExistente = await this.metaRepository.find({
         where: {
           isConcluida: false,
+          usuario: { id: usuario.id },
         },
       });
       if (!metaExistente.length) {
