@@ -39,15 +39,9 @@ export class MetaService implements MetaOperations {
     usuario: Usuario,
     meta: CreateMetaInsertDto,
   ): Promise<MetaResponseDto> {
-    const datasInicio = meta.dataInicio.split('-');
-    const dataInicio = new Date(
-      +datasInicio[2],
-      +datasInicio[1] - 1,
-      +datasInicio[0],
-    );
+    const dataInicio = new Date(meta.dataInicio);
 
-    const datasFim = meta.dataFim.split('-');
-    const dataFim = new Date(+datasFim[2], +datasFim[1] - 1, +datasFim[0]);
+    const dataFim = new Date(meta.dataFim);
 
     const dataAtual = new Date();
 
@@ -61,6 +55,7 @@ export class MetaService implements MetaOperations {
       const metaExistente = await this.metaRepository.find({
         where: {
           isConcluida: false,
+          usuario: { id: usuario.id },
         },
       });
       if (!metaExistente.length) {

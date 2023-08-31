@@ -17,6 +17,7 @@ export class CreateMetaInsertDto {
   @IsString({ message: 'Data de início deve ser um texto' })
   @ApiProperty({
     type: Date,
+    example: '2001-03-07T00:00:00.000Z',
   })
   dataInicio: string;
 
@@ -25,6 +26,7 @@ export class CreateMetaInsertDto {
   @IsString({ message: 'Data de fim deve ser um texto' })
   @ApiProperty({
     type: Date,
+    example: '2001-03-07T00:00:00.000Z',
   })
   dataFim: string;
 
