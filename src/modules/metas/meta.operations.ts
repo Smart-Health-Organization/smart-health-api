@@ -3,10 +3,13 @@ import {
   GetMetasResponseDto,
   MetaResponseDto,
 } from '@app/types/dtos/response/meta.response.dto';
+import { Meta } from '@app/types/entities/meta.entity';
 import { Usuario } from '@app/types/entities/usuario.entity';
 
 export interface MetaOperations {
   getMetasByUsuarioId(usuarioId: number): Promise<GetMetasResponseDto>;
+
+  getMetasById(metaId: number): Promise<Meta>;
 
   postMetas(
     usuario: Usuario,

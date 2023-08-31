@@ -28,7 +28,7 @@ export class MetaAssembler {
       massaMagra,
       gorduraCorporal,
       isConcluida,
-      antropometrias,
+      // antropometrias,
     };
   }
 }

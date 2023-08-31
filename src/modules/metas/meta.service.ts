@@ -22,6 +22,16 @@ export class MetaService implements MetaOperations {
     private metaRepository: Repository<Meta>,
   ) {}
 
+  async getMetasById(metaId: number): Promise<Meta> {
+    const meta = await this.metaRepository.findOne({
+      where: { id: metaId },
+    });
+    if (!meta) {
+      throw new NotFoundException('Meta não encontrada');
+    }
+    return meta;
+  }
+
   async getMetasByUsuarioId(usuarioId: number): Promise<GetMetasResponseDto> {
     const metas = await this.metaRepository.find({
       where: { usuario: { id: usuarioId } },

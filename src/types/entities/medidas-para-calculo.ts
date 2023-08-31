@@ -5,25 +5,25 @@ import { Column } from 'typeorm';
 
 @ObjectType()
 export class MedidasParaCalculo {
-  @Column()
+  @Column('float')
   @ApiProperty({
     example: 15,
   })
   suprailiaca: number;
 
-  @Column()
+  @Column('float')
   @ApiProperty({
     example: 15,
   })
   abdominal: number;
 
-  @Column()
+  @Column('float')
   @ApiProperty({
     example: 15,
   })
   triceps: number;
 
-  @Column()
+  @Column('float')
   @ApiProperty({
     example: 15,
   })

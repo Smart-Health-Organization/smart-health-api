@@ -34,31 +34,37 @@ export class Antropometria extends MedidasParaCalculo {
   })
   altura: number;
 
-  @Column()
+  @Column('float')
   @ApiProperty({
     example: 80,
   })
   peso: number;
 
-  @Column()
+  @Column('float')
   @ApiProperty({
     example: 15,
   })
   densidadeCorporal: number;
 
-  @Column()
+  @Column('float')
   @ApiProperty({
     example: 15,
   })
   gorduraCorporal: number;
 
-  @Column()
+  @Column('float')
   @ApiProperty({
     example: 15,
   })
   massaMagra: number;
 
-  @Column()
+  @Column('float')
+  @ApiProperty({
+    example: 15,
+  })
+  taxaMetabolicaBasal: number;
+
+  @Column('float')
   @ApiProperty({
     example: 15,
   })
