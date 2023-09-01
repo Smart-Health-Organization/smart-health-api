@@ -1,14 +1,7 @@
 import { MacronutrienteCompartilhado } from '@app/types/entities/macronutriente-compartilhado.entity';
-import { MetaCompartilhada } from '@app/types/entities/meta-compartilhada.entity';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @ObjectType()
 @Entity()
@@ -68,12 +61,12 @@ export class AntropometriaCompartilhada {
   })
   atividadeFisicaSemanal: number;
 
-  @ManyToOne(
-    () => MetaCompartilhada,
-    (meta) => meta.antropometriasCompartilhadas,
-    { onDelete: 'CASCADE' },
-  )
-  metaCompartilhada: MetaCompartilhada;
+  // @ManyToOne(
+  //   () => MetaCompartilhada,
+  //   (meta) => meta.antropometriasCompartilhadas,
+  //   { onDelete: 'CASCADE' },
+  // )
+  // metaCompartilhada: MetaCompartilhada;
 
   @OneToMany(
     () => MacronutrienteCompartilhado,

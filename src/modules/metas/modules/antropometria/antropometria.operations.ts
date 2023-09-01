@@ -16,4 +16,9 @@ export interface AntropometriaOperations {
   getComparativoDeMedidas(
     metaId: number,
   ): Promise<AntropometriaComparativoResponseData>;
+
+  deleteAntropometria(
+    antropometriaId: number,
+    metaId: number,
+  ): Promise<boolean>;
 }

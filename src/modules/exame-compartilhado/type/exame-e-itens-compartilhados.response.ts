@@ -1,5 +1,6 @@
 import { ExameItemsMapResponseData } from '@app/types/dtos/insert/exame-compartilhado.insert.dto';
 import { UsuarioResponseDto } from '@app/types/dtos/response/usuario.response.dto';
+import { MetaCompartilhadaResponseType } from '@modules/meta-compartilhada/type/meta-compartilhada.response.type';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class ExameEItensCompartilhadoResponse {
@@ -30,4 +31,7 @@ export class ExameEItensCompartilhadoResponse {
     },
   })
   itens: ExameItemsMapResponseData;
+
+  @ApiProperty({ type: MetaCompartilhadaResponseType })
+  meta: MetaCompartilhadaResponseType;
 }

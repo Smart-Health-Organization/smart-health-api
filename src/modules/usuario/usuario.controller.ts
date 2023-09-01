@@ -17,6 +17,7 @@ import { ExamesAndExameItemsResponseType } from '@modules/exame/type/exame-and-e
 import { ExameItemsMapResponseType } from '@modules/exame/type/exame-items-map.response.type';
 import { MetaOperations } from '@modules/metas/meta.operations';
 import { AntropometriaOperations } from '@modules/metas/modules/antropometria/antropometria.operations';
+import { AntropometriaComparativoResponseData } from '@modules/metas/modules/antropometria/type/antropometria-comparativo.response.type';
 import { UsuarioAssembler } from '@modules/usuario/assembler/usuarioAssembler';
 import { UsuarioExameCompartilhadoResponseType } from '@modules/usuario/type/exame-compartilhado-response.type';
 import { UsuarioOperations } from '@modules/usuario/usuario.operations';
@@ -279,10 +280,23 @@ export class UsuarioController {
 
   @ApiOkResponse({
     description: 'Metas do usuário recuperadas',
-    type: [MetaResponseDto],
+    type: [AntropometriaComparativoResponseData],
   })
   @Get('/:usuarioId/metas/:metaId/antropometrias/comparativos')
   async getComparativoDeMedidas(@Param('metaId') metaId: string) {
     return await this.antropometriaService.getComparativoDeMedidas(+metaId);
+  }
+
+  @Delete('/:usuarioId/metas/:metaId/antropometrias/:antropometriaId')
+  @HttpCode(204)
+  async deletarAntropometria(
+    @Param('antropometriaId') antropometriaId: string,
+    @Param('metaId') metaId: string,
+  ) {
+    await this.metaService.getMetasById(+metaId);
+    return await this.antropometriaService.deleteAntropometria(
+      +antropometriaId,
+      +metaId,
+    );
   }
 }

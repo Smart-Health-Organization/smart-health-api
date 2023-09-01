@@ -52,6 +52,10 @@ export class ExameItemCompartilhadoService
       },
     });
 
+    if (!itens.length) {
+      return null;
+    }
+
     const itensResponse =
       ExameItemCompartilhadoAssembler.assembleItemEntityToResponseType(itens);
 

@@ -1,6 +1,6 @@
-import { AntropometriaCompartilhada } from '@app/types/entities/antropometria-compartilhada.entity';
-import { Usuario } from '@app/types/entities/usuario.entity';
-import { Field, HideField, ID, ObjectType } from '@nestjs/graphql';
+import { ComparativoCompartilhado } from '@app/types/entities/comparativo-compartilhado.entity';
+import { ExameCompartilhado } from '@app/types/entities/exame-compartilhado.entity';
+import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 import {
   Column,
@@ -9,7 +9,6 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { hashPasswordTransform } from '../../helpers/crypto';
 
 @ObjectType()
 @Entity()
@@ -23,21 +22,9 @@ export class MetaCompartilhada {
 
   @Column()
   @ApiProperty({
-    example: 'Thiago Sanches',
+    example: 'Apenas um titulo',
   })
   titulo: string;
-
-  @Column()
-  @ApiProperty({
-    example: 'Thiago Sanches',
-  })
-  login: string;
-
-  @Column({
-    transformer: hashPasswordTransform,
-  })
-  @HideField()
-  senha: string;
 
   @Column()
   @ApiProperty({
@@ -63,19 +50,15 @@ export class MetaCompartilhada {
   })
   gorduraCorporal: number;
 
-  @ManyToOne(() => Usuario, (user) => user.examesCompartilhados, {
+  @ManyToOne(() => ExameCompartilhado, (exame) => exame.meta, {
     onDelete: 'CASCADE',
   })
-  @ApiProperty({
-    type: Usuario,
-  })
-  usuario: Usuario;
+  exameCompartilhado: ExameCompartilhado;
 
   @OneToMany(
-    () => AntropometriaCompartilhada,
-    (antropometriaCompartilhada) =>
-      antropometriaCompartilhada.metaCompartilhada,
+    () => ComparativoCompartilhado,
+    (comparativo) => comparativo.metaCompartilhada,
     { cascade: true },
   )
-  antropometriasCompartilhadas: AntropometriaCompartilhada[];
+  comparativos?: ComparativoCompartilhado[];
 }

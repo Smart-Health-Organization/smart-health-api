@@ -1,4 +1,5 @@
 import { ExameItemCompartilhado } from '@app/types/entities/exame-item-compartilhado.entity';
+import { MetaCompartilhada } from '@app/types/entities/meta-compartilhada.entity';
 import { Usuario } from '@app/types/entities/usuario.entity';
 import { Field, HideField, ID, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
@@ -7,6 +8,7 @@ import {
   Entity,
   ManyToOne,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { hashPasswordTransform } from '../../helpers/crypto';
@@ -52,5 +54,8 @@ export class ExameCompartilhado {
     (itemCompartilhado) => itemCompartilhado.exameCompartilhado,
     { cascade: true },
   )
-  itens: ExameItemCompartilhado[];
+  itens?: ExameItemCompartilhado[];
+
+  @OneToOne(() => MetaCompartilhada, { cascade: true })
+  meta: MetaCompartilhada;
 }

@@ -18,6 +18,29 @@ export class AntropometriaService implements AntropometriaOperations {
     private repository: Repository<Antropometria>,
   ) {}
 
+  async deleteAntropometria(
+    antropometriaId: number,
+    metaId: number,
+  ): Promise<boolean> {
+    await this.getAntropometriaById(metaId);
+    const deleted = await this.repository.delete({
+      id: antropometriaId,
+      meta: { id: metaId },
+    });
+    if (deleted) return true;
+    return false;
+  }
+
+  async getAntropometriaById(antropmetriaId: number) {
+    const antropometria = await this.repository.findOne({
+      where: { id: antropmetriaId },
+    });
+    if (!antropometria) {
+      throw new BadRequestException('Antropometria não encontrada');
+    }
+    return antropometria;
+  }
+
   async getComparativoDeMedidas(
     metaId: number,
   ): Promise<AntropometriaComparativoResponseData> {
@@ -32,6 +55,10 @@ export class AntropometriaService implements AntropometriaOperations {
     const antropometrias = await this.repository.find({
       where: { meta: { id: metaId } },
     });
+
+    if (!antropometrias.length) {
+      throw new BadRequestException('Não há antropometrias para essa meta');
+    }
     return AntropometriaAssembler.assembleAntropometriasToResponse(
       antropometrias,
     );

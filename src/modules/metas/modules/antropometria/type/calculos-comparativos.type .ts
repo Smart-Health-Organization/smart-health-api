@@ -18,4 +18,7 @@ export class CalculosComparativos {
 
   @Expose()
   taxaMetabolicaBasal: number;
+
+  @Expose()
+  peso: number;
 }
