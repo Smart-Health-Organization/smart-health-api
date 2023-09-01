@@ -34,6 +34,7 @@ export class MetaService implements MetaOperations {
 
   async getMetasByUsuarioId(usuarioId: number): Promise<GetMetasResponseDto> {
     const metas = await this.metaRepository.find({
+      relations: ['antropometrias'],
       where: { usuario: { id: usuarioId } },
     });
 

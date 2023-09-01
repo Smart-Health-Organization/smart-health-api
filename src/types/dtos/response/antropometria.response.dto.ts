@@ -2,6 +2,9 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class AntropometriaResponseDto {
   @ApiProperty({ example: 1 })
+  id: number;
+
+  @ApiProperty({ example: 1 })
   altura: number;
 
   @ApiProperty({ example: 1 })

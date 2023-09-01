@@ -35,9 +35,9 @@ export class MetaResponseDto {
   gorduraCorporal: number;
 
   @ApiProperty({
-    type: AntropometriaResponseDto,
+    type: [AntropometriaResponseDto],
   })
-  antropometrias?: AntropometriaResponseDto;
+  antropometrias: AntropometriaResponseDto[];
 
   @ApiProperty({
     example: false,

@@ -1,16 +1,9 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 
-import { Macronutriente } from '@app/types/entities/macronutriente.entity';
 import { MedidasParaCalculo } from '@app/types/entities/medidas-para-calculo';
 import { Meta } from '@app/types/entities/meta.entity';
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @ObjectType()
 @Entity()
@@ -78,12 +71,4 @@ export class Antropometria extends MedidasParaCalculo {
 
   @ManyToOne(() => Meta, (meta) => meta.antropometrias, { onDelete: 'CASCADE' })
   meta: Meta;
-
-  @OneToMany(() => Macronutriente, (macro) => macro.antropometria, {
-    cascade: true,
-  })
-  @ApiProperty({
-    type: [Macronutriente],
-  })
-  macronutrientes: Macronutriente[];
 }

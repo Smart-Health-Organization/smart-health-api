@@ -13,14 +13,17 @@ export class ExameCompartilhadoAssembler {
     exameComartilhadoRequest: ExameCompartilhadoInsertDto,
   ) {
     const { titulo, senha } = exameComartilhadoRequest;
-    const itensFormatados = this.assembleExameItemCompartilhadoInsertToEntity(
-      exameComartilhadoRequest.itens,
-    );
+    const itens = exameComartilhadoRequest.itens
+      ? this.assembleExameItemCompartilhadoInsertToEntity(
+          exameComartilhadoRequest.itens,
+        )
+      : undefined;
+
     return {
       titulo,
       login: crypto.randomUUID(),
       senha,
-      itens: itensFormatados,
+      itens,
     };
   }
 

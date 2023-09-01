@@ -12,6 +12,7 @@ export class AntropometriaAssembler {
     antropometria: Antropometria,
   ): AntropometriaResponseDto {
     return {
+      id: antropometria?.id,
       altura: antropometria?.altura,
       peso: antropometria?.peso,
       atividadeFisicaSemanal: antropometria?.atividadeFisicaSemanal,
@@ -50,6 +51,7 @@ export class AntropometriaAssembler {
       massaMagra: [],
       caloriasDiarias: [],
       taxaMetabolicaBasal: [],
+      peso: [],
     };
     const valoresParaComparativos = antrpometrias.map((antropometria) =>
       plainToClass(CalculosComparativos, antropometria, {
@@ -60,7 +62,7 @@ export class AntropometriaAssembler {
       Object.keys(antropometria).forEach((key) => {
         if (comparativos[key]) {
           const medida: Comparativo = {
-            data: antropometria.data,
+            data: new Date(antropometria.data),
             medida: antropometria[key],
           };
           comparativos[key] = [...comparativos[key], medida];

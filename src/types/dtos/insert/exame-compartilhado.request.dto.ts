@@ -1,6 +1,6 @@
 import { InputType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString } from 'class-validator';
+import { IsNumber, IsString } from 'class-validator';
 
 @InputType()
 export class ExameCompartilhadoInsertDto {
@@ -24,6 +24,12 @@ export class ExameCompartilhadoInsertDto {
 
   @ApiProperty()
   itens: ExameItemsMapResponseData;
+
+  @ApiProperty({
+    example: 1,
+  })
+  @IsNumber({}, { message: 'O id da meta deve ser um número' })
+  metaId: number;
 }
 
 type Item = {
