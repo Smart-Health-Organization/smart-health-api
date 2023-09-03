@@ -28,7 +28,6 @@ export class ExameCompartilhadoInsertDto {
   @ApiProperty({
     example: 1,
   })
-  @IsNumber({}, { message: 'O id da meta deve ser um número' })
   metaId: number;
 }
 
