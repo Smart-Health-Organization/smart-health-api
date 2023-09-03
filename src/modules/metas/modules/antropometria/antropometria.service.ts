@@ -22,7 +22,7 @@ export class AntropometriaService implements AntropometriaOperations {
     antropometriaId: number,
     metaId: number,
   ): Promise<boolean> {
-    await this.getAntropometriaById(metaId);
+    await this.getAntropometriaById(antropometriaId);
     const deleted = await this.repository.delete({
       id: antropometriaId,
       meta: { id: metaId },
