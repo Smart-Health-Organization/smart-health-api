@@ -33,7 +33,7 @@ export class ExameService implements ExameOperations {
     private readonly pdfManipulatorService: PdfManipulatorOperations,
   ) {}
   async createExame(usuario: Usuario, data: string): Promise<ExameResponseDto> {
-    const exame = this.exameRepository.create({
+    const exame = await this.exameRepository.create({
       usuario,
       data: new Date(data).toISOString(),
     });

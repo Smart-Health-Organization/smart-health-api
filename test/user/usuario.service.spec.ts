@@ -85,10 +85,12 @@ describe('UsuarioService', () => {
         id: +mockUserId,
         nome: 'Lucas Santos',
         email: 'lucas@example.com',
-        idade: 30,
+        dataDeNascimento: '2001-07-03T00:00:00.000Z',
         sexo: 'masculino',
         senha: 'senha',
         exames: [],
+        metas: [],
+        examesCompartilhados: [],
       };
       const mockUpdateData: UpdateUsuarioInsertDto = {
         nome: 'Updated Name',
@@ -110,7 +112,10 @@ describe('UsuarioService', () => {
       );
 
       expect(updatedUser).toEqual(
-        UsuarioAssembler.assembleUserToDto({ ...mockUser, ...mockUpdateData }),
+        UsuarioAssembler.assembleUsuarioToDto({
+          ...mockUser,
+          ...mockUpdateData,
+        }),
       );
     });
 
@@ -121,10 +126,12 @@ describe('UsuarioService', () => {
         id: +mockUserId,
         nome: 'John Doe',
         email: 'johndoe@example.com',
-        idade: 30,
+        dataDeNascimento: '2001-07-03T00:00:00.000Z',
         sexo: 'masculino',
         senha: 'senha',
         exames: [],
+        metas: [],
+        examesCompartilhados: [],
       };
       const mockUpdateData: UpdateUsuarioInsertDto = {
         nome: 'Updated Name',
@@ -150,10 +157,12 @@ describe('UsuarioService', () => {
         id: +mockUserId,
         nome: 'Lucas Santos',
         email: 'lucas@example.com',
-        idade: 30,
+        dataDeNascimento: '2001-07-03T00:00:00.000Z',
         sexo: 'masculino',
         senha: 'hashedPassword',
         exames: [],
+        metas: [],
+        examesCompartilhados: [],
       };
       const mockUpdateData: RedefinirSenhaInsertDto = {
         senhaAntiga: 'incorrectPassword',

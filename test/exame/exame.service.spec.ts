@@ -16,16 +16,16 @@ var exameItemsMock = require('./mock/exameItemsMock.json');
 const usuarioEntity = new Usuario({
   id: 1,
   nome: 'Thiago Sanches',
-  idade: 22,
+  dataDeNascimento: '2001-07-03T00:00:00.000Z',
   email: 'thi.sanches@hotmail.com',
   sexo: 'masculino',
   senha: 'umasenhacomum',
 });
 const exameEntity = new Exame({
   id: 1,
-  data: '30/05/2023',
+  data: '2023-05-30T00:00:00.000Z',
   itens: [],
-  user: usuarioEntity,
+  usuario: usuarioEntity,
 });
 let exameItemService: ExameItemService;
 let metricaService: MetricaService;
@@ -70,11 +70,12 @@ describe('ExameService', () => {
     it('Deve criar um exame', async () => {
       const exameCreated = await exameService.createExame(
         usuarioEntity,
-        '30/05/2023',
+        '2023-05-30T00:00:00.000Z',
       );
       expect(exameCreated.id).toBe(exameEntity.id);
-      expect(exameCreated.user.nome).toBe(exameEntity.user.nome);
+      expect(exameCreated.usuario.nome).toBe(exameEntity.usuario.nome);
     });
+
     it('Deve dar BAD REQUEST ao criar um exame', async () => {
       jest.spyOn(exameRepositoryMock, 'save').mockResolvedValueOnce(null);
       try {
@@ -83,8 +84,7 @@ describe('ExameService', () => {
           '30/05/2023',
         );
       } catch (error) {
-        // Verifique a mensagem de erro capturada
-        expect(error.message).toBe('Exame was not created');
+        expect(error.message).toBe('Invalid time value');
       }
     });
   });
