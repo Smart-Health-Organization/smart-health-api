@@ -7,7 +7,6 @@ import { Tokens } from '@utils/tokens';
 import { AuthService } from '@app/auth/auth.service';
 import { UsuarioService } from '@modules/usuario/usuario.service';
 import { AuthController } from './auth.controller';
-import { AuthResolver } from './auth.resolver';
 
 @Module({
   imports: [
@@ -33,7 +32,6 @@ import { AuthResolver } from './auth.resolver';
       useClass: UsuarioService,
     },
     AuthService,
-    AuthResolver,
     UsuarioService,
     // JwtStrategy,
   ],
