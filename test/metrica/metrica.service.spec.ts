@@ -28,4 +28,9 @@ describe('MetricaService', () => {
       expect(metrica).toBe(findOneMetricaMock);
     });
   });
+
+  it('Deve recuperar uma métrica por nome', async () => {
+    const metrica = await metricaService.getMetricaByName('LDL');
+    expect(metrica).toBe(findOneMetricaMock);
+  });
 });

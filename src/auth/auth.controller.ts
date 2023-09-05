@@ -1,11 +1,11 @@
+import { AuthService } from '@app/auth/auth.service';
+import { AuthInput } from '@app/auth/dto/auth.input';
+import { AuthType } from '@app/auth/dto/auth.type';
 import { CreateUsuarioInsertDto } from '@app/types/dtos/insert/create-user.insert.dto';
 import { UsuarioResponseDto } from '@app/types/dtos/response/user.response.dto';
 import { Body, Controller, Inject, Post } from '@nestjs/common';
 import { ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Tokens } from '@utils/tokens';
-import { AuthService } from 'src/auth/auth.service';
-import { AuthInput } from 'src/auth/dto/auth.input';
-import { AuthType } from 'src/auth/dto/auth.type';
 import { UsuarioService } from './../modules/usuario/usuario.service';
 
 @ApiTags('Autenticação')

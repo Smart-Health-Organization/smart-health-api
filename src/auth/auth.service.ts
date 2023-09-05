@@ -1,10 +1,10 @@
+import { AuthInput } from '@app/auth/dto/auth.input';
+import { AuthType } from '@app/auth/dto/auth.type';
 import { Usuario } from '@app/types/entities/usuario.entity';
+import { UsuarioService } from '@modules/usuario/usuario.service';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { compareSync } from 'bcrypt';
-import { AuthInput } from 'src/auth/dto/auth.input';
-import { AuthType } from 'src/auth/dto/auth.type';
-import { UsuarioService } from 'src/modules/usuario/usuario.service';
 
 @Injectable()
 export class AuthService {

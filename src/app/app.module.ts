@@ -1,3 +1,5 @@
+import { AuthModule } from '@app/auth/auth.module';
+import { JwtMiddleware } from '@app/auth/jwt.middleware';
 import { UserMiddleware } from '@app/auth/user.middleware';
 import { BaseModule } from '@modules/base/base.module';
 import { ExameModule } from '@modules/exame/exame.module';
@@ -12,8 +14,7 @@ import { RouterModule } from '@nestjs/core';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
-import { AuthModule } from 'src/auth/auth.module';
-import { JwtMiddleware } from 'src/auth/jwt.middleware';
+
 const ormconfig = require('../../ormconfig.js');
 @Module({
   imports: [

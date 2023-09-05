@@ -3,8 +3,9 @@ import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt/dist';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Tokens } from '@utils/tokens';
-import { AuthService } from 'src/auth/auth.service';
-import { UsuarioService } from 'src/modules/usuario/usuario.service';
+
+import { AuthService } from '@app/auth/auth.service';
+import { UsuarioService } from '@modules/usuario/usuario.service';
 import { AuthController } from './auth.controller';
 import { AuthResolver } from './auth.resolver';
 
