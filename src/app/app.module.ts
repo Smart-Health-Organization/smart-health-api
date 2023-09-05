@@ -2,7 +2,9 @@ import { AuthModule } from '@app/auth/auth.module';
 import { JwtMiddleware } from '@app/auth/jwt.middleware';
 import { UserMiddleware } from '@app/auth/user.middleware';
 import { BaseModule } from '@modules/base/base.module';
+import { ExameCompartilhadoModule } from '@modules/exame-compartilhado/exame-compartilhado.module';
 import { ExameModule } from '@modules/exame/exame.module';
+import { MetaModule } from '@modules/metas/meta.module';
 import { MetricaModule } from '@modules/metrica/metrica.module';
 import { LimiteModule } from '@modules/metrica/modules/limite/limite.module';
 import { PdfManipulatorModule } from '@modules/pdf-manipulator/pdf-manipulator.module';
@@ -33,7 +35,9 @@ const ormconfig = require('../../ormconfig.js');
     ExameModule,
     MetricaModule,
     LimiteModule,
+    ExameCompartilhadoModule,
     PdfManipulatorModule,
+    MetaModule,
     RouterModule.register([
       {
         path: 'metricas',
@@ -56,6 +60,8 @@ export class AppModule {
         { path: '/login', method: RequestMethod.POST },
         { path: '/signup', method: RequestMethod.POST },
         { path: '/graphql', method: RequestMethod.ALL },
+        { path: '/exames-compartilhados', method: RequestMethod.POST },
+        { path: '/exames-compartilhados/:login', method: RequestMethod.GET },
       )
       .forRoutes('*');
     consumer

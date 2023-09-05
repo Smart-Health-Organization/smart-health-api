@@ -2,7 +2,7 @@ import { IdENomeResponseType } from '@app/types/dtos/response/id-e-nome.response
 import { ExameItem } from '@app/types/entities/exame-item.entity';
 import { InputType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
-import { UsuarioResponseDto } from './user.response.dto';
+import { UsuarioResponseDto } from './usuario.response.dto';
 
 @InputType()
 export class ExameResponseDto {
@@ -12,7 +12,8 @@ export class ExameResponseDto {
   id: number;
 
   @ApiProperty({
-    example: 'Thu Mar 30 2023 17:19:08 GMT-0300 (Brasilia Standard Time)',
+    type: Date,
+    example: '2023-08-23T00:00:00.000Z',
   })
   data: string;
 
@@ -21,5 +22,5 @@ export class ExameResponseDto {
   @ApiProperty({
     type: UsuarioResponseDto,
   })
-  user: IdENomeResponseType;
+  usuario: IdENomeResponseType;
 }

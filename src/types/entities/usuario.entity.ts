@@ -1,4 +1,6 @@
+import { ExameCompartilhado } from '@app/types/entities/exame-compartilhado.entity';
 import { Exame } from '@app/types/entities/exame.entity';
+import { Meta } from '@app/types/entities/meta.entity';
 import { Field, HideField, ID, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
@@ -22,9 +24,9 @@ export class Usuario {
 
   @Column()
   @ApiProperty({
-    example: 22,
+    type: '2001-07-03T00:00:00.000Z',
   })
-  idade: number;
+  dataDeNascimento: string;
 
   @Column()
   @ApiProperty({
@@ -44,16 +46,32 @@ export class Usuario {
   @HideField()
   senha: string;
 
-  @OneToMany(() => Exame, (exame) => exame.user, { cascade: true })
+  @OneToMany(() => Exame, (exame) => exame.usuario, { cascade: true })
   @ApiProperty({
     type: [Exame],
   })
   exames: Exame[];
 
+  @OneToMany(() => Meta, (meta) => meta.usuario, { cascade: true })
+  @ApiProperty({
+    type: [Meta],
+  })
+  metas: Meta[];
+
+  @OneToMany(
+    () => ExameCompartilhado,
+    (exameCompartilhado) => exameCompartilhado.usuario,
+    { cascade: true },
+  )
+  @ApiProperty({
+    type: [ExameCompartilhado],
+  })
+  examesCompartilhados: ExameCompartilhado[];
+
   constructor(usuario?: Partial<Usuario>) {
     this.id = usuario?.id;
     this.nome = usuario?.nome;
-    this.idade = usuario?.idade;
+    this.dataDeNascimento = usuario?.dataDeNascimento;
     this.email = usuario?.email;
     this.sexo = usuario?.sexo;
     this.senha = usuario?.senha;

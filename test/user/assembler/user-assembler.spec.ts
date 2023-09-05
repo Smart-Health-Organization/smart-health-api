@@ -16,7 +16,9 @@ describe('UsuarioAssembler', () => {
       // Verifica se a função transformou corretamente o usuário em Dto
       expect(usuarioWithousPass.nome).toStrictEqual(novoUsuario.nome);
       expect(usuarioWithousPass.email).toStrictEqual(novoUsuario.email);
-      expect(usuarioWithousPass.idade).toStrictEqual(novoUsuario.idade);
+      expect(usuarioWithousPass.dataDeNascimento).toStrictEqual(
+        novoUsuario.dataDeNascimento,
+      );
     });
 
     it('deve transformar uma entidade usuario em DTO', async () => {
@@ -24,13 +26,15 @@ describe('UsuarioAssembler', () => {
       const novoUsuario: Usuario = usuarioCreationMock;
 
       //chama o método assembleCreateUsuarioToDto para transformar o retorno do banco em dto
-      const usuarioDto = UsuarioAssembler.assembleUserToDto(novoUsuario);
+      const usuarioDto = UsuarioAssembler.assembleUsuarioToDto(novoUsuario);
 
       // Verifica se a função transformou corretamente o usuário em Dto
       expect(usuarioDto.id).toStrictEqual(novoUsuario.id);
       expect(usuarioDto.nome).toStrictEqual(novoUsuario.nome);
       expect(usuarioDto.email).toStrictEqual(novoUsuario.email);
-      expect(usuarioDto.idade).toStrictEqual(novoUsuario.idade);
+      expect(usuarioDto.dataDeNascimento).toStrictEqual(
+        novoUsuario.dataDeNascimento,
+      );
       expect(usuarioDto.sexo).toStrictEqual(novoUsuario.sexo);
     });
 
@@ -39,7 +43,7 @@ describe('UsuarioAssembler', () => {
       const outroNovoUsuario: Usuario = usuarioCreationMock;
       outroNovoUsuario.nome = 'Outro nome';
       outroNovoUsuario.email = 'outroemail@gmail.com';
-      outroNovoUsuario.idade = 25;
+      outroNovoUsuario.dataDeNascimento = '2001-07-03T00:00:00.000Z';
       outroNovoUsuario.sexo = 'feminino';
       const listaDeUsuarios = [novoUsuario, outroNovoUsuario];
 
@@ -49,7 +53,9 @@ describe('UsuarioAssembler', () => {
         expect(usuarioDto.id).toStrictEqual(listaDeUsuarios[index].id);
         expect(usuarioDto.nome).toStrictEqual(listaDeUsuarios[index].nome);
         expect(usuarioDto.email).toStrictEqual(listaDeUsuarios[index].email);
-        expect(usuarioDto.idade).toStrictEqual(listaDeUsuarios[index].idade);
+        expect(usuarioDto.dataDeNascimento).toStrictEqual(
+          listaDeUsuarios[index].dataDeNascimento,
+        );
         expect(usuarioDto.sexo).toStrictEqual(listaDeUsuarios[index].sexo);
       });
     });
