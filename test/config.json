@@ -6,7 +6,11 @@
   "transform": {
     "^.+\\.(t|j)s$": "ts-jest"
   },
-  "collectCoverageFrom": ["**/*.(t|j)s"],
+  "collectCoverageFrom": [
+    "src/modules/**/*service.{js,ts}",
+    "src/modules/**/*controller.{js,ts}",
+    "src/modules/**/*assembler.{js,ts}"
+  ],
   "coverageDirectory": "../coverage",
   "moduleNameMapper": {
     "@app/(.*)$": "<rootDir>src/$1",

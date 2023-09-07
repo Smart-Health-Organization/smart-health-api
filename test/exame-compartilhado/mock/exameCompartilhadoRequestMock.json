@@ -1,0 +1,32 @@
+{
+  "titulo": "Um título qualquer",
+  "senha": "Senha",
+  "confirmacaoSenha": "Senha",
+  "itens": {
+    "HDL": [
+      {
+        "data": "Tue May 30 2023 00:00:00 GMT-0300 (Brasilia Standard Time)",
+        "medida": 42,
+        "unidade": "mg/dL",
+        "isAtual": true,
+        "isAlterado": true
+      },
+      {
+        "data": "Tue May 30 2023 00:00:00 GMT-0300 (Brasilia Standard Time)",
+        "medida": 42,
+        "unidade": "mg/dL",
+        "isAtual": true,
+        "isAlterado": true
+      }
+    ],
+    "TSH": [
+      {
+        "data": "Tue May 30 2023 00:00:00 GMT-0300 (Brasilia Standard Time)",
+        "medida": 1.43,
+        "unidade": "µUI/mL",
+        "isAtual": true,
+        "isAlterado": true
+      }
+    ]
+  }
+}

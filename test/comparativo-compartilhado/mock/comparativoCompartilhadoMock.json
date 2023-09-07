@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "nome": "densidadeCorporal",
+    "data": "2001-03-22T00:00:00.000Z",
+    "medida": 30.404129999999995
+  },
+  {
+    "id": 2,
+    "nome": "densidadeCorporal",
+    "data": "2001-03-22T00:00:00.000Z",
+    "medida": 30.404129999999995
+  },
+  {
+    "id": 3,
+    "nome": "gorduraCorporal",
+    "data": "2001-03-22T00:00:00.000Z",
+    "medida": 19.108922013593975
+  },
+  {
+    "id": 4,
+    "nome": "gorduraCorporal",
+    "data": "2001-03-22T00:00:00.000Z",
+    "medida": 19.108922013593975
+  },
+  {
+    "id": 5,
+    "nome": "massaMagra",
+    "data": "2001-03-22T00:00:00.000Z",
+    "medida": 728.0197018776543
+  },
+  {
+    "id": 6,
+    "nome": "massaMagra",
+    "data": "2001-03-22T00:00:00.000Z",
+    "medida": 728.0197018776543
+  },
+  {
+    "id": 7,
+    "nome": "caloriasDiarias",
+    "data": "2001-03-22T00:00:00.000Z",
+    "medida": 18036
+  },
+  {
+    "id": 8,
+    "nome": "caloriasDiarias",
+    "data": "2001-03-22T00:00:00.000Z",
+    "medida": 18036
+  },
+  {
+    "id": 9,
+    "nome": "taxaMetabolicaBasal",
+    "data": "2001-03-22T00:00:00.000Z",
+    "medida": 10020
+  },
+  {
+    "id": 10,
+    "nome": "taxaMetabolicaBasal",
+    "data": "2001-03-22T00:00:00.000Z",
+    "medida": 10020
+  },
+  {
+    "id": 11,
+    "nome": "peso",
+    "data": "2001-03-22T00:00:00.000Z",
+    "medida": 900
+  },
+  {
+    "id": 12,
+    "nome": "peso",
+    "data": "2001-03-22T00:00:00.000Z",
+    "medida": 900
+  }
+]

@@ -16,18 +16,6 @@ export class ExameAssembler {
       itens: exame.itens,
     };
   }
-  static assembleExamesToDto(exame: Exame[]): ExameResponseDto[] {
-    const examesDto = exame.map((exame) => {
-      return {
-        id: exame.id,
-        data: exame.data,
-        usuario: { id: exame.usuario.id, nome: exame.usuario.nome },
-        itens: exame.itens,
-      };
-    });
-
-    return examesDto;
-  }
 
   static assembleExameAndExameItemsToDto(
     exameAndExameItemMap: Map<Exame, ExameItem[]>,

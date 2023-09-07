@@ -38,9 +38,9 @@ export class AntropometriaAssembler {
   }
 
   static assembleComparativos(
-    antrpometrias: AntropometriaResponseDto[],
+    antropometrias: AntropometriaResponseDto[],
   ): AntropometriaComparativoResponseData {
-    antrpometrias = antrpometrias.sort((a, b) => {
+    antropometrias = antropometrias.sort((a, b) => {
       const dataA = new Date(a.data);
       const dataB = new Date(b.data);
       return dataB.getTime() - dataA.getTime();
@@ -53,7 +53,7 @@ export class AntropometriaAssembler {
       taxaMetabolicaBasal: [],
       peso: [],
     };
-    const valoresParaComparativos = antrpometrias.map((antropometria) =>
+    const valoresParaComparativos = antropometrias.map((antropometria) =>
       plainToClass(CalculosComparativos, antropometria, {
         excludeExtraneousValues: true,
       }),

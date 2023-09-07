@@ -1,4 +1,4 @@
-import { ExameAssembler } from '@modules/exame/assembler/exameAssembler';
+import { ExameAssembler } from '@modules/exame/assembler/exame-assembler';
 import { ItemsDoExameResponseType } from '@modules/exame/type/exame-and-exame-items.response.type';
 import { pdfFilter } from '@modules/exame/validator/FileValidation';
 import {

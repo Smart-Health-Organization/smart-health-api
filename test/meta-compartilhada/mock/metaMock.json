@@ -1,0 +1,9 @@
+{
+  "id": 1,
+  "titulo": "Meta 1",
+  "dataInicio": "2023-09-08T00:00:00.000Z",
+  "dataFim": "2023-09-10T00:00:00.000Z",
+  "massaMagra": 20,
+  "gorduraCorporal": 21,
+  "isConcluida": false
+}
