@@ -1,4 +1,4 @@
-import { UsuarioResponseDto } from '@app/types/dtos/response/user.response.dto';
+import { UsuarioResponseDto } from '@app/types/dtos/response/usuario.response.dto';
 import { Usuario } from '@app/types/entities/usuario.entity';
 
 export class UsuarioAssembler {
@@ -7,7 +7,7 @@ export class UsuarioAssembler {
       id: user.id,
       nome: user.nome,
       email: user.email,
-      idade: user.idade,
+      dataDeNascimento: (new Date(user.dataDeNascimento)).toISOString(),
       sexo: user.sexo,
     };
   }
@@ -17,7 +17,7 @@ export class UsuarioAssembler {
         id: user.id,
         nome: user.nome,
         email: user.email,
-        idade: user.idade,
+        dataDeNascimento: user.dataDeNascimento,
         sexo: user.sexo,
       };
     });
@@ -25,12 +25,12 @@ export class UsuarioAssembler {
     return usersDto;
   }
 
-  static assembleUserToDto(user: Usuario): UsuarioResponseDto {
+  static assembleUsuarioToDto(user: Usuario): UsuarioResponseDto {
     return {
       id: user.id,
       nome: user.nome,
       email: user.email,
-      idade: user.idade,
+      dataDeNascimento: user.dataDeNascimento,
       sexo: user.sexo,
     };
   }

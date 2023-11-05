@@ -1,0 +1,26 @@
+[
+  {
+    "nome": "HDL",
+    "data": null,
+    "medida": 42,
+    "unidade": "mg/dL",
+    "isAtual": true,
+    "isAlterado": true
+  },
+  {
+    "nome": "HDL",
+    "data": null,
+    "medida": 42,
+    "unidade": "mg/dL",
+    "isAtual": true,
+    "isAlterado": true
+  },
+  {
+    "nome": "TSH",
+    "data": null,
+    "medida": 1.43,
+    "unidade": "µUI/mL",
+    "isAtual": true,
+    "isAlterado": true
+  }
+]

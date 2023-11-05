@@ -16,7 +16,7 @@ import { MetricaOperations } from '@modules/metrica/metrica.operations';
 import { PdfManipulatorOperations } from '@modules/pdf-manipulator/pdf-manipulator.operations';
 import { Repository } from 'typeorm';
 import { Exame } from '../../types/entities/exame.entity';
-import { ExameAssembler } from './assembler/exameAssembler';
+import { ExameAssembler } from './assembler/exame-assembler';
 import { ExameOperations } from './exame.operations';
 import { ExamesAndExameItemsResponseType } from './type/exame-and-exame-items.response.type';
 
@@ -32,19 +32,14 @@ export class ExameService implements ExameOperations {
     @Inject(Tokens.PDF_OPERATIONS)
     private readonly pdfManipulatorService: PdfManipulatorOperations,
   ) {}
-  async createExame(user: Usuario, data: string): Promise<ExameResponseDto> {
-    const dateParts = data.split('/');
-    const year = parseInt(dateParts[2], 10);
-    const month = parseInt(dateParts[1], 10) - 1;
-    const day = parseInt(dateParts[0], 10);
-    const formattedFata = new Date(year, month, day);
-    const exame = this.exameRepository.create({
-      user,
-      data: formattedFata.toString(),
+  async createExame(usuario: Usuario, data: string): Promise<ExameResponseDto> {
+    const exame = await this.exameRepository.create({
+      usuario,
+      data: new Date(data).toISOString(),
     });
     const exameSaved = await this.exameRepository.save(exame);
     if (!exameSaved) {
-      throw new BadRequestException('Exame was not created');
+      throw new BadRequestException('Exame não foi criado');
     }
     const exameDto = ExameAssembler.assembleCreateExameToDto(exameSaved);
     return exameDto;
@@ -61,11 +56,11 @@ export class ExameService implements ExameOperations {
   }
 
   async getExamesByUserId(
-    userId: string,
+    usuarioId: string,
   ): Promise<ExamesAndExameItemsResponseType> {
     const exames = await this.exameRepository.find({
       where: {
-        user: { id: parseInt(userId) },
+        usuario: { id: parseInt(usuarioId) },
       },
     });
 
@@ -80,9 +75,9 @@ export class ExameService implements ExameOperations {
   }
 
   async getExameItemsFromAllExamsByUser(
-    userId: string,
+    usuarioId: string,
   ): Promise<ExameItemsMapResponseType> {
-    const exames = await this.getExamesByUserId(userId);
+    const exames = await this.getExamesByUserId(usuarioId);
     const examesPorData = exames.sort((a, b) => {
       const dataA = new Date(a.data);
       const dataB = new Date(b.data);

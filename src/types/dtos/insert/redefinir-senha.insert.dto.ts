@@ -14,5 +14,5 @@ export class RedefinirSenhaInsertDto {
   @ApiProperty({
     example: 'NovaSenha',
   })
-  NovaSenha: string;
+  novaSenha: string;
 }

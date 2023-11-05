@@ -1,0 +1,14 @@
+{
+  "itens": [
+    { "metrica": "HDL", "medida": 45, "unidade": "mg/dL" },
+    { "metrica": "LDL", "medida": 116, "unidade": "mg/dL" },
+    { "metrica": "VLDL", "medida": 36, "unidade": "mg/dL" },
+    { "metrica": "COLESTEROL TOTAL", "medida": 197, "unidade": "mg/dL" },
+    { "metrica": "CREATININA", "medida": 1, "unidade": "mg/dL" },
+    {
+      "metrica": "ALT-ALANINA AMINOTRANSFERASE",
+      "medida": 66,
+      "unidade": "U/L"
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import { UsuarioHelper } from '@app/helpers/usuario.helper';
 import { CreateExameItemInsertDtoArray } from '@app/types/dtos/insert/exame-item.insert.dto';
 import { ExameItem } from '@app/types/entities/exame-item.entity';
 import { ResultadoExameItem } from '@app/types/entities/resultado-exame.entity';
@@ -27,7 +28,7 @@ export class ExameItemService implements ExameItemOperations {
     private readonly limiteService: LimiteOperations,
   ) {}
   async createExameItems(
-    user: Usuario,
+    usuario: Usuario,
     exame: Exame,
     exameItens: CreateExameItemInsertDtoArray,
   ): Promise<any> {
@@ -40,11 +41,14 @@ export class ExameItemService implements ExameItemOperations {
       const limites = metrica
         ? await this.limiteService.getLimitesByMetricaId(metrica.id.toString())
         : null;
+
+      const idade = UsuarioHelper.calcularIdade(usuario.dataDeNascimento);
+
       const limiteFiltered = limites?.filter(
         (limite) =>
-          limite.sexo === user.sexo &&
-          user.idade >= limite.idadeInicio &&
-          user.idade <= limite.idadeFim,
+          limite.sexo === usuario.sexo &&
+          idade >= limite.idadeInicio &&
+          idade <= limite.idadeFim,
       );
 
       const resultadoExameItem = new ResultadoExameItem();

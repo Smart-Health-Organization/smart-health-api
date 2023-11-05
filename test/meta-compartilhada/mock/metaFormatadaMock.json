@@ -1,0 +1,61 @@
+{
+  "titulo": "Meta 1",
+  "dataInicio": "2023-09-08T00:00:00.000Z",
+  "dataFim": "2023-09-10T00:00:00.000Z",
+  "massaMagra": 20,
+  "gorduraCorporal": 21,
+  "comparativos": [
+    {
+      "nome": "densidadeCorporal",
+      "data": "2001-03-22T00:00:00.000Z",
+      "medida": 30.404129999999995
+    },
+    {
+      "nome": "densidadeCorporal",
+      "data": "2001-03-22T00:00:00.000Z",
+      "medida": 30.404129999999995
+    },
+    {
+      "nome": "gorduraCorporal",
+      "data": "2001-03-22T00:00:00.000Z",
+      "medida": 19.108922013593975
+    },
+    {
+      "nome": "gorduraCorporal",
+      "data": "2001-03-22T00:00:00.000Z",
+      "medida": 19.108922013593975
+    },
+    {
+      "nome": "massaMagra",
+      "data": "2001-03-22T00:00:00.000Z",
+      "medida": 728.0197018776543
+    },
+    {
+      "nome": "massaMagra",
+      "data": "2001-03-22T00:00:00.000Z",
+      "medida": 728.0197018776543
+    },
+    {
+      "nome": "caloriasDiarias",
+      "data": "2001-03-22T00:00:00.000Z",
+      "medida": 18036
+    },
+    {
+      "nome": "caloriasDiarias",
+      "data": "2001-03-22T00:00:00.000Z",
+      "medida": 18036
+    },
+    {
+      "nome": "taxaMetabolicaBasal",
+      "data": "2001-03-22T00:00:00.000Z",
+      "medida": 10020
+    },
+    {
+      "nome": "taxaMetabolicaBasal",
+      "data": "2001-03-22T00:00:00.000Z",
+      "medida": 10020
+    },
+    { "nome": "peso", "data": "2001-03-22T00:00:00.000Z", "medida": 900 },
+    { "nome": "peso", "data": "2001-03-22T00:00:00.000Z", "medida": 900 }
+  ]
+}
