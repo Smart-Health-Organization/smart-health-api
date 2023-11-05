@@ -34,4 +34,11 @@ export class Exame {
     onDelete: 'CASCADE',
   })
   usuario: Usuario;
+
+  constructor(exame?: Partial<Exame>) {
+    this.id = exame?.id;
+    this.data = exame?.data;
+    this.itens = exame?.itens;
+    this.usuario = exame?.usuario;
+  }
 }

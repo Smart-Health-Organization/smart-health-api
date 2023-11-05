@@ -16,7 +16,7 @@ import { MetricaOperations } from '@modules/metrica/metrica.operations';
 import { PdfManipulatorOperations } from '@modules/pdf-manipulator/pdf-manipulator.operations';
 import { Repository } from 'typeorm';
 import { Exame } from '../../types/entities/exame.entity';
-import { ExameAssembler } from './assembler/exameAssembler';
+import { ExameAssembler } from './assembler/exame-assembler';
 import { ExameOperations } from './exame.operations';
 import { ExamesAndExameItemsResponseType } from './type/exame-and-exame-items.response.type';
 
@@ -33,7 +33,7 @@ export class ExameService implements ExameOperations {
     private readonly pdfManipulatorService: PdfManipulatorOperations,
   ) {}
   async createExame(usuario: Usuario, data: string): Promise<ExameResponseDto> {
-    const exame = this.exameRepository.create({
+    const exame = await this.exameRepository.create({
       usuario,
       data: new Date(data).toISOString(),
     });

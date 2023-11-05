@@ -1,0 +1,29 @@
+[
+  {
+    "id": 10,
+    "nome": "HDL",
+    "data": "2023-05-30T03:00:00.000Z",
+    "medida": 42,
+    "unidade": "mg/dL",
+    "isAtual": true,
+    "isAlterado": true
+  },
+  {
+    "id": 11,
+    "nome": "HDL",
+    "data": "2023-05-30T03:00:00.000Z",
+    "medida": 42,
+    "unidade": "mg/dL",
+    "isAtual": true,
+    "isAlterado": true
+  },
+  {
+    "id": 12,
+    "nome": "TSH",
+    "data": "2023-05-30T03:00:00.000Z",
+    "medida": 1.43,
+    "unidade": "µUI/mL",
+    "isAtual": true,
+    "isAlterado": true
+  }
+]

@@ -101,7 +101,7 @@ export class UsuarioService implements UsuarioOperations {
     if (!validPassword) {
       throw new UnauthorizedException('Senha incorreta');
     }
-    await this.usuarioRepository.update(id, { senha: data.NovaSenha });
+    await this.usuarioRepository.update(id, { senha: data.novaSenha });
 
     const usuarioUpdated = await this.getUsuarioById(id);
     return UsuarioAssembler.assembleCreateUsuarioParaDto(usuarioUpdated);

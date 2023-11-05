@@ -1,0 +1,16 @@
+{
+  "id": 1,
+  "altura": 180,
+  "peso": 900,
+  "atividadeFisicaSemanal": 3,
+  "data": "2001-03-22T00:00:00.000Z",
+  "coxa": 20,
+  "abdominal": 30,
+  "triceps": 40,
+  "suprailiaca": 60,
+  "densidadeCorporal": 30.404129999999995,
+  "gorduraCorporal": 19.108922013593975,
+  "massaMagra": 728.0197018776543,
+  "caloriasDiarias": 18036,
+  "taxaMetabolicaBasal": 10020
+}

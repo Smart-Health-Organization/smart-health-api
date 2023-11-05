@@ -67,4 +67,14 @@ export class Usuario {
     type: [ExameCompartilhado],
   })
   examesCompartilhados: ExameCompartilhado[];
+
+  constructor(usuario?: Partial<Usuario>) {
+    this.id = usuario?.id;
+    this.nome = usuario?.nome;
+    this.dataDeNascimento = usuario?.dataDeNascimento;
+    this.email = usuario?.email;
+    this.sexo = usuario?.sexo;
+    this.senha = usuario?.senha;
+    this.exames = usuario?.exames;
+  }
 }

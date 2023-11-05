@@ -1,0 +1,8 @@
+{
+  "HDL": { "valor": 45, "unidade": "mg/dL" },
+  "LDL": { "valor": 116, "unidade": "mg/dL" },
+  "VLDL": { "valor": 36, "unidade": "mg/dL" },
+  "COLESTEROL TOTAL": { "valor": 197, "unidade": "mg/dL" },
+  "CREATININA": { "valor": 1, "unidade": "mg/dL" },
+  "ALT-ALANINA AMINOTRANSFERASE": { "valor": 66, "unidade": "U/L" }
+}

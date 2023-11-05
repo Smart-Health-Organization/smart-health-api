@@ -1,5 +1,4 @@
 import { Limite } from '@app/types/entities/limite.entity';
-import { LimiteResolver } from '@modules/metrica/modules/limite/limite.resolver';
 import { LimiteService } from '@modules/metrica/modules/limite/limite.service';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -11,7 +10,6 @@ import { LimiteController } from './limite.controller';
   controllers: [LimiteController],
   providers: [
     LimiteService,
-    LimiteResolver,
     {
       provide: Tokens.LIMITE_OPERATIONS,
       useClass: LimiteService,
