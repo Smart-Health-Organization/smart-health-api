@@ -38,13 +38,13 @@ export class MetaCompartilhada {
   })
   dataFim: Date;
 
-  @Column()
+  @Column('float')
   @ApiProperty({
     example: 10,
   })
   massaMagra: number;
 
-  @Column()
+  @Column('float')
   @ApiProperty({
     example: 15,
   })
