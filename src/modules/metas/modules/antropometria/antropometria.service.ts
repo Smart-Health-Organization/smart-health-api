@@ -95,15 +95,24 @@ export class AntropometriaService implements AntropometriaOperations {
   ): Calculos {
     const idade = UsuarioHelper.calcularIdade(dataNascimento);
 
-    const dc = this.calcularDensidadeCorporal(sexo, idade, antropometria);
+    const somaDeDobras =
+      antropometria?.abdominal +
+      antropometria?.coxa +
+      antropometria?.suprailiaca +
+      antropometria?.triceps;
+
+    const gorduraCorporal = this.calcularGorduraCorporal(
+      sexo,
+      idade,
+      somaDeDobras,
+    );
 
     const taxaMetabolicaBasal = this.calcularTaxaMetabolicaBasal(
       antropometria,
       sexo,
       idade,
     );
-    const auxiliarParaCalculo = dc - 4.5;
-    const gorduraCorporal = (4.95 / auxiliarParaCalculo) * 100;
+
     const massaMagra =
       antropometria.peso - (antropometria.peso * gorduraCorporal) / 100;
     const caloriasDiarias = this.calcularCaloriasDiarias(
@@ -111,8 +120,12 @@ export class AntropometriaService implements AntropometriaOperations {
       sexo,
       taxaMetabolicaBasal,
     );
+
     return {
-      densidadeCorporal: dc,
+      densidadeCorporal:
+        sexo == 'masculino'
+          ? 1.1714 - 0.0671 * Math.log10(somaDeDobras)
+          : 1.1665 - 0.0706 * Math.log10(somaDeDobras),
       gorduraCorporal,
       taxaMetabolicaBasal,
       massaMagra,
@@ -120,32 +133,23 @@ export class AntropometriaService implements AntropometriaOperations {
     };
   }
 
-  private calcularDensidadeCorporal(
-    sexo,
-    idade,
-    antropometria: CreateAntropometriaInsertDto,
-  ): number {
-    let dencisadeCorporal;
-    const somaDeDobras =
-      antropometria?.abdominal +
-      antropometria?.coxa +
-      antropometria?.suprailiaca +
-      antropometria?.triceps;
+  private calcularGorduraCorporal(sexo, idade, somaDeDobras: number): number {
+    let gorduraCorporal;
 
     if (sexo == 'masculino') {
-      dencisadeCorporal =
+      gorduraCorporal =
         0.29288 * somaDeDobras -
         0.0005 * (somaDeDobras * somaDeDobras) +
         0.15845 * idade -
         5.76377;
     } else if (sexo == 'feminino') {
-      dencisadeCorporal =
+      gorduraCorporal =
         0.29669 * somaDeDobras -
         0.00043 * (somaDeDobras * somaDeDobras) +
         0.02963 * idade -
         1.4072;
     }
-    return dencisadeCorporal;
+    return gorduraCorporal;
   }
 
   private calcularTaxaMetabolicaBasal(antropometria, sexo, idade): number {

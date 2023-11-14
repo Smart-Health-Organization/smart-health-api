@@ -1,10 +1,10 @@
 import { Field } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsInt, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateAntropometriaInsertDto {
   @Field()
-  @IsNumber({}, { message: 'Altura deve ser um número' })
+  @IsInt({ message: 'Altura deve ser um número inteiro' })
   @ApiProperty({
     example: 172,
   })
