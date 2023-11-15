@@ -1,6 +1,6 @@
 import { Field, InputType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
-import {  IsEmail, IsNotEmpty, IsNumber, IsString, Min } from 'class-validator';
+import { IsEmail, IsISO8601, IsNotEmpty, IsString } from 'class-validator';
 
 @InputType()
 export class CreateUsuarioInsertDto {
@@ -19,6 +19,10 @@ export class CreateUsuarioInsertDto {
     type: Date,
     example: '2001-03-07T00:00:00.000Z',
   })
+  @IsISO8601(
+    { strict: true },
+    { message: 'Data de nascimento deve ser uma data válida' },
+  )
   dataDeNascimento: string;
 
   @Field()
@@ -32,7 +36,7 @@ export class CreateUsuarioInsertDto {
   @Field()
   @IsString({ message: 'Email deve ser um texto' })
   @IsNotEmpty({ message: 'Email é obrigatório' })
-  @IsEmail({},{ message: 'Email com formato incorreto' })
+  @IsEmail({}, { message: 'Email com formato incorreto' })
   @ApiProperty({
     example: 'thi.sanches@hotmail.com',
   })
