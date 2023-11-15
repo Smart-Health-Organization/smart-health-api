@@ -95,7 +95,7 @@ describe('UsuarioService', () => {
       const mockUpdateData: UpdateUsuarioInsertDto = {
         nome: 'Updated Name',
         email: 'updated@example.com',
-        idade: 35,
+        dataDeNascimento: '2001-03-10T00:00:00.000Z',
       };
       const mockUpdatedUser: Usuario = {
         ...mockUser,
@@ -136,7 +136,7 @@ describe('UsuarioService', () => {
       const mockUpdateData: UpdateUsuarioInsertDto = {
         nome: 'Updated Name',
         email: 'existing@example.com',
-        idade: 35,
+        dataDeNascimento: '2001-03-10T00:00:00.000Z',
       };
       jest.spyOn(usuarioService, 'getUsuarioById').mockResolvedValue(mockUser);
       jest
