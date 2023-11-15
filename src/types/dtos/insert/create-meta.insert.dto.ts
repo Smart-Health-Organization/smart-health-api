@@ -1,6 +1,6 @@
 import { Field, InputType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsPositive, IsString } from 'class-validator';
 
 @InputType()
 export class CreateMetaInsertDto {
@@ -34,6 +34,7 @@ export class CreateMetaInsertDto {
   @ApiProperty({
     example: 15,
   })
+  @IsPositive({ message: 'Massa magra deve ser um valor positivo' })
   @IsNumber({}, { message: 'Massa magra deve ser enviada como um número' })
   massaMagra: number;
 
@@ -42,6 +43,7 @@ export class CreateMetaInsertDto {
   @ApiProperty({
     example: 20,
   })
+  @IsPositive({ message: 'Gordura corporal deve ser um valor positivo' })
   @IsNumber({}, { message: 'Gordura corporal deve ser enviada como um número' })
   gorduraCorporal: number;
 }

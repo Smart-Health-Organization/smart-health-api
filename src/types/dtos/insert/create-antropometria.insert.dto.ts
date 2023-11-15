@@ -1,6 +1,14 @@
 import { Field } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsInt, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import {
+  IsInt,
+  IsNotEmpty,
+  IsNumber,
+  IsPositive,
+  IsString,
+  Max,
+  Min,
+} from 'class-validator';
 
 export class CreateAntropometriaInsertDto {
   @Field()
@@ -8,6 +16,7 @@ export class CreateAntropometriaInsertDto {
   @ApiProperty({
     example: 172,
   })
+  @IsPositive({ message: 'Altura deve ser um valor positivo' })
   altura: number;
 
   @Field()
@@ -15,6 +24,7 @@ export class CreateAntropometriaInsertDto {
   @ApiProperty({
     example: 79,
   })
+  @IsPositive({ message: 'Peso deve ser um valor positivo' })
   peso: number;
 
   @Field()
@@ -24,6 +34,12 @@ export class CreateAntropometriaInsertDto {
   )
   @ApiProperty({
     example: 3,
+  })
+  @Min(0, {
+    message: 'Frequência de atividade física deve ser maior ou igual que 0',
+  })
+  @Max(7, {
+    message: 'Frequência de atividade física deve ser menor ou igual a 7',
   })
   atividadeFisicaSemanal: number;
 
@@ -41,6 +57,7 @@ export class CreateAntropometriaInsertDto {
   @ApiProperty({
     example: 20,
   })
+  @IsPositive({ message: 'Medida da coxa deve ser um valor positivo' })
   coxa: number;
 
   @Field()
@@ -48,6 +65,7 @@ export class CreateAntropometriaInsertDto {
   @ApiProperty({
     example: 30,
   })
+  @IsPositive({ message: 'Medida do abdominal deve ser um valor positivo' })
   abdominal: number;
 
   @Field()
@@ -55,6 +73,7 @@ export class CreateAntropometriaInsertDto {
   @ApiProperty({
     example: 40,
   })
+  @IsPositive({ message: 'Medida do tríceps deve ser um valor positivo' })
   triceps: number;
 
   @Field()
@@ -62,5 +81,6 @@ export class CreateAntropometriaInsertDto {
   @ApiProperty({
     example: 50,
   })
+  @IsPositive({ message: 'Medida da suprailíaca deve ser um valor positivo' })
   suprailiaca: number;
 }
