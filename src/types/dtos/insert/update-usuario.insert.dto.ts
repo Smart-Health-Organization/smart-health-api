@@ -1,5 +1,6 @@
 import { Field, InputType } from '@nestjs/graphql';
-import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsOptional, IsString } from 'class-validator';
 
 @InputType()
 export class UpdateUsuarioInsertDto {
@@ -9,9 +10,12 @@ export class UpdateUsuarioInsertDto {
   nome?: string;
 
   @Field()
-  @IsNumber()
-  @IsOptional()
-  idade?: number;
+  @IsString({ message: 'Data deve ser um texto' })
+  @ApiProperty({
+    type: Date,
+    example: '2001-03-07T00:00:00.000Z',
+  })
+  dataDeNascimento: string;
 
   @Field()
   @IsString({ message: 'Email deve ser um texto' })
