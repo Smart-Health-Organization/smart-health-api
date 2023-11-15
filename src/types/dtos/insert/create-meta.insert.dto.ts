@@ -1,6 +1,12 @@
 import { Field, InputType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsPositive, IsString } from 'class-validator';
+import {
+  IsISO8601,
+  IsNotEmpty,
+  IsNumber,
+  IsPositive,
+  IsString,
+} from 'class-validator';
 
 @InputType()
 export class CreateMetaInsertDto {
@@ -19,6 +25,10 @@ export class CreateMetaInsertDto {
     type: Date,
     example: '2001-03-07T00:00:00.000Z',
   })
+  @IsISO8601(
+    { strict: true },
+    { message: 'Data de início deve ser uma data válida' },
+  )
   dataInicio: string;
 
   @Field()
@@ -28,6 +38,10 @@ export class CreateMetaInsertDto {
     type: Date,
     example: '2001-03-07T00:00:00.000Z',
   })
+  @IsISO8601(
+    { strict: true },
+    { message: 'Data de fim deve ser uma data válida' },
+  )
   dataFim: string;
 
   @IsNotEmpty({ message: 'Massa magra é obrigatória' })
